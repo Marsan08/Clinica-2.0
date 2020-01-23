@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package clinica;
+import excepciones.PagoExcepcion;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.ArrayList;
@@ -13,10 +14,6 @@ import java.util.Scanner;
  * @author AdrianSaveli
  */
 public class Pago {
-
-    static Pago nuevoPagos(int i, String cob) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     protected long id;//Es el identificador del pago.
     private Date fechadePago;//Es la fecha de la realización del pago por parte del paciente.
@@ -107,7 +104,7 @@ public class Pago {
         */ 
         return p;
     }
-    public static Pago nuevoPago() throws ParseException {
+    public static Pago nuevoPago() throws  ParseException {
         Pago p = new Pago();
         Scanner in = new Scanner(System.in);
         boolean correcto;
