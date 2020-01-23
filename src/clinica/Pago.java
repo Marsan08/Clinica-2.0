@@ -81,8 +81,6 @@ public class Pago {
         this.fechadePago = p.getFechaDePago();
         this.importe = p.getImporte();
         this.metododePago = p.getMetodoDePago();
-        
-        
         }
 
     @Override
