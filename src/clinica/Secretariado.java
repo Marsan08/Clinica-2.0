@@ -122,7 +122,20 @@ public class Secretariado extends Empleado{
         
      return s;   
     } 
+    public void realizarInforme(Paciente paciente){
+    Scanner in = new Scanner(System.in);
     
+    Informe inf = new Informe(); 
+    
+    
+    
+    System.out.println("Introduzca descripción del tratamiento:");
+    String dtrat = in.nextLine();
+    System.out.println("Introduzca el nombre del secretariado que realiza el informe:");
+    String sec = in.nextLine();   
+    
+    
+    };
      
     
 }
