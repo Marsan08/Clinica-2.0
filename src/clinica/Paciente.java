@@ -5,6 +5,7 @@
  */
 package clinica;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -138,27 +139,83 @@ public class Paciente {
         
         boolean correcto;
         do{
+            
         String nom,ape,nif,tel,dir;
         System.out.println("Dame el nombre:");
         nom=in.nextLine();
         p.setNombre(nom);
+        
         System.out.println("Dame el apellido:");
         ape=in.nextLine();
         p.setApellidos(ape);
+        
         System.out.println("Dame el NIF:");
         nif=in.nextLine();
         p.setNIF(nif);
+        
         System.out.println("Dame el telefono:");
         tel=in.nextLine();
         p.setTelefono(tel);
+        
         System.out.println("Dame la dirección:");
         dir=in.nextLine();
         p.setDireccion(dir);
+        
         System.out.println("¿Son correctos los datos del paciente?");
         
         correcto = Utilidades.leerBoleano();
         }
         while (!correcto);
+        
         return p;
     }
+    
+    
+    
+    //Caso de uso REALIZAR PAGO hecho por Mar Santin.
+    
+    public boolean realizarPago (Tratamiento t) throws ParseException{
+        
+        Scanner in = new Scanner (System.in);
+        
+        Cobro c = t.getCobro();
+        
+        Double importePagado= 0.0;
+        
+        ArrayList<Pago> pagos= c.getPagos();
+        
+        for (Pago p: pagos){
+            
+            importePagado += p.getImporte();
+            
+       
+        }
+        
+        if (importePagado < c.getImporteTotalEuros()){
+            
+            System.out.println("El importe total del tratamiento todavía no ha sido abonado, por favor introduzca un nuevo pago.");
+            double npago = in.nextDouble();
+            c.setPagos(npago);
+        
+            pagos.add(Pago.nuevoPago());
+            
+        }
+        
+        
+        return true;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
