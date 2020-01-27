@@ -104,7 +104,7 @@ public class Pago {
         */ 
         return p;
     }
-    public static Pago nuevoPago() throws  ParseException {
+    public static Pago nuevoPago() throws  ParseException, excepciones.PagoExcepcion{
         Pago p = new Pago();
         Scanner in = new Scanner(System.in);
         boolean correcto;
@@ -115,15 +115,51 @@ public class Pago {
             p.setFechaDePago(fecha);
 
             System.out.println("Introduzca el importe del pago:");
-            double imp;
-            imp = in.nextInt();
-
+            double importe = 0 ;
+            String importe2 = Double.toString(importe);
+            importe = in.nextInt();
+            p.setImporte(importe);
+           
+            
+            for (int i=0; i<importe2.length(); i++){
+                    
+            char b =importe2.charAt(i);
+            
+            if(Character.isLetter(b)){
+                
+            }
+            throw new excepciones.PagoExcepcion("No se permiten letras en el importe de pago.");
+             }
+            int timporte = importe2.length();
+            
+            if(timporte <=-1){
+            throw new excepciones.PagoExcepcion("No se puede crear un importe de pago negativo.");
+            
+            }
+            
+            
+           
             System.out.println("Introduzca el método de pago: ");
             String metp = in.nextLine();
             p.setMetodoDePago(metp);
+            
+            for (int i=0; i<metp.length(); i++){
+                    
+            char c =metp.charAt(i);
+            
+            if(Character.isDigit(c)){
+            throw new excepciones.PagoExcepcion("No se permiten digitos en el método de pago.");
+             }
+            int tamaniometp=metp.length();
+            if(tamaniometp<2){
+            throw new excepciones.PagoExcepcion("El nombre de metodo de pago es demasiado corto");
+            }
+            if(tamaniometp>10){
+            throw new excepciones.PagoExcepcion("El nombre de metodo de pago es demaiado largo");
+            }
+            }
 
-            
-            
+  
             System.out.println("La pago introducido es: " + p);
             System.out.println("¿Es correcto el pago?");
             correcto = Utilidades.leerBoleano();
@@ -131,6 +167,10 @@ public class Pago {
         } while (!correcto);
 
         return p;
+    }
+
+    private void setImporte(double importe) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
