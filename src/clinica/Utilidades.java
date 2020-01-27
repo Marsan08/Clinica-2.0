@@ -144,8 +144,8 @@ public class Utilidades {
     }
    public void registraPaciente(String nombre,String apellidos,String nif, String tlf, String dir) {
 
-            Paciente p=new Paciente(nombre,apellidos,nif,tlf,dir);
-            System.out.println(p.toString());
+            //Paciente p=new Paciente(nombre,apellidos,nif,tlf,dir);
+            //System.out.println(p.toString());
 }
     
 }

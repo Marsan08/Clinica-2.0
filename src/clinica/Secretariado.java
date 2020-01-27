@@ -7,7 +7,6 @@ package clinica;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Set;
 
 /**
  * @version 2.0
@@ -122,12 +121,20 @@ public class Secretariado extends Empleado{
         while(!correcto);
         
      return s;   
-    }
-      
+    } 
+    public void realizarInforme(Paciente paciente, int numPacientes){
+    Scanner in = new Scanner(System.in);
     
-       
-    }
-            
+    Informe nuevo = new Informe(); 
+  
     
-   
-
+    do{
+    System.out.println("Introduzca descripción del tratamiento:");
+    String dtrat = in.nextLine();
+    System.out.println("Introduzca el nombre del secretariado que realiza el informe:");
+    String sec = in.nextLine();   
+    } while(numPacientes>0);
+    };
+     
+    
+}
