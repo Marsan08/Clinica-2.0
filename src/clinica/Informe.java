@@ -111,7 +111,4 @@ public class Informe {
      return i;   
     }  
 
-    void setTratamiento(Tratamiento t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
