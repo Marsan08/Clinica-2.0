@@ -174,7 +174,7 @@ public class Paciente {
     
     //Caso de uso REALIZAR PAGO hecho por Mar Santin.
     
-    public boolean realizarPago (Tratamiento t) throws ParseException{
+    public boolean realizarPago (Tratamiento t) throws ParseException, excepciones.PagoExcepcion{
         
         Scanner in = new Scanner (System.in);
         
