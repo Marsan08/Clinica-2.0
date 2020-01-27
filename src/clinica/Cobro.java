@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package clinica;
+import excepciones.PagoExcepcion;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.ArrayList;
@@ -84,7 +85,7 @@ public class Cobro {
         return c;
     }
     
-   public static Cobro nuevoCobro () throws ParseException{
+   public static Cobro nuevoCobro () throws ParseException, PagoExcepcion{
        
     Cobro c = new Cobro();
     Scanner in = new Scanner(System.in);
