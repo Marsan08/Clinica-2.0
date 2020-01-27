@@ -50,4 +50,5 @@ public class Utilidades {
         new Paciente(4, "Carla", "Ramirez Dieguez", "0949384Z", "975073211", "C/Percebe Ourense 40978"),
         new Paciente(5, "Ramona", "Perez Montoya", "223832Y", "942779900","C/Andorra Valencia 85627")
     };
+    public static final int numPacientes = PACIENTES.length;
 }
