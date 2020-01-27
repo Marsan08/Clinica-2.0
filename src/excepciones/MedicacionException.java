@@ -28,5 +28,31 @@ public class MedicacionException extends Exception {
         return nombreValido;
 
     }
+    public static boolean validarPrincipioActivo(String principioActivo) throws MedicacionException {
+        boolean principioActivoValido = false;
+        if (principioActivo.isEmpty()) {
+            principioActivoValido = false;
+            throw new MedicacionException("El nombre esta vacio");
+        }
+
+        
+        
+        principioActivoValido=true;
+        return principioActivoValido;
+
+    }
+        public static boolean validarDosisMaxDiaria(String dosisMaxDiaria) throws MedicacionException {
+        boolean dosisMaxDiariaValido = false;
+        if (dosisMaxDiaria.isEmpty()) {
+            dosisMaxDiariaValido = false;
+            throw new MedicacionException("El nombre esta vacio");
+        }
+
+        
+        
+        dosisMaxDiariaValido=true;
+        return dosisMaxDiariaValido;
+
+    }
 
 }
