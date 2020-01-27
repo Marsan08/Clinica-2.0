@@ -122,12 +122,11 @@ public class Secretariado extends Empleado{
         
      return s;   
     } 
-    public void realizarInforme(Paciente paciente, int numPacientes){
+    public void realizarInforme(Paciente paciente,boolean consentimiento,Tratamiento t ,int numPacientes){
     Scanner in = new Scanner(System.in);
     
     Informe nuevo = new Informe(); 
-  
-    
+    nuevo.setTratamiento(t);
     do{
     System.out.println("Introduzca descripción del tratamiento:");
     String dtrat = in.nextLine();

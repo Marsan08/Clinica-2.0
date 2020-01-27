@@ -43,6 +43,24 @@ public class Clinica {
        //* System.out.println(cir1.toString());
         //Cita cita = Cita.nuevoCita();
         //Pago pago = Pago.nuevoPago();
+        
+        //Utilidades u = new Utilidades();
+        //u.registraPaciente();
+       
+        //Utilidades u = new Utilidades();
+        //Utilidades.registraPaciente(p);
+        
+    //Paciente paciente[]; 
+    //paciente=u.PACIENTES;
+    //for(int i=0;i<paciente.length;i++){
+        
+    //Paciente p=new Paciente(paciente[i].getNombre(),paciente[i].getApellidos(),paciente[i].getNIF(),paciente[i].getTelefono(),paciente[i].getDireccion());  
+    //u.registraPaciente(p.getNombre(), p.getApellidos(), p.getNIF(), p.getTelefono(), p.getDireccion());
+    //}
+    
     }
     
 }
+            
+            
+
