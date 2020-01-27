@@ -126,8 +126,7 @@ public class Secretariado extends Empleado{
     Scanner in = new Scanner(System.in);
     
     Informe nuevo = new Informe(); 
-  
-    
+    nuevo.setTratamiento(t);
     do{
     System.out.println("Introduzca descripción del tratamiento:");
     String dtrat = in.nextLine();
