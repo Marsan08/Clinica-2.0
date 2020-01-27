@@ -6,6 +6,9 @@
 package clinica;
 
 import java.text.ParseException;
+import excepciones.PagoExcepcion;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @version 1.0
@@ -58,9 +61,33 @@ public class Clinica {
     //u.registraPaciente(p.getNombre(), p.getApellidos(), p.getNIF(), p.getTelefono(), p.getDireccion());
     //}
     
+    
+    Paciente p = new Paciente();
+     try{
+    Pago k= Pago.nuevoPago();
+     Tratamiento t = new Tratamiento();
+   
+    
+        p.realizarPago(t);
+        
+        
+    } 
+    catch(PagoExcepcion ex){
+    
+            System.out.println("Se ha producido una PagoExcepcion"+ ex.getMessage());
+    
     }
     
+    }
 }
+    
+    
+    
+    
+    
+    
+    
+    
             
             
 
