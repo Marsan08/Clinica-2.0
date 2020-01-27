@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package clinica;
-import java.text.ParseException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
@@ -76,7 +76,7 @@ public class Alergia {
         */ 
         return a;
     }
-        public static Alergia nuevaAlergia () throws ParseException{
+        public static Alergia nuevaAlergia () {
   
         Alergia a = new Alergia();
         Scanner in = new Scanner(System.in);

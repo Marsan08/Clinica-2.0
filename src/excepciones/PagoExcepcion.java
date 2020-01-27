@@ -14,4 +14,6 @@ public class PagoExcepcion extends Exception {
     public PagoExcepcion(String msj){
         super(msj);
     }
+   
+    
 }
