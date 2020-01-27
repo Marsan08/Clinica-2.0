@@ -5,6 +5,7 @@
  */
 package clinica;
 
+import excepciones.PacienteException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -87,12 +88,36 @@ public class Paciente {
     }
     //Constructor con argumentos
 
-    public Paciente(long idPaciente, String nombre, String apellidos, String NIF, String telefono, String direccion) {
+    public Paciente(long idPaciente, String nombre, String apellidos, String NIF, String telefono, String direccion) throws PacienteException {
         this.id = idPaciente;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.NIF = NIF;
-        this.telefono = telefono;
+        
+        try{
+        if (PacienteException.validarNombre(nombre)) this.nombre = nombre; 
+        }
+        catch(PacienteException ex){
+            System.out.println("Error al validar el nombre del paciente." + ex.getMessage());
+        }
+        
+        try{
+        if (PacienteException.validarApellido(apellidos)) this.apellidos = apellidos;
+        }
+        catch (PacienteException ex){
+             System.out.println("Error al validar el apellido del paciente." + ex.getMessage());
+        }
+        
+        try{
+        if (PacienteException.validarNif(NIF)) this.NIF = NIF;
+        }
+        catch (PacienteException ex){
+            System.out.println("Error al validar el NIF del paciente." + ex.getMessage());
+        }
+        
+        try{
+        if (PacienteException.validarTelefono(telefono)) this.telefono = telefono;
+        }
+        catch (PacienteException ex){
+            System.out.println("Error al validar el telefono del paciente." + ex.getMessage());
+        }
         this.direccion = direccion;
     }
    

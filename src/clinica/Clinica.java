@@ -5,7 +5,10 @@
  */
 package clinica;
 
+import excepciones.PacienteException;
 import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @version 1.0
@@ -50,13 +53,23 @@ public class Clinica {
         //Utilidades u = new Utilidades();
         //Utilidades.registraPaciente(p);
         
-    //Paciente paciente[]; 
+        Utilidades u = new Utilidades();
+        
+        
+        
+    Paciente p;
     //paciente=u.PACIENTES;
     //for(int i=0;i<paciente.length;i++){
         
-    //Paciente p=new Paciente(paciente[i].getNombre(),paciente[i].getApellidos(),paciente[i].getNIF(),paciente[i].getTelefono(),paciente[i].getDireccion());  
-    //u.registraPaciente(p.getNombre(), p.getApellidos(), p.getNIF(), p.getTelefono(), p.getDireccion());
-    //}
+    p=Paciente.nuevoPaciente();  
+    
+    
+        try {
+            u.registraPaciente(p);
+ 
+        } catch (PacienteException ex) {
+          System.out.println("Se ha producido una PacienteException."+ ex.getMessage());
+        }
     
     }
     
