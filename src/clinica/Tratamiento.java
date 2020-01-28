@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package clinica;
+import excepciones.PagoExcepcion;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -136,7 +137,7 @@ public class Tratamiento {
          return t;
     }
  
-    public static Tratamiento nuevoTratamiento() throws ParseException{
+    public static Tratamiento nuevoTratamiento() throws ParseException, PagoExcepcion{
             Tratamiento t = new Tratamiento();
             Scanner in = new Scanner(System.in);
             
