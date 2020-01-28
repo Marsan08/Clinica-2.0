@@ -8,6 +8,7 @@ package clinica;
 import excepciones.MedicacionException;
 import excepciones.PagoExcepcion;
 import java.text.ParseException;
+import excepciones.PacienteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,15 +26,16 @@ public class Clinica {
     public static void main(String[] args) throws ParseException {
         
        
+
         
             
-      Paciente p = new Paciente();
+      Paciente pac = new Paciente();
      try{
         Pago k= Pago.nuevoPago();
      Tratamiento t = new Tratamiento();
    
     
-        p.realizarPago(t);
+        pac.realizarPago(t);
         
         
     } 
@@ -56,6 +58,28 @@ public class Clinica {
     
     
 
+    
+
+        //Utilidades u = new Utilidades();
+        //Utilidades.registraPaciente(p);
+        
+        Utilidades u = new Utilidades();
+        
+        
+        
+    Paciente p;
+    //paciente=u.PACIENTES;
+    //for(int i=0;i<paciente.length;i++){
+        
+    p=Paciente.nuevoPaciente();  
+    
+    
+        try {
+            u.registraPaciente(p);
+ 
+        } catch (PacienteException ex) {
+          System.out.println("Se ha producido una PacienteException."+ ex.getMessage());
+        }
     
 
             //* Historial h1= new Historial(7,"Paciente"); //Se crea el objeto historial h1
