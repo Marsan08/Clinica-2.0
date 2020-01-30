@@ -76,7 +76,7 @@ public class Informe {
     }
         public static Informe nuevoInforme () throws ParseException{
   
-        Informe i = Informe.nuevoInforme();
+        Informe i = new Informe();
         Scanner in = new Scanner(System.in);
         boolean correcto;
         
