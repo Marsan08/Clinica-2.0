@@ -81,9 +81,6 @@ public class Informe {
         boolean correcto;
         
         do{
-            
-            
-            
             System.out.println("Introduzca descripción del tratamiento:");
             String dtrat = in.nextLine();
             i.setDescripciónTratamiento(dtrat);
