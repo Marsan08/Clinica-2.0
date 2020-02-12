@@ -199,7 +199,7 @@ public class Paciente {
     
     //Caso de uso REALIZAR PAGO hecho por Mar Santin.
     
-    public boolean realizarPago (Tratamiento t) throws ParseException, excepciones.PagoExcepcion{
+    public boolean realizarPago (Tratamiento t){
         
         Scanner in = new Scanner (System.in);
         
@@ -213,7 +213,6 @@ public class Paciente {
             
             importePagado += p.getImporte();
             
-       
         }
         
         if (importePagado < c.getImporteTotalEuros()){
@@ -225,7 +224,6 @@ public class Paciente {
             pagos.add(Pago.nuevoPago());
             
         }
-        
         
         return true;
     }

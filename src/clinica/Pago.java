@@ -10,6 +10,8 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @version 3.1
@@ -40,12 +42,13 @@ public class Pago {
         this.fechadePago = fechaDePago;
     }
 
-    public int getImporte() {
-        return (int) importe;
+    public void setImporte(Double importe) {
+        this.importe = importe;
+
     }
 
-    public void setImporte(int importe) {
-        this.importe = importe;
+    public double getImporte() {
+        return importe;
     }
 
     public String getMetodoDePago() {
@@ -73,7 +76,7 @@ public class Pago {
         this.id = ID;
         this.fechadePago = FechaDePago;
         try {
-            if(PagoExcepcion.validarImporte(importe)) {
+            if (PagoExcepcion.validarImporte(importe)) {
                 this.importe = importe;
             }
 
@@ -123,7 +126,7 @@ public class Pago {
         return p;
     }
 
-    public static Pago nuevoPago() throws ParseException, PagoExcepcion {
+    public static Pago nuevoPago() {
         Pago p = new Pago();
         Scanner in = new Scanner(System.in);
         boolean correcto;
@@ -136,13 +139,18 @@ public class Pago {
             System.out.println("Introduzca el importe del pago:");
             double importe;
             importe = in.nextDouble();
-            if (!excepciones.PagoExcepcion.validarImporte(importe));
-            p.setImporte(importe);
+            try {
+                if (!excepciones.PagoExcepcion.validarImporte(importe)) {
+                    p.setImporte(importe);
+                }
+                System.out.println("Introduzca el método de pago: ");
+                String metp = in.nextLine();
+                if (!excepciones.PagoExcepcion.validarMetodoDePago(metp)) {
+                    p.setMetodoDePago(metp);
+                }
 
-            System.out.println("Introduzca el método de pago: ");
-            String metp = in.nextLine();
-            if (!excepciones.PagoExcepcion.validarMetodoDePago(metp)) {
-                p.setMetodoDePago(metp);
+            } catch (PagoExcepcion ex) {
+                Logger.getLogger(Pago.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             System.out.println("La pago introducido es: " + p);
@@ -152,10 +160,6 @@ public class Pago {
         } while (!correcto);
 
         return p;
-    }
-
-    private void setImporte(double importe) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
