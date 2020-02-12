@@ -86,7 +86,7 @@ public class Informe {
             
             System.out.println("Introduzca descripción del tratamiento:");
             String dtrat = in.nextLine();
-            // i.setDescripcionTratamiento(dtrat);
+            i.setDescripciónTratamiento(dtrat);
             
             ArrayList <Secretariado> secretariados = new ArrayList();
             System.out.println("¿Quieres introducir los secretarios? ");
