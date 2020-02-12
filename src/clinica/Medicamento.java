@@ -37,8 +37,17 @@ public class Medicamento {
         } else {
 
         }
-        this.principioActivo = principioActivo;
-        this.dosisMaxDiaria = dosisMaxDiaria;
+        if (MedicacionException.validarPrincipioActivo(principioActivo)) {
+            this.principioActivo = principioActivo;
+        } else {
+
+        }
+        if (MedicacionException.validarDosisMaxDiaria(dosisMaxDiaria)) {
+            this.dosisMaxDiaria = dosisMaxDiaria;
+        } else {
+
+        }
+        
     }
 
     public Medicamento(Medicamento m) throws MedicacionException {
