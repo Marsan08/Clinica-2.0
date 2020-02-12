@@ -23,38 +23,15 @@ public class Clinica {
      * @param args the command line arguments
      * Programa principal de la clinica. Prueba los métodos data y toString de las clases creadas.
      */
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args)  {
+  
         
-       
-
+        //CASO DE USO REALIZAR PAGO
         
-            
       Paciente pac = new Paciente();
-     try{
-        Pago k= Pago.nuevoPago();
-     Tratamiento t = new Tratamiento();
-   
-    
-        pac.realizarPago(t);
-        
-        
-    } 
-    catch(PagoExcepcion ex){
-    
-            System.out.println("Se ha producido una PagoExcepcion"+ ex.getMessage());
-    }
-        
-       
-        //Utilidades u = new Utilidades();
-        //Utilidades.registraPaciente(p);
-        
-    //Paciente paciente[]; 
-    //paciente=u.PACIENTES;
-    //for(int i=0;i<paciente.length;i++){
-        
-    //Paciente p=new Paciente(paciente[i].getNombre(),paciente[i].getApellidos(),paciente[i].getNIF(),paciente[i].getTelefono(),paciente[i].getDireccion());  
-    //u.registraPaciente(p.getNombre(), p.getApellidos(), p.getNIF(), p.getTelefono(), p.getDireccion());
-    //}
+      Pago k= Pago.nuevoPago();
+      Tratamiento t = new Tratamiento();
+      pac.realizarPago(t);
     
     
 
