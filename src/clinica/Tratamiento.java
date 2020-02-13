@@ -17,6 +17,9 @@ public class Tratamiento {
     Informe informe;
     Paciente paciente;
     Cobro cobro;
+    long idCobro;
+    long idPaciente;
+    long idInforme;
     
     protected long id;
     //Identificador del tratamiento relacionado con el paciente TIENE QUE TENER VALOR MAYOR A CERO
@@ -58,6 +61,31 @@ public class Tratamiento {
         this.id = id;
     }
 
+    public long getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(long idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+
+    public long getIdInforme() {
+        return idInforme;
+    }
+
+    public void setIdInforme(long idInforme) {
+        this.idInforme = idInforme;
+    }
+
+    
+    public long getIdCobro() {
+        return idCobro;
+    }
+
+    public void setIdCobro(long idCobro) {
+        this.idCobro = idCobro;
+    }
+    
     public String getNombre() {
         return nombre;
     }
