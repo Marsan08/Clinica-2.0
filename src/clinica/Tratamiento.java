@@ -46,9 +46,27 @@ public class Tratamiento {
         this.nombre = t.getNombre();
         this.fechaInicio = t.getFechaInicio();
         this.consentimiento = t.isConsentimiento();
+        this.idInforme = t.getIdInforme();
+        this.idPaciente = t.getIdPaciente();
+        this.idCobro = t.getIdCobro();
        
     }
 
+    public Tratamiento(Informe informe, Paciente paciente, Cobro cobro, long idCobro, long idPaciente, long idInforme, long id, String nombre, String fechaInicio, boolean consentimiento, ArrayList<Cita> citas) {
+        this.informe = informe;
+        this.paciente = paciente;
+        this.cobro = cobro;
+        this.idCobro = idCobro;
+        this.idPaciente = idPaciente;
+        this.idInforme = idInforme;
+        this.id = id;
+        this.nombre = nombre;
+        this.fechaInicio = fechaInicio;
+        this.consentimiento = consentimiento;
+        this.citas = citas;
+    }
+ 
+    
     public long getId() {
         return id;
     }
