@@ -62,7 +62,7 @@ public class Revision extends Cita {
     
     public String data() {
         
-        return super.data()+ "|"+getAnotaciones();
+        return super.data()+ "|"+getAnotaciones()+"|"+getIdCirujano();
     }
    
     

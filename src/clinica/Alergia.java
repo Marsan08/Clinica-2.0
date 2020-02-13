@@ -59,7 +59,7 @@ public class Alergia {
         return "Alerg\u00eda{" + "ID=" + id + ", nombreAlerg\u00eda=" + nombreAlergia + '}';
     }
     public String data() {
-        return ""+getID()+"|"+getNombreAlergia();
+        return ""+getID()+"|"+getNombreAlergia()+"|"+getHistoriales();
     }
     public ArrayList<Alergia> getAllAlergia (){
         

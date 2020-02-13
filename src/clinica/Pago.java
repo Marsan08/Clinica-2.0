@@ -140,7 +140,7 @@ public class Pago {
     }
 
     public String data() {
-        return "" + getID() + "|" + getFechaDePago() + "|" + getImporte() + "|" + getMetodoDePago();
+        return "" + getID() + "|" + getFechaDePago() + "|" + getImporte() + "|" + getMetodoDePago()+"|"+getPaciente()+"|"+getIdCobro();
     }
 
     public ArrayList<Pago> getAllPago() {

@@ -83,7 +83,7 @@ public class Secretariado extends Empleado {
 
     @Override
     public String data() {
-        return super.data() + "" + getAñosExperiencia();
+        return super.data() + "|" + getAñosExperiencia() + "|" + getInformes();
     }
 
     public Secretariado getSecretariadoById(long id) {
