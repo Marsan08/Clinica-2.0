@@ -104,7 +104,7 @@ public class Medicamento {
     }
 
     public String Data() {
-        return getId() + " | " + getNombre() + " | " + getPrincipioActivo() + " | " + getDosisMaxDiaria();
+        return this.getId() + " | " + this.getNombre() + " | " + this.getPrincipioActivo() + " | " + this.getDosisMaxDiaria();
     }
 
     public ArrayList<Medicamento> getAllMedicamento() {

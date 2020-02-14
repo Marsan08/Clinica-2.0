@@ -170,7 +170,7 @@ public class Tratamiento {
     }
      
     public String Data (){
-     return getId() + " | " + getNombre() + " | " + getFechaInicio() + " | " + isConsentimiento ();
+     return this.getId() + " | " + this.getNombre() + " | " + this.getFechaInicio() + " | " + this.isConsentimiento ();
     }
     
     public ArrayList<Tratamiento> getAllTratamiento (){
