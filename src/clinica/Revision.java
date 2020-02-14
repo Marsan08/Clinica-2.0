@@ -60,6 +60,7 @@ public class Revision extends Cita {
         return super.toString()+"Revisi\u00f3n{" + "anotaciones=" + anotaciones + '}';
     }
     
+    @Override
     public String data() {
         
         return super.data()+ "|"+getAnotaciones()+"|"+getIdCirujano();
