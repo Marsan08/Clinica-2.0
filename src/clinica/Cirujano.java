@@ -60,6 +60,8 @@ public class Cirujano extends Empleado{
     Método toString de la clase Cirujano
     */
 
+    
+    
     @Override
     public String toString() {
         return super.toString()+ "Cirujano{" + "especialidades=" + especialidades + '}';
