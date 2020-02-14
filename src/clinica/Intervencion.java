@@ -94,8 +94,9 @@ public class Intervencion extends Cita{
     
     public String Data () {
         
-        return super.data()+ "|"+getDuracion();
+        return super.data()+ "|" + getDuracion() + " | " + "Cita{" + "idCita=" + id;
     }
+    
     public ArrayList<Intervencion> getAllIntervencion (){
     ArrayList <Intervencion> intervenciones = new ArrayList <Intervencion>();
     return intervenciones ;
