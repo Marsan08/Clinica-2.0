@@ -43,7 +43,10 @@ public class MedicacionException extends Exception {
     }
         public static boolean validarDosisMaxDiaria(int dosisMaxDiaria) throws MedicacionException {
         boolean dosisMaxDiariaValido = false;
-
+        if (dosisMaxDiaria>1000) {
+            dosisMaxDiariaValido = false;
+            throw new MedicacionException("Es una dosis demasiado alta podría dañar a alguien");
+        }
         
         
         dosisMaxDiariaValido=true;
