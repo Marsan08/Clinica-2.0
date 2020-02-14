@@ -27,15 +27,6 @@ public class Paciente {
     private String NIF;//Es la tarjeta de identidad del paciente.Cadena de caracteres.
     private String telefono;//Es el telefono de contacto del paciente.Cadena de caracteres.
     private String direccion;//Es la dirección de residencia del paciente.Cadena de caracteres.
-    long idPago;
-
-    public long getIdPago() {
-        return idPago;
-    }
-
-    public void setIdPago(long idPago) {
-        this.idPago = idPago;
-    }
     
     public long getIdHistorial() {    
         return idHistorial;
@@ -134,7 +125,7 @@ public class Paciente {
         this.direccion = direccion;
     }
 
-    public Paciente(Historial historial, long idHistorial, long id, String nombre, String apellidos, String NIF, String telefono, String direccion, long idPago) {
+    public Paciente(Historial historial, long idHistorial, long id, String nombre, String apellidos, String NIF, String telefono, String direccion) {
         this.historial = historial;
         this.idHistorial = idHistorial;
         this.id = id;
@@ -143,7 +134,7 @@ public class Paciente {
         this.NIF = NIF;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.idPago = idPago;
+        
     }
 
 
@@ -157,7 +148,7 @@ public class Paciente {
         this.telefono = p.getTelefono();
         this.direccion = p.getDireccion();
         this.idHistorial = p.getIdHistorial();
-        this.idPago = p.getIdPago();
+        
         }
     //Otros métodos sobreescritos
     
@@ -167,7 +158,7 @@ public class Paciente {
     }
     
     public String data() {
-        return ""+getId()+"|"+getNombre()+"|"+getApellidos()+"|"+getNIF()+"|"+getTelefono()+"|"+getDireccion()+"|"+getIdPago()+"|"+getIdHistorial();
+        return ""+getId()+"|"+getNombre()+"|"+getApellidos()+"|"+getNIF()+"|"+getTelefono()+"|"+getDireccion()+"|"+getIdHistorial();
     }
 
     
