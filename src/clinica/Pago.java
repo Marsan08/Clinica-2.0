@@ -24,7 +24,25 @@ public class Pago {
     private double importe;//Es el importe del pago.Solo son valores númericos.
     private String metododePago;//Es el método por el cual se efectua el pago (Transferencia,efectivo,...).
     Paciente paciente;//Paciente es el que realiza el pago.
+    long idPaciente;
+    long idCobro;
     //Getters y setters
+
+    public long getIdCobro() {
+        return idCobro;
+    }
+
+    public void setIdCobro(long idCobro) {
+        this.idCobro = idCobro;
+    }
+    
+    public long getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(long idPaciente) {
+        this.idPaciente = idPaciente;
+    }
 
     public long getID() {
         return id;
@@ -38,8 +56,8 @@ public class Pago {
         return fechadePago;
     }
 
-    public void setFechaDePago(Date fechaDePago) {
-        this.fechadePago = fechaDePago;
+    public void setFechaDePago(Date fechadePago) {
+        this.fechadePago = fechadePago;
     }
 
     public void setImporte(Double importe) {
@@ -55,8 +73,8 @@ public class Pago {
         return metododePago;
     }
 
-    public void setMetodoDePago(String métodoDePago) {
-        this.metododePago = métodoDePago;
+    public void setMetodoDePago(String metododePago) {
+        this.metododePago = metododePago;
     }
 
     public Paciente getPaciente() {
@@ -95,12 +113,25 @@ public class Pago {
 
     }
 
+    public Pago(long id, Date fechadePago, double importe, String metododePago, Paciente paciente, long idPaciente, long idCobro) {
+        this.id = id;
+        this.fechadePago = fechadePago;
+        this.importe = importe;
+        this.metododePago = metododePago;
+        this.paciente = paciente;
+        this.idPaciente = idPaciente;
+        this.idCobro = idCobro;
+    }
+
+
     //Constructor de copia
     public Pago(Pago p) {
         this.id = p.getID();
         this.fechadePago = p.getFechaDePago();
         this.importe = p.getImporte();
         this.metododePago = p.getMetodoDePago();
+        this.idPaciente = p.getIdPaciente();
+        this.idPaciente = p.getIdCobro();
     }
 
     @Override
@@ -109,7 +140,7 @@ public class Pago {
     }
 
     public String data() {
-        return "" + getID() + "|" + getFechaDePago() + "|" + getImporte() + "|" + getMetodoDePago();
+        return "" + getID() + "|" + getFechaDePago() + "|" + getImporte() + "|" + getMetodoDePago()+"|"+getPaciente()+"|"+getIdCobro();
     }
 
     public ArrayList<Pago> getAllPago() {

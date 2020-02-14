@@ -19,7 +19,7 @@ public class Paciente {
     
     
     Historial historial;
-    
+    long idHistorial;
     protected long id;//Es el identificador del paciente.
     
     private String nombre;//Es el nombre del paciente.Cadena de caracteres.
@@ -28,10 +28,14 @@ public class Paciente {
     private String telefono;//Es el telefono de contacto del paciente.Cadena de caracteres.
     private String direccion;//Es la dirección de residencia del paciente.Cadena de caracteres.
     
-    
+    public long getIdHistorial() {    
+        return idHistorial;
+    }
 
-    
     //Getters y setters
+    public void setIdHistorial(long idHistorial) {    
+        this.idHistorial = idHistorial;
+    }
 
     public long getId() {
         return id;
@@ -120,6 +124,17 @@ public class Paciente {
         }
         this.direccion = direccion;
     }
+
+    public Paciente(Historial historial, long idHistorial, long id, String nombre, String apellidos, String NIF, String telefono, String direccion) {
+        this.historial = historial;
+        this.idHistorial = idHistorial;
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.NIF = NIF;
+        this.telefono = telefono;
+        this.direccion = direccion;
+    }
    
     //Constructor de copia
    public Paciente (Paciente p) {
@@ -129,6 +144,7 @@ public class Paciente {
         this.NIF = p.getNIF();
         this.telefono = p.getTelefono();
         this.direccion = p.getDireccion();
+        this.idHistorial = p.getIdHistorial();
         }
     //Otros métodos sobreescritos
     

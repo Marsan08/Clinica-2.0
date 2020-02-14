@@ -18,8 +18,17 @@ public class Secretariado extends Empleado {
     private int añosExperiencia;//Son los años de experiencia del secretariado.Debe ser un número determinado.
     private ArrayList<Informe> informes;
     Cita cita;
+    long idCita;
     //Getters y setters
 
+    public long getIdCita() {
+        return idCita;
+    }
+
+    public void setIdCita(long idCita) {
+        this.idCita = idCita;
+    }
+    
     public ArrayList<Informe> getInformes() {
         return informes;
     }
@@ -42,15 +51,17 @@ public class Secretariado extends Empleado {
     }
 
     //Constructor con argumentos
-    public Secretariado(String nombre, String apellido, String telefono, String nif, String direccion) {
+    public Secretariado(String nombre, String apellido, String telefono, String nif, String direccion,int añosExperiencia,long idCita) {
         super(nombre, apellido, telefono, nif, direccion);
         this.añosExperiencia = añosExperiencia;
+        this.idCita= idCita;
     }
 
     //Constructor de copia
     public Secretariado(Secretariado p) {
         super(p);
         this.añosExperiencia = p.getAñosExperiencia();
+        this.idCita= p.getIdCita();
 
     }
 
@@ -72,7 +83,7 @@ public class Secretariado extends Empleado {
 
     @Override
     public String data() {
-        return super.data() + "" + getAñosExperiencia();
+        return super.data() + "|" + getAñosExperiencia() + "|" + getInformes();
     }
 
     public Secretariado getSecretariadoById(long id) {

@@ -60,7 +60,7 @@ public class Informe {
     }
     
     public String data() {
-        return ""+getID()+"|"+getDescripciónTratamiento();
+        return ""+getID()+"|"+getDescripciónTratamiento()+"|"+getSecretariados();
     }
     public ArrayList<Informe> getAllInforme (){
     ArrayList <Informe> informes = new ArrayList <Informe>();
@@ -81,12 +81,9 @@ public class Informe {
         boolean correcto;
         
         do{
-            
-            
-            
             System.out.println("Introduzca descripción del tratamiento:");
             String dtrat = in.nextLine();
-            // i.setDescripcionTratamiento(dtrat);
+            i.setDescripciónTratamiento(dtrat);
             
             ArrayList <Secretariado> secretariados = new ArrayList();
             System.out.println("¿Quieres introducir los secretarios? ");
