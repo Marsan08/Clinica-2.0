@@ -51,24 +51,23 @@ public class PacienteException extends Exception {
         return apellidoValido;
         
     }
-    
+       
     public static boolean validarNif(String NIF) throws PacienteException{
         boolean nifValido=false;
-                
+        NIF = NIF.toUpperCase();
+                              
                 for (int i = 0; i < NIF.length() - 1; i++) {
             char c = NIF.charAt(i);
             if (Character.isLetter(c)) {
                 throw new PacienteException("No se permiten letras en el NIF");
             }
-            int tamanhoNIF = NIF.length();
-            if (tamanhoNIF > 9) {
-                throw new PacienteException("Demasiado largo");
+            int tamanhoNIF = NIF.length();            
+            if (tamanhoNIF != 9) {
+                throw new PacienteException("8 numeros y 1 letra");               
             }
-            if (tamanhoNIF < 9) {
-                throw new PacienteException("Demasiado corto");
-            }
+                       
         }
-    nifValido=true;
+        nifValido=true;
         return nifValido;
     }
     

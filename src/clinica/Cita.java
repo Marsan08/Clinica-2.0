@@ -21,7 +21,9 @@ public class Cita {
     private char rangoHorario;
     private String hora;
     private boolean estado;
-
+    
+    private long idTratamiento;
+    
     public Cita() {
     }
 
@@ -80,13 +82,24 @@ public class Cita {
         this.estado = estado;
     }
 
+    public long getIdTratamiento() {
+        return idTratamiento;
+    }
+
+    public void setIdTratamiento(long idTratamiento) {
+        this.idTratamiento = idTratamiento;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "Cita{" + "idCita=" + id + ", fecha=" + fecha + ", rangoHorario=" + rangoHorario + ", hora=" + hora + '}';
     }
-
+    //primero atributos cita, despues atributos de las relaciones
+    
     public String data() {
-        return getId() + " | " + getFecha() + " | " + getRangoHorario() + " | " + getHora();
+        return getId() + " | " + getFecha() + " | " + getRangoHorario() + " | " + getHora() + " | " + getIdTratamiento();
 
     }
 

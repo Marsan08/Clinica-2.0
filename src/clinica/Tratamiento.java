@@ -4,9 +4,12 @@
  * and open the template in the editor.
  */
 package clinica;
+import excepciones.PagoExcepcion;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  * version 2
  * @author DAW109
@@ -183,7 +186,12 @@ public class Tratamiento {
            }
            
                 System.out.println("Introduzca el cobro del tratamiento:");
-                Cobro cobro = Cobro.nuevoCobro();
+                Cobro cobro = null;
+                try {
+                    cobro = Cobro.nuevoCobro();
+                } catch (PagoExcepcion ex) {
+                    Logger.getLogger(Tratamiento.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 String Cobro = in.nextLine();
                 t.setCobro(cobro);
            
