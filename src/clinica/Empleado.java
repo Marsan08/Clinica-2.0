@@ -103,7 +103,7 @@ public class Empleado{
     
     public String data() {
       
-        return this.getId() + " | " + this.getNombre() + " | " + this.getApellido() + " | " + this.getTelefono() + " | " + this.getNif() + " | " + this.getDireccion() + " | " + "Empleado{" + "idEmpleado=" + id;
+        return this.getId() + " | " + this.getNombre() + " | " + this.getApellido() + " | " + this.getTelefono() + " | " + this.getNif() + " | " + this.getDireccion();
     }
     
     

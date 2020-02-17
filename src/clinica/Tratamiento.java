@@ -17,6 +17,7 @@ public class Tratamiento {
     Informe informe;
     Paciente paciente;
     Cobro cobro;
+    
     long idCobro;
     long idPaciente;
     long idInforme;
@@ -170,7 +171,7 @@ public class Tratamiento {
     }
      
     public String Data (){
-     return this.getId() + " | " + this.getNombre() + " | " + this.getFechaInicio() + " | " + this.isConsentimiento ();
+     return this.getId() + " | " + this.getIdCobro() + " | " + this.getIdPaciente() + " | " + this.getIdInforme() + " | " + this.getNombre() + " | " + this.getFechaInicio() + " | " + this.isConsentimiento ();
     }
     
     public ArrayList<Tratamiento> getAllTratamiento (){
