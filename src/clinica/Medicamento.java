@@ -37,8 +37,17 @@ public class Medicamento {
         } else {
 
         }
-        this.principioActivo = principioActivo;
-        this.dosisMaxDiaria = dosisMaxDiaria;
+        if (MedicacionException.validarPrincipioActivo(principioActivo)) {
+            this.principioActivo = principioActivo;
+        } else {
+
+        }
+        if (MedicacionException.validarDosisMaxDiaria(dosisMaxDiaria)) {
+            this.dosisMaxDiaria = dosisMaxDiaria;
+        } else {
+
+        }
+        
     }
 
     public Medicamento(Medicamento m) throws MedicacionException {
@@ -95,7 +104,7 @@ public class Medicamento {
     }
 
     public String Data() {
-        return getId() + " | " + getNombre() + " | " + getPrincipioActivo() + " | " + getDosisMaxDiaria();
+        return this.getId() + " | " + this.getNombre() + " | " + this.getPrincipioActivo() + " | " + this.getDosisMaxDiaria();
     }
 
     public ArrayList<Medicamento> getAllMedicamento() {
@@ -129,10 +138,24 @@ public class Medicamento {
             System.out.println("Introduzca el principio activo del medicamento: ");
             String prina = in.nextLine();
             m.setPrincipioActivo(prina);
+            try {
+                if (MedicacionException.validarPrincipioActivo(prina)) {
+                    m.setPrincipioActivo(prina);
+                }
+             } catch (MedicacionException ex) {
+                System.out.println("Se ha producido una MedicacionException con el principio activo del medicamento." + ex.getMessage());
+            }
 
             System.out.println("Introduza la dosis maxima diaria en mg:");
-            String dmaxd = in.nextLine();
+            int dmaxd = in.nextInt();
             m.setDosisMaxDiaria(dmaxd);
+            try {
+                if (MedicacionException.validarDosisMaxDiaria(dmaxd)) {
+                    m.setDosisMaxDiaria(dmaxd);
+                }
+             } catch (MedicacionException ex) {
+                System.out.println("Se ha producido una MedicacionException con el principio activo del medicamento." + ex.getMessage());
+            }
 
             System.out.println("Introduzca la alergia: ");
             Alergia alergia = Alergia.nuevaAlergia();
@@ -147,9 +170,6 @@ public class Medicamento {
         return m;
     }
 
-    private void setDosisMaxDiaria(String dmaxd) {
-
-    }
 
     private void setCita(ArrayList<Cita> citas) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

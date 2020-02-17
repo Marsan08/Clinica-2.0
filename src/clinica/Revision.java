@@ -18,10 +18,15 @@ public class Revision extends Cita {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     private String anotaciones;
-    //Son las anotaciones que se escriben en la revisión.Cadena de caracteres.
-    
+    long idCirujano;//Son las anotaciones que se escriben en la revisión.Cadena de caracteres.
     //Getters y setters
-    
+    public long getIdCirujano() {
+        return idCirujano;
+    }
+    public void setIdCirujano(long idCirujano) {    
+        this.idCirujano = idCirujano;
+    }
+
     public String getAnotaciones() {
         return anotaciones;
     }
@@ -34,14 +39,16 @@ public class Revision extends Cita {
     super();
     }
     //Constructor con argumentos
-    public Revision(Date fecha, char rangoHorario,String hora,boolean estado,String anotaciones) {
+    public Revision(Date fecha, char rangoHorario,String hora,boolean estado,String anotaciones,long idCirujano) {
         super(fecha,rangoHorario,hora,estado);
         this.anotaciones = anotaciones;
+        this.idCirujano = idCirujano;
     }
     //Constructor de copia
     public Revision (Revision p) {
         super(p);
-        this.anotaciones = p.getAnotaciones();  
+        this.anotaciones = p.getAnotaciones();
+        this.idCirujano = p.idCirujano;
     }
     public Revision(Cita c, String anotaciones){
        super(c);
@@ -53,9 +60,10 @@ public class Revision extends Cita {
         return super.toString()+"Revisi\u00f3n{" + "anotaciones=" + anotaciones + '}';
     }
     
+    @Override
     public String data() {
         
-        return super.data()+ "|"+getAnotaciones();
+        return super.data()+ "|"+getAnotaciones()+"|"+getIdCirujano();
     }
    
     

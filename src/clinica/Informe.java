@@ -76,17 +76,14 @@ public class Informe {
     }
         public static Informe nuevoInforme () throws ParseException{
   
-        Informe i = Informe.nuevoInforme();
+        Informe i = new Informe();
         Scanner in = new Scanner(System.in);
         boolean correcto;
         
         do{
-            
-            
-            
             System.out.println("Introduzca descripción del tratamiento:");
             String dtrat = in.nextLine();
-            // i.setDescripcionTratamiento(dtrat);
+            i.setDescripciónTratamiento(dtrat);
             
             ArrayList <Secretariado> secretariados = new ArrayList();
             System.out.println("¿Quieres introducir los secretarios? ");

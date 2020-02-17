@@ -6,6 +6,17 @@
 package clinica;
 
 import excepciones.PacienteException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,8 +29,7 @@ public class Paciente {
     
     
     
-    Historial historial;
-    
+
     protected long id;//Es el identificador del paciente.
     
     private String nombre;//Es el nombre del paciente.Cadena de caracteres.
@@ -27,11 +37,17 @@ public class Paciente {
     private String NIF;//Es la tarjeta de identidad del paciente.Cadena de caracteres.
     private String telefono;//Es el telefono de contacto del paciente.Cadena de caracteres.
     private String direccion;//Es la dirección de residencia del paciente.Cadena de caracteres.
+    Historial historial;
+    long idHistorial;
     
-    
+    public long getIdHistorial() {    
+        return idHistorial;
+    }
 
-    
     //Getters y setters
+    public void setIdHistorial(long idHistorial) {    
+        this.idHistorial = idHistorial;
+    }
 
     public long getId() {
         return id;
@@ -81,7 +97,132 @@ public class Paciente {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+    //Los 4 métodos de lectura y escritura.
+    public static ArrayList<Paciente> fromTextFile (String path) {
+        ArrayList<Paciente> ret = new ArrayList<>();
+        File fichero = new File(path);
+        FileReader lector = null;
+        BufferedReader buffer = null ;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while((linea=buffer.readLine())!=null){
+                    String[] campos = linea.split("|");
+                    long id = Long.parseLong(campos[0]);
+                    String nombre = campos[1];
+		    String apellido = campos[2];
+		    String NIF = campos[1];
+                    String telefono = campos[2];
+		    String direccion = campos[1];
+                    Paciente p = new Paciente(id,nombre,apellido,NIF, telefono,direccion);
+                    ret.add(p);                   
+                }
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(lector!=null)
+                    lector.close();
+            }
+        }
+        catch(PacienteException p){
+            System.out.println("Se ha producido una ClienteException");
+        }
+        catch(FileNotFoundException p){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException p){
+            System.out.println("Se ha producido una IOException");
+        }
 
+        return ret;
+    }
+     public static ArrayList<Paciente> fromBinaryFile (String path) {
+        ArrayList<Paciente> ret = new ArrayList<>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try{
+            try{
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Paciente p;
+                while((p = (Paciente)lectorObjeto.readObject())!=null)
+                    ret.add(p);
+            }finally{
+                if(lector!=null)
+                    lector.close();
+                if(lectorObjeto!=null)
+                    lectorObjeto.close();
+            }
+        }
+
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException p){
+            System.out.println("Se ha producido una IOException");
+        }
+                catch(ClassNotFoundException p){
+            System.out.println("Se ha producido una ClassNotFoundException");
+        }
+
+        return ret;
+    }
+    
+    
+ public void toTextFile (String path){
+        File fichero = new File(path);
+        FileWriter escritor = null;
+        PrintWriter buffer = null ;
+        try {
+            try {
+                escritor = new FileWriter(fichero);
+                buffer = new PrintWriter(escritor);
+                buffer.println(this.data());
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(escritor!=null)
+                    escritor.close();
+            }
+        }
+        catch(FileNotFoundException p){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException p){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception p){
+            System.out.println("Se ha producido una Exception");
+        }
+    }
+
+    public void toBinaryFile (String path) {
+        FileOutputStream escritor = null;
+        ObjectOutputStream escritorObjeto = null;
+        try{
+            try{
+                escritor = new FileOutputStream(path);
+                escritorObjeto = new ObjectOutputStream(escritor);
+                escritorObjeto.writeObject(this);
+            }finally{
+                if(escritor!=null)
+                    escritor.close();
+                if(escritorObjeto!=null)
+                    escritorObjeto.close();
+            }
+        }
+        catch(FileNotFoundException p){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException p){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception p){
+            System.out.println("Se ha producido una Exception");
+        }
+    }
    
     //Constructor por defecto
     public Paciente() {
@@ -120,6 +261,20 @@ public class Paciente {
         }
         this.direccion = direccion;
     }
+
+    public Paciente(Historial historial, long idHistorial, long id, String nombre, String apellidos, String NIF, String telefono, String direccion) {
+        this.historial = historial;
+        this.idHistorial = idHistorial;
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.NIF = NIF;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        
+    }
+
+
    
     //Constructor de copia
    public Paciente (Paciente p) {
@@ -129,6 +284,8 @@ public class Paciente {
         this.NIF = p.getNIF();
         this.telefono = p.getTelefono();
         this.direccion = p.getDireccion();
+        this.idHistorial = p.getIdHistorial();
+        
         }
     //Otros métodos sobreescritos
     
@@ -138,7 +295,7 @@ public class Paciente {
     }
     
     public String data() {
-        return ""+getId()+"|"+getNombre()+"|"+getApellidos()+"|"+getNIF()+"|"+getTelefono()+"|"+getDireccion();
+        return ""+getId()+"|"+getNombre()+"|"+getApellidos()+"|"+getNIF()+"|"+getTelefono()+"|"+getDireccion()+"|"+getIdHistorial();
     }
 
     
@@ -218,7 +375,7 @@ public class Paciente {
     
     //Caso de uso REALIZAR PAGO hecho por Mar Santin.
     
-    public boolean realizarPago (Tratamiento t) throws ParseException, excepciones.PagoExcepcion{
+    public boolean realizarPago (Tratamiento t){
         
         Scanner in = new Scanner (System.in);
         
@@ -232,7 +389,6 @@ public class Paciente {
             
             importePagado += p.getImporte();
             
-       
         }
         
         if (importePagado < c.getImporteTotalEuros()){
@@ -244,7 +400,6 @@ public class Paciente {
             pagos.add(Pago.nuevoPago());
             
         }
-        
         
         return true;
     }

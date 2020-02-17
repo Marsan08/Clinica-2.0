@@ -4,24 +4,45 @@
  * and open the template in the editor.
  */
 package clinica;
+
 import excepciones.PagoExcepcion;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @version 3.1
  * @author AdrianSaveli
  */
 public class Pago {
-    
+
     protected long id;//Es el identificador del pago.
     private Date fechadePago;//Es la fecha de la realización del pago por parte del paciente.
-    private double importe ;//Es el importe del pago.Solo son valores númericos.
+    private double importe;//Es el importe del pago.Solo son valores númericos.
     private String metododePago;//Es el método por el cual se efectua el pago (Transferencia,efectivo,...).
     Paciente paciente;//Paciente es el que realiza el pago.
+    long idPaciente;
+    long idCobro;
     //Getters y setters
+
+    public long getIdCobro() {
+        return idCobro;
+    }
+
+    public void setIdCobro(long idCobro) {
+        this.idCobro = idCobro;
+    }
     
+    public long getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(long idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+
     public long getID() {
         return id;
     }
@@ -34,24 +55,25 @@ public class Pago {
         return fechadePago;
     }
 
-    public void setFechaDePago(Date fechaDePago) {
-        this.fechadePago = fechaDePago;
+    public void setFechaDePago(Date fechadePago) {
+        this.fechadePago = fechadePago;
     }
 
-    public int getImporte() {
-        return (int) importe;
-    }
-
-    public void setImporte(int importe) {
+    public void setImporte(Double importe) {
         this.importe = importe;
+
+    }
+
+    public double getImporte() {
+        return importe;
     }
 
     public String getMetodoDePago() {
         return metododePago;
     }
 
-    public void setMetodoDePago(String métodoDePago) {
-        this.metododePago = métodoDePago;
+    public void setMetodoDePago(String metododePago) {
+        this.metododePago = metododePago;
     }
 
     public Paciente getPaciente() {
@@ -62,49 +84,79 @@ public class Pago {
         this.paciente = paciente;
     }
     
-   //Constructor por defecto
+    //Constructor por defecto
     public Pago() {
     }
+
     //Constructor con argumentos
-    public Pago(long ID, Date FechaDePago, int Importe, String MetodoDePago) {
+    public Pago(long ID, Date FechaDePago, double importe, String MetodoDePago) throws PagoExcepcion {
         this.id = ID;
         this.fechadePago = FechaDePago;
-        this.importe = Importe;
-        this.metododePago = MetodoDePago;
+        try {
+            if (PagoExcepcion.validarImporte(importe)) {
+                this.importe = importe;
+            }
+
+        } catch (PagoExcepcion ex) {
+            System.out.println("Error al validar el importe del pago.");
+        }
+
+        try {
+            if (PagoExcepcion.validarMetodoDePago(MetodoDePago)) {
+                this.metododePago = MetodoDePago;
+            }
+        } catch (PagoExcepcion ex) {
+
+            System.out.println("Error al valido el método de pago");
+        }
+
     }
+
+    public Pago(long id, Date fechadePago, double importe, String metododePago, Paciente paciente, long idPaciente, long idCobro) {
+        this.id = id;
+        this.fechadePago = fechadePago;
+        this.importe = importe;
+        this.metododePago = metododePago;
+        this.paciente = paciente;
+        this.idPaciente = idPaciente;
+        this.idCobro = idCobro;
+    }
+
+
     //Constructor de copia
-      public Pago (Pago p) {
+    public Pago(Pago p) {
         this.id = p.getID();
         this.fechadePago = p.getFechaDePago();
         this.importe = p.getImporte();
         this.metododePago = p.getMetodoDePago();
-        }
+        this.idPaciente = p.getIdPaciente();
+        this.idPaciente = p.getIdCobro();
+    }
 
     @Override
     public String toString() {
         return "Pago{" + "ID=" + id + ", fechaDePago=" + fechadePago + ", importe=" + importe + ", m\u00e9todoDePago=" + metododePago + '}';
     }
-    
+
     public String data() {
-        return ""+getID()+"|"+getFechaDePago()+"|"+getImporte()+"|"+getMetodoDePago();
+        return "" + getID() + "|" + getFechaDePago() + "|" + getImporte() + "|" + getMetodoDePago()+"|"+getPaciente().getId()+"|"+getIdCobro();
     }
-    
-    
-    public ArrayList<Pago> getAllPago (){
-    ArrayList <Pago> pagos = new ArrayList <Pago>();
-    return pagos;
+
+    public ArrayList<Pago> getAllPago() {
+        ArrayList<Pago> pagos = new ArrayList<Pago>();
+        return pagos;
     }
-    
-   
-    public Pago getPagoById (long id){
+
+    public Pago getPagoById(long id) {
         Pago p = new Pago();
         /*Este método sirve para que posteriormente se busque el id dado
         y se obtengan los datos de aquel pago que tenga ese id dado.
         Aunque si no existe ningún pago con ese id saldra null.  
-        */ 
+         */
         return p;
     }
-    public static Pago nuevoPago() throws  ParseException, excepciones.PagoExcepcion{
+
+    public static Pago nuevoPago() {
         Pago p = new Pago();
         Scanner in = new Scanner(System.in);
         boolean correcto;
@@ -115,51 +167,22 @@ public class Pago {
             p.setFechaDePago(fecha);
 
             System.out.println("Introduzca el importe del pago:");
-            double importe = 0 ;
-            String importe2 = Double.toString(importe);
-            importe = in.nextInt();
-            p.setImporte(importe);
-           
-            
-            for (int i=0; i<importe2.length(); i++){
-                    
-            char b =importe2.charAt(i);
-            
-            if(Character.isLetter(b)){
-                
-            }
-            throw new excepciones.PagoExcepcion("No se permiten letras en el importe de pago.");
-             }
-            int timporte = importe2.length();
-            
-            if(timporte <=-1){
-            throw new excepciones.PagoExcepcion("No se puede crear un importe de pago negativo.");
-            
-            }
-            
-            
-           
-            System.out.println("Introduzca el método de pago: ");
-            String metp = in.nextLine();
-            p.setMetodoDePago(metp);
-            
-            for (int i=0; i<metp.length(); i++){
-                    
-            char c =metp.charAt(i);
-            
-            if(Character.isDigit(c)){
-            throw new excepciones.PagoExcepcion("No se permiten digitos en el método de pago.");
-             }
-            int tamaniometp=metp.length();
-            if(tamaniometp<2){
-            throw new excepciones.PagoExcepcion("El nombre de metodo de pago es demasiado corto");
-            }
-            if(tamaniometp>10){
-            throw new excepciones.PagoExcepcion("El nombre de metodo de pago es demaiado largo");
-            }
+            double importe;
+            importe = in.nextDouble();
+            try {
+                if (!excepciones.PagoExcepcion.validarImporte(importe)) {
+                    p.setImporte(importe);
+                }
+                System.out.println("Introduzca el método de pago: ");
+                String metp = in.nextLine();
+                if (!excepciones.PagoExcepcion.validarMetodoDePago(metp)) {
+                    p.setMetodoDePago(metp);
+                }
+
+            } catch (PagoExcepcion ex) {
+                System.out.println("PagoExcepcion" + ex.getMessage());;
             }
 
-  
             System.out.println("La pago introducido es: " + p);
             System.out.println("¿Es correcto el pago?");
             correcto = Utilidades.leerBoleano();
@@ -168,10 +191,5 @@ public class Pago {
 
         return p;
     }
-
-    private void setImporte(double importe) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 
 }

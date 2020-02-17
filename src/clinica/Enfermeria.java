@@ -58,7 +58,7 @@ public class Enfermeria extends Empleado{
 
     public String Data () {
         
-        return super.data()+ getCategoria() + "";
+        return super.data()+ getCategoria();
     }
 
     @Override

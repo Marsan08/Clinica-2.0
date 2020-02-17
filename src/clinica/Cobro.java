@@ -23,7 +23,7 @@ public class Cobro {
     public Cobro() {
     }
 
-    public Cobro(int idCobro, double importeTotalEuros, Date fechaFinalizacion) {
+    public Cobro(int idCobro, double importeTotalEuros, Date fechaFinalizacion) throws excepciones.PagoExcepcion {
         this.id = idCobro;
         this.importeTotalEuros = importeTotalEuros;
         this.fechaFinalizacion = fechaFinalizacion;

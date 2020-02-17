@@ -20,12 +20,17 @@ import java.util.logging.Logger;
  */
 public class Utilidades {
 
-    public static Date leerFecha() throws ParseException {
+    public static Date leerFecha(){
         Scanner in = new Scanner(System.in);
         System.out.println("Escriba la fecha en formato dd/MM/yyyy");
         String fechaComoTexto = in.nextLine();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date fecha = sdf.parse(fechaComoTexto);
+        Date fecha=null;
+        try {
+            fecha = sdf.parse(fechaComoTexto);
+        } catch (ParseException ex) {
+            Logger.getLogger(Utilidades.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return fecha;
     }
 

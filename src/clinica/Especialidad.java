@@ -12,10 +12,12 @@ import java.util.Scanner;
  */
 public class Especialidad {
     
+    protected long id;
+    // Identificador de la especialidad, debe ser siempre de tipo long.
+
     private String nombre;
     //Nombre de la especialidad ej; endodoncista, esta relacionada con cirujía ES OBLIGATORIO TENER UNA CADENA DE CARACTERES
-    protected long id;
-    // Identificador de la especialidad, puede ser SA125 por eso es un String, NO PUEDE SER VALOR 0
+
 
     public Especialidad() {
     }
@@ -59,7 +61,7 @@ public class Especialidad {
     
     public String Data(){
         
-        return getNombre() + " | " + getId();
+        return this.getId() + " | " + this.getNombre();
     }
 
     

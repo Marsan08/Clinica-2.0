@@ -6,6 +6,8 @@
 package clinica;
 
 import excepciones.MedicacionException;
+import excepciones.PagoExcepcion;
+import java.text.ParseException;
 import excepciones.PacienteException;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -22,9 +24,20 @@ public class Clinica {
      * @param args the command line arguments
      * Programa principal de la clinica. Prueba los métodos data y toString de las clases creadas.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
+  
         
-       
+        //CASO DE USO REALIZAR PAGO
+        
+      Paciente pac = new Paciente();
+      Pago k= Pago.nuevoPago();
+      Tratamiento t = new Tratamiento();
+      pac.realizarPago(t);
+    
+    
+
+    
+
         //Utilidades u = new Utilidades();
         //Utilidades.registraPaciente(p);
         
@@ -46,6 +59,7 @@ public class Clinica {
           System.out.println("Se ha producido una PacienteException."+ ex.getMessage());
         }
     
+
             //* Historial h1= new Historial(7,"Paciente"); //Se crea el objeto historial h1
             //*Empleado e1= new Empleado(1,"Jose","Sanchez","938298","239883-A","Calle Heliodoro 123");
             //Cobro c1=new Cobro(3,50.0,"13/04/2007");
@@ -133,13 +147,6 @@ public class Clinica {
      
 }
     
-        
- 
-    
- 
 
-    
-
-            
             
 
