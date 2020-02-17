@@ -180,7 +180,7 @@ public class Pago {
                 }
 
             } catch (PagoExcepcion ex) {
-                Logger.getLogger(Pago.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("PagoExcepcion" + ex.getMessage());;
             }
 
             System.out.println("La pago introducido es: " + p);

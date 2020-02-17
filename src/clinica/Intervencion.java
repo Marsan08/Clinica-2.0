@@ -20,6 +20,8 @@ public class Intervencion extends Cita{
     
     private ArrayList <Cirujano> cirujanos;
     
+    private long idCirujano;
+    
     public Intervencion() {
     super();
     }
@@ -29,6 +31,7 @@ public class Intervencion extends Cita{
         this.duracion = duracion;
        this.enfermeros = new ArrayList<Enfermeria>();
        this.cirujanos = new ArrayList<Cirujano>();
+       this.idCirujano = idCirujano;
     }
     
     public Intervencion (Intervencion i) {
@@ -36,6 +39,7 @@ public class Intervencion extends Cita{
         this.duracion = i.getDuracion();
         this.enfermeros = new ArrayList<Enfermeria>();
         this.cirujanos = new ArrayList<Cirujano>();
+        this.idCirujano = i.getIdCirujano();
     }
     
     public Intervencion(Cita c, String duracion){
@@ -43,6 +47,7 @@ public class Intervencion extends Cita{
        this.duracion = duracion;
        this.enfermeros = new ArrayList<Enfermeria>();
        this.cirujanos = new ArrayList<Cirujano>();
+       this.idCirujano  =idCirujano;
        
    } 
     
@@ -61,6 +66,8 @@ public class Intervencion extends Cita{
        this.cirujanos = cirujanos;
        
    }
+      
+      
    
     public String getDuracion() {
         return duracion;
@@ -85,6 +92,14 @@ public class Intervencion extends Cita{
     public void setCirujanos(ArrayList<Cirujano> cirujanos) {
         this.cirujanos = cirujanos;
     }
+
+    public long getIdCirujano() {
+        return idCirujano;
+    }
+
+    public void setIdCirujano(long idCirujano) {
+        this.idCirujano = idCirujano;
+    }
    
 
     @Override
@@ -94,7 +109,8 @@ public class Intervencion extends Cita{
     
     public String Data () {
         
-        return super.data()+ "|" + getDuracion() + " | " + "Cita{" + "idCita=" + id;
+        return super.data()+ " | " + getIdCirujano() + "|" + getDuracion();
+        
     }
     
     public ArrayList<Intervencion> getAllIntervencion (){
