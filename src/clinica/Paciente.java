@@ -90,7 +90,7 @@ public class Paciente {
         this.direccion = direccion;
     }
     
-     public static ArrayList<Paciente> fromBinaryFile (String path) throws ClassNotFoundException {
+     public static ArrayList<Paciente> fromBinaryFile (String path) {
         ArrayList<Paciente> ret = new ArrayList<>();
         FileInputStream lector = null;
         ObjectInputStream lectorObjeto = null;
