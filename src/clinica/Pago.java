@@ -6,7 +6,6 @@
 package clinica;
 
 import excepciones.PagoExcepcion;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -84,7 +83,7 @@ public class Pago {
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
-
+    
     //Constructor por defecto
     public Pago() {
     }

@@ -6,6 +6,10 @@
 package clinica;
 
 import excepciones.PacienteException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -85,7 +89,38 @@ public class Paciente {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+    
+     public static ArrayList<Paciente> fromBinaryFile (String path) throws ClassNotFoundException {
+        ArrayList<Paciente> ret = new ArrayList<>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try{
+            try{
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Paciente p;
+                while((p = (Paciente)lectorObjeto.readObject())!=null)
+                    ret.add(p);
+            }finally{
+                if(lector!=null)
+                    lector.close();
+                if(lectorObjeto!=null)
+                    lectorObjeto.close();
+            }
+        }
 
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException p){
+            System.out.println("Se ha producido una IOException");
+        }
+                catch(ClassNotFoundException p){
+            System.out.println("Se ha producido una ClassNotFoundException");
+        }
+
+        return ret;
+    }
    
     //Constructor por defecto
     public Paciente() {
