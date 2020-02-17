@@ -116,6 +116,7 @@ public class Paciente {
 		    String NIF = campos[1];
                     String telefono = campos[2];
 		    String direccion = campos[1];
+                    long idHistorial = Long.parseLong(campos[0]);
                     Paciente p = new Paciente(id,nombre,apellido,NIF, telefono,direccion);
                     ret.add(p);                   
                 }
@@ -127,7 +128,7 @@ public class Paciente {
             }
         }
         catch(PacienteException p){
-            System.out.println("Se ha producido una ClienteException");
+            System.out.println("Se ha producido una PacienteException");
         }
         catch(FileNotFoundException p){
             System.out.println("Se ha producido una FileNotFoundException");
@@ -262,17 +263,17 @@ public class Paciente {
         this.direccion = direccion;
     }
 
-    public Paciente(Historial historial, long idHistorial, long id, String nombre, String apellidos, String NIF, String telefono, String direccion) {
-        this.historial = historial;
-        this.idHistorial = idHistorial;
-        this.id = id;
+    public Paciente(String nombre, String apellidos, String NIF, String telefono, String direccion, Historial historial, long idHistorial) throws PacienteException {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.NIF = NIF;
         this.telefono = telefono;
         this.direccion = direccion;
-        
+        this.historial = historial;
+        this.idHistorial = idHistorial;
     }
+
+
 
 
    
