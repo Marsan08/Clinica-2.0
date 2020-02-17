@@ -10,9 +10,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -92,8 +96,8 @@ public class Paciente {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    
-           public static ArrayList<Paciente> fromTextFile (String path) {
+    //Los 4 métodos de lectura y escritura.
+    public static ArrayList<Paciente> fromTextFile (String path) {
         ArrayList<Paciente> ret = new ArrayList<>();
         File fichero = new File(path);
         FileReader lector = null;
@@ -163,6 +167,60 @@ public class Paciente {
         }
 
         return ret;
+    }
+    
+    
+ public void toTextFile (String path){
+        File fichero = new File(path);
+        FileWriter escritor = null;
+        PrintWriter buffer = null ;
+        try {
+            try {
+                escritor = new FileWriter(fichero);
+                buffer = new PrintWriter(escritor);
+                buffer.println(this.data());
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(escritor!=null)
+                    escritor.close();
+            }
+        }
+        catch(FileNotFoundException p){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException p){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception p){
+            System.out.println("Se ha producido una Exception");
+        }
+    }
+
+    public void toBinaryFile (String path) {
+        FileOutputStream escritor = null;
+        ObjectOutputStream escritorObjeto = null;
+        try{
+            try{
+                escritor = new FileOutputStream(path);
+                escritorObjeto = new ObjectOutputStream(escritor);
+                escritorObjeto.writeObject(this);
+            }finally{
+                if(escritor!=null)
+                    escritor.close();
+                if(escritorObjeto!=null)
+                    escritorObjeto.close();
+            }
+        }
+        catch(FileNotFoundException p){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException p){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception p){
+            System.out.println("Se ha producido una Exception");
+        }
     }
    
     //Constructor por defecto
