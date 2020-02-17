@@ -60,7 +60,7 @@ public class Informe {
     }
     
     public String data() {
-        return ""+getID()+"|"+getDescripciónTratamiento()+"|"+getSecretariados();
+        return ""+getID()+"|"+getDescripciónTratamiento();
     }
     public ArrayList<Informe> getAllInforme (){
     ArrayList <Informe> informes = new ArrayList <Informe>();

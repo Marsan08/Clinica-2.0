@@ -29,8 +29,7 @@ public class Paciente {
     
     
     
-    Historial historial;
-    long idHistorial;
+
     protected long id;//Es el identificador del paciente.
     
     private String nombre;//Es el nombre del paciente.Cadena de caracteres.
@@ -38,6 +37,8 @@ public class Paciente {
     private String NIF;//Es la tarjeta de identidad del paciente.Cadena de caracteres.
     private String telefono;//Es el telefono de contacto del paciente.Cadena de caracteres.
     private String direccion;//Es la dirección de residencia del paciente.Cadena de caracteres.
+    Historial historial;
+    long idHistorial;
     
     public long getIdHistorial() {    
         return idHistorial;
