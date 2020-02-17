@@ -6,8 +6,11 @@
 package clinica;
 
 import excepciones.PacienteException;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.text.ParseException;
@@ -90,6 +93,46 @@ public class Paciente {
         this.direccion = direccion;
     }
     
+           public static ArrayList<Paciente> fromTextFile (String path) {
+        ArrayList<Paciente> ret = new ArrayList<>();
+        File fichero = new File(path);
+        FileReader lector = null;
+        BufferedReader buffer = null ;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while((linea=buffer.readLine())!=null){
+                    String[] campos = linea.split("|");
+                    long id = Long.parseLong(campos[0]);
+                    String nombre = campos[1];
+		    String apellido = campos[2];
+		    String NIF = campos[1];
+                    String telefono = campos[2];
+		    String direccion = campos[1];
+                    Paciente p = new Paciente(id,nombre,apellido,NIF, telefono,direccion);
+                    ret.add(p);                   
+                }
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(lector!=null)
+                    lector.close();
+            }
+        }
+        catch(PacienteException p){
+            System.out.println("Se ha producido una ClienteException");
+        }
+        catch(FileNotFoundException p){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException p){
+            System.out.println("Se ha producido una IOException");
+        }
+
+        return ret;
+    }
      public static ArrayList<Paciente> fromBinaryFile (String path) {
         ArrayList<Paciente> ret = new ArrayList<>();
         FileInputStream lector = null;
