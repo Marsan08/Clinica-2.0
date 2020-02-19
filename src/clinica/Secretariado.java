@@ -5,6 +5,18 @@
  */
 package clinica;
 
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -44,7 +56,126 @@ public class Secretariado extends Empleado {
     public void setAñosExperiencia(int añosExperiencia) {
         this.añosExperiencia = añosExperiencia;
     }
+     public static ArrayList<Secretariado> FromTextFile (String path) {
+        ArrayList<Secretariado> ret = new ArrayList<>();
+        File fichero = new File(path);
+        FileReader lector = null;
+        BufferedReader buffer = null ;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while((linea=buffer.readLine())!=null){
+                    String[] campos = linea.split("\\|");
 
+                    long id = Long.parseLong(campos[0]);
+                    String añosExperiencia = campos[1];
+	            long idCita = Long.parseLong(campos[0]);
+                 //No se porque falla.   Secretariado s = new Secretariado(id,añosExperiencia,idCita);
+                  //  ret.add(s);                   
+                }
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(lector!=null)
+                    lector.close();
+            }
+        }
+        catch(FileNotFoundException p){
+            System.out.println("Se ha producido una FileNotFoundException"+p.getMessage());
+        }
+        catch(IOException p){
+            System.out.println("Se ha producido una IOException"+p.getMessage());
+        }
+        catch(Exception p){
+            System.out.println("Se ha producido una Exception"+p.getMessage());
+        }
+        return ret;
+    }
+
+    public static ArrayList<Secretariado> FromBinaryFile (String path) {
+        ArrayList<Secretariado> ret = new ArrayList<>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try{
+            try{
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Secretariado s;
+                while((s = (Secretariado)lectorObjeto.readObject())!=null){
+                    ret.add(s);
+                    lector.skip(4);}
+            }finally{
+                if(lectorObjeto!=null)
+                    lectorObjeto.close();
+                if(lector!=null)
+                    lector.close();
+            }
+        }
+        catch(FileNotFoundException p){
+            System.out.println("Se ha producido una FileNotFoundException"+p.getMessage());
+        }
+        catch(EOFException p){
+            System.out.println("Final de fichero");
+        }
+        catch(IOException p){
+            System.out.println("Se ha producido una IOException: "+p.getMessage());
+        }
+        catch(ClassNotFoundException p){
+            System.out.println("Se ha producido una ClassNotFoundException"+p.getMessage());
+        }
+        catch(Exception p){
+            System.out.println("Se ha producido una Exception"+p.getMessage());
+        }
+        return ret;
+    }
+
+    public void writeToTextFile (String path){
+        File fichero = new File(path);
+        FileWriter escritor = null;
+        PrintWriter buffer = null ;
+        try {
+            try {
+                escritor = new FileWriter(fichero, true);
+                buffer = new PrintWriter(escritor);
+                buffer.print(this.data()+"\r\n");
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(escritor!=null)
+                    escritor.close();
+            }
+        }
+        catch(FileNotFoundException p){
+            System.out.println("Se ha producido una FileNotFoundException"+p.getMessage());
+        }
+        catch(IOException p){
+            System.out.println("Se ha producido una IOException"+p.getMessage());
+        }
+        catch(Exception p){
+            System.out.println("Se ha producido una Exception"+p.getMessage());
+        }
+    }
+
+    public void writeToBinaryFile (String path) {
+        try{
+            FileOutputStream fichero = new FileOutputStream(path, true);
+            ObjectOutputStream escritor = new ObjectOutputStream(fichero);
+            escritor.writeObject(this);
+            escritor.flush();
+            escritor.close();
+        }       
+        catch(FileNotFoundException p){
+            System.out.println("Se ha producido una FileNotFoundException"+p.getMessage());
+        }
+        catch(IOException p){
+            System.out.println("Se ha producido una IOException"+p.getMessage());
+        }
+        catch(Exception p){
+            System.out.println("Se ha producido una Exception"+p.getMessage());
+        }
+    }
     //Constructor por defecto
     public Secretariado() {
         super();
