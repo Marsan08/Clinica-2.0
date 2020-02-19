@@ -4,6 +4,17 @@
  * and open the template in the editor.
  */
 package clinica;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -120,6 +131,133 @@ public class Enfermeria extends Empleado{
     
     return e;
 }
+  
+  
+  //Metodos de entrada y salida 
+  
+  public static ArrayList<Enfermeria> fromTextFile (String path) {
+        ArrayList<Enfermeria> enf = new ArrayList<>();
+        File fichero = new File(path);
+        FileReader enfermero = null;
+        BufferedReader buffer = null ;
+        try {
+            try {
+                enfermero = new FileReader(fichero);
+                buffer = new BufferedReader(enfermero);
+                String linea;
+                while((linea=buffer.readLine())!=null){
+                    String[] campos = linea.split("\\|");
+                    //super long id = long.parseLong(campos[0]);
+                    char categoria;
+                    Enfermeria c = new Enfermeria();
+                    enf.add(c);                   
+                }
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(enfermero!=null)
+                    enfermero.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
+        return enf;
+    }
+  
+          public static ArrayList<Enfermeria> fromBinaryFile (String path) {
+        ArrayList<Enfermeria> enf = new ArrayList<>();
+        FileInputStream enfermero = null;
+        ObjectInputStream enfObjeto = null;
+        try{
+            try{
+                enfermero = new FileInputStream(path);
+                enfObjeto = new ObjectInputStream(enfermero);
+                Enfermeria e;
+                while((e = (Enfermeria)enfObjeto.readObject())!=null)
+                    enf.add(e);
+            }finally{
+                if(enfermero!=null)
+                    enfermero.close();
+                if(enfObjeto!=null)
+                    enfObjeto.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(ClassNotFoundException e){
+            System.out.println("Se ha producido una ClassNotFoundException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
+        return enf;
+    }
+    
+    public void toTextFile (String path){
+        File enfermero = new File(path);
+        FileWriter enfermeria = null;
+        PrintWriter buffer = null ;
+        try {
+            try {
+                enfermeria = new FileWriter(enfermero);
+                buffer = new PrintWriter(enfermeria);
+                buffer.println(this.Data());
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(enfermeria!=null)
+                    enfermeria.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
+    }
+
+   
+    public void toBinaryFile (String path) {
+        FileOutputStream enfermeria = null;
+        ObjectOutputStream enfObjeto = null;
+        try{
+            try{
+                enfermeria = new FileOutputStream(path);
+                enfObjeto = new ObjectOutputStream(enfermeria);
+                enfObjeto.writeObject(this);
+            }finally{
+                if(enfermeria!=null)
+                    enfermeria.close();
+                if(enfObjeto!=null)
+                    enfObjeto.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
+    }
+  
   
   
 }

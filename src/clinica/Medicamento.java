@@ -6,6 +6,17 @@
 package clinica;
 
 import excepciones.MedicacionException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,7 +41,7 @@ public class Medicamento {
     public Medicamento() {
     }
 
-    public Medicamento(int idMedicamento, String nombre, String principioActivo, int dosisMaxDiaria) throws MedicacionException {
+    public Medicamento(long idMedicamento, String nombre, String principioActivo, int dosisMaxDiaria) throws MedicacionException {
         this.id = idMedicamento;
         if (MedicacionException.validarNombre(nombre)) {
             this.nombre = nombre;
@@ -62,7 +73,7 @@ public class Medicamento {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -174,5 +185,140 @@ public class Medicamento {
     private void setCita(ArrayList<Cita> citas) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
+    //Metodos de entrada y salida
+    
+            
+        public static ArrayList<Medicamento> fromTextFile (String path) {
+        ArrayList<Medicamento> med = new ArrayList<>();
+        File fichero = new File(path);
+        FileReader medica = null;
+        BufferedReader buffer = null ;
+        try {
+            try {
+                medica = new FileReader(fichero);
+                buffer = new BufferedReader(medica);
+                String linea;
+                while((linea=buffer.readLine())!=null){
+                    String[] campos = linea.split("\\|");
+                    long id = Long.parseLong(campos[0]);
+                    String nombre = campos[10];
+                    String principioActivo = campos[10];
+                    int dosisMaxDiaria = Integer.parseInt(campos[0]);
+                    Medicamento m = new Medicamento (id, nombre, principioActivo, dosisMaxDiaria);
+                    med.add(m);                   
+                }
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(medica!=null)
+                    medica.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
+        return med;
+    }
+        
+        
+        public static ArrayList<Medicamento> fromBinaryFile (String path) {
+        ArrayList<Medicamento> med = new ArrayList<>();
+        FileInputStream medica = null;
+        ObjectInputStream medObjeto = null;
+        try{
+            try{
+                medica = new FileInputStream(path);
+                medObjeto = new ObjectInputStream(medica);
+                Medicamento m;
+                while((m = (Medicamento)medObjeto.readObject())!=null)
+                    med.add(m);
+            }finally{
+                if(medica!=null)
+                    medica.close();
+                if(medObjeto!=null)
+                    medObjeto.close();
+            }
+        }
+        catch(FileNotFoundException m){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException m){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(ClassNotFoundException m){
+            System.out.println("Se ha producido una ClassNotFoundException");
+        }
+        catch(Exception m){
+            System.out.println("Se ha producido una Exception");
+        }
+        return med;
+    }
+    
+    public void toTextFile (String path){
+        File medica = new File(path);
+        FileWriter medicacion = null;
+        PrintWriter buffer = null ;
+        try {
+            try {
+                medicacion = new FileWriter(medica);
+                buffer = new PrintWriter(medicacion);
+                buffer.println(this.Data());
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(medicacion!=null)
+                    medicacion.close();
+            }
+        }
+        catch(FileNotFoundException m){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException m){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception m){
+            System.out.println("Se ha producido una Exception");
+        }
+    }
+
+   
+    public void toBinaryFile (String path) {
+        FileOutputStream medica = null;
+        ObjectOutputStream medObjeto = null;
+        try{
+            try{
+                medica = new FileOutputStream(path);
+                medObjeto = new ObjectOutputStream(medica);
+                medObjeto.writeObject(this);
+            }finally{
+                if(medica!=null)
+                    medica.close();
+                if(medObjeto!=null)
+                    medObjeto.close();
+            }
+        }
+        catch(FileNotFoundException m){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException m){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception m){
+            System.out.println("Se ha producido una Exception");
+        }
+    }
+  
+        
+        
+    
+    
 
 }
