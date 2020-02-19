@@ -112,14 +112,15 @@ public class Pago {
 
     }
 
-    public Pago(long id, Date fechadePago, double importe, String metododePago, Paciente paciente, long idPaciente, long idCobro) {
+    public Pago(long id, long idPaciente, long idCobro ,Date fechadePago, double importe, String metododePago, Paciente paciente) {
         this.id = id;
+        this.idPaciente = idPaciente;
+        this.idCobro = idCobro;
         this.fechadePago = fechadePago;
         this.importe = importe;
         this.metododePago = metododePago;
         this.paciente = paciente;
-        this.idPaciente = idPaciente;
-        this.idCobro = idCobro;
+
     }
 
 
