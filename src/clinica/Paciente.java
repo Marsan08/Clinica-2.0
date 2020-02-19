@@ -117,6 +117,7 @@ public class Paciente  implements Serializable {
 		    String NIF = campos[1];
                     String telefono = campos[2];
 		    String direccion = campos[1];
+                    long idHistorial = Long.parseLong(campos[0]);
                     Paciente p = new Paciente(id,nombre,apellido,NIF, telefono,direccion);
                     ret.add(p);                   
                 }
