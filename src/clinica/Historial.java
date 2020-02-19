@@ -19,7 +19,7 @@ public class Historial {
     private String descripcion;//Descripcion del historial
     private ArrayList<Alergia> alergias;
   //private List<Alergia>alergias=new ArrayList<Alergia>();
- 
+    private long idPaciente;
     public Historial() {
     }
 
@@ -57,14 +57,23 @@ public class Historial {
         this.descripcion = descripcion;
     }
 
+    public long getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(long idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+
     @Override
     public String toString() {
         return "Historial{" + "idHistoria=" + id + ", descripcion=" + descripcion + '}';
     }
     
     public String data() {
-        return getId() + " | " + getDescripcion();
+        return getId() + " | " + getDescripcion() + " | " + getIdPaciente() ;
     }
+    
     public ArrayList<Historial> getAllHistorial (){
     ArrayList <Historial> historiales = new ArrayList <Historial>();
     return historiales ;

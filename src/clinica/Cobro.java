@@ -72,9 +72,9 @@ public class Cobro {
     public String toString() {
         return "Cobro{" + "idCobro=" + id + ", importeTotalEuros=" + importeTotalEuros + ", fechaFinalizacion=" + fechaFinalizacion + '}';
     }
-    
+        
     public String data() {
-        return getIdCobro() + " | " + getImporteTotalEuros()+ " | " + getFechaFinalizacion();
+        return getIdCobro() + " | " + getImporteTotalEuros()+ " | " + getFechaFinalizacion() ;
     }
     public ArrayList<Cobro> getAllCobro (){
     ArrayList <Cobro> cobros = new ArrayList <Cobro>();

@@ -109,7 +109,7 @@ public class Paciente {
                 buffer = new BufferedReader(lector);
                 String linea;
                 while((linea=buffer.readLine())!=null){
-                    String[] campos = linea.split("|");
+                    String[] campos = linea.split("\\|");
                     long id = Long.parseLong(campos[0]);
                     String nombre = campos[1];
 		    String apellido = campos[2];
@@ -150,10 +150,11 @@ public class Paciente {
                 while((p = (Paciente)lectorObjeto.readObject())!=null)
                     ret.add(p);
             }finally{
-                if(lector!=null)
-                    lector.close();
+
                 if(lectorObjeto!=null)
                     lectorObjeto.close();
+                if(lector!=null)
+                    lector.close();
             }
         }
 
@@ -207,10 +208,10 @@ public class Paciente {
                 escritorObjeto = new ObjectOutputStream(escritor);
                 escritorObjeto.writeObject(this);
             }finally{
-                if(escritor!=null)
-                    escritor.close();
                 if(escritorObjeto!=null)
                     escritorObjeto.close();
+                if(escritor!=null)
+                    escritor.close();
             }
         }
         catch(FileNotFoundException p){
@@ -325,19 +326,38 @@ public class Paciente {
         String nom,ape,nif,tel,dir;
         System.out.println("Dame el nombre:");
         nom=in.nextLine();
-        p.setNombre(nom);
         
-        System.out.println("Dame el apellido:");
+        try{
+            if(!excepciones.PacienteException.validarNombre(nom)){
+        p.setNombre(nom);    
+            }
+            
+         System.out.println("Dame el apellido:");
         ape=in.nextLine();
+        
+        if(!excepciones.PacienteException.validarApellido(ape)){
         p.setApellidos(ape);
+        }
         
         System.out.println("Dame el NIF:");
         nif=in.nextLine();
-        p.setNIF(nif);
+  
         
+        if(!excepciones.PacienteException.validarNif(nif)) {
+        p.setNIF(nif);  
+            
+        }
         System.out.println("Dame el telefono:");
         tel=in.nextLine();
-        p.setTelefono(tel);
+        
+         if(!excepciones.PacienteException.validarTelefono(tel)){
+         
+         p.setTelefono(tel);
+        }
+       
+        } catch (PacienteException ex){
+            System.out.println("PacienteException: " +ex.getMessage());
+        }
         
         System.out.println("Dame la dirección:");
         dir=in.nextLine();
