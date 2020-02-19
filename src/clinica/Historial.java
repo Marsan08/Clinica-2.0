@@ -5,6 +5,17 @@
  * and open the template in the editor.
  */
 package clinica;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 //import java.util.*;
@@ -31,6 +42,10 @@ public class Historial {
     public Historial(Historial h){
         this.descripcion=h.getDescripcion();
         this.id=h.getId();
+    }
+
+    private Historial(long id, String descripcion, long idPaciente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public ArrayList<Alergia> getAlergias() {
@@ -122,5 +137,128 @@ public class Historial {
 
      }
     
+       public static ArrayList<Historial> fromTextFile (String path) {
+        ArrayList<Historial> ret = new ArrayList<>();
+        File fichero = new File(path);
+        FileReader lector = null;
+        BufferedReader buffer = null ;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while((linea=buffer.readLine())!=null){
+                    String[] campos = linea.split("\\|");
+                    long id = Long.parseLong(campos[0]);
+                    String descripcion = campos[10];
+                    long idPaciente = Long.parseLong(campos[0]);
+                    Historial z = new Historial(id, descripcion, idPaciente);
+                    ret.add(z);                   
+                }
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(lector!=null)
+                    lector.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
+        return ret;
+    }
+    
+    public static ArrayList<Historial> fromBinaryFile (String path) {
+        ArrayList<Historial> ret = new ArrayList<>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try{
+            try{
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Historial c;
+                while((c = (Historial)lectorObjeto.readObject())!=null)
+                    ret.add(c);
+            }finally{
+                if(lector!=null)
+                    lector.close();
+                if(lectorObjeto!=null)
+                    lectorObjeto.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(ClassNotFoundException e){
+            System.out.println("Se ha producido una ClassNotFoundException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
+        return ret;
+    }
+    
+    public void toTextFile (String path){
+        File archivo = new File(path);
+        FileWriter writer = null;
+        PrintWriter buffer = null ;
+        try {
+            try {
+                writer = new FileWriter(archivo);
+                buffer = new PrintWriter(writer);
+                buffer.println(this.data());
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(writer!=null)
+                    writer.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
+    }
+    
+    public void toBinaryFile (String path) {
+        FileOutputStream writer = null;
+        ObjectOutputStream writerObjeto = null;
+        try{
+            try{
+                writer = new FileOutputStream(path);
+                writerObjeto = new ObjectOutputStream(writer);
+                writerObjeto.writeObject(this);
+            }finally{
+                if(writer!=null)
+                    writer.close();
+                if(writerObjeto!=null)
+                    writerObjeto.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
+    }   
+          
 }
 
