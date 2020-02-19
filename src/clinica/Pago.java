@@ -6,6 +6,19 @@
 package clinica;
 
 import excepciones.PagoExcepcion;
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -84,6 +97,131 @@ public class Pago {
         this.paciente = paciente;
     }
     
+    //4 metodos nuevos
+     public static ArrayList<Pago> FromTextFile (String path) {
+        ArrayList<Pago> ret = new ArrayList<>();
+        File fichero = new File(path);
+        FileReader lector = null;
+        BufferedReader buffer = null ;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while((linea=buffer.readLine())!=null){
+                    String[] campos = linea.split("\\|");
+                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                    long id = Long.parseLong(campos[0]);
+                    long idPaciente = Long.parseLong(campos[1]);
+                    long idCobro = Long.parseLong(campos[1]);
+                    Date fechadePago = df.parse(campos[4]);
+		    double importe = Double.parseDouble(campos[1]);
+                    String metododePago = campos[3];
+                    Pago p = new Pago(id, idPaciente, idCobro,  fechadePago, importe, metododePago);
+                    ret.add(p);                   
+                }
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(lector!=null)
+                    lector.close();
+            }
+        }
+        catch(FileNotFoundException p){
+            System.out.println("Se ha producido una FileNotFoundException"+p.getMessage());
+        }
+        catch(IOException p){
+            System.out.println("Se ha producido una IOException"+p.getMessage());
+        }
+        catch(Exception p){
+            System.out.println("Se ha producido una Exception"+p.getMessage());
+        }
+        return ret;
+    }
+
+    public static ArrayList<Pago> readModificacionFromBinaryFile (String path) {
+        ArrayList<Pago> ret = new ArrayList<>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try{
+            try{
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Pago p;
+                while((p = (Pago)lectorObjeto.readObject())!=null){
+                    ret.add(p);
+                    lector.skip(4);}
+            }finally{
+                if(lectorObjeto!=null)
+                    lectorObjeto.close();
+                if(lector!=null)
+                    lector.close();
+            }
+        }
+        catch(FileNotFoundException p){
+            System.out.println("Se ha producido una FileNotFoundException"+p.getMessage());
+        }
+        catch(EOFException p){
+            System.out.println("Final de fichero");
+        }
+        catch(IOException p){
+            System.out.println("Se ha producido una IOException: "+p.getMessage());
+        }
+        catch(ClassNotFoundException p){
+            System.out.println("Se ha producido una ClassNotFoundException"+p.getMessage());
+        }
+        catch(Exception p){
+            System.out.println("Se ha producido una Exception"+p.getMessage());
+        }
+        return ret;
+    }
+
+    public void writeModificacionToTextFile (String path){
+        File fichero = new File(path);
+        FileWriter escritor = null;
+        PrintWriter buffer = null ;
+        try {
+            try {
+                escritor = new FileWriter(fichero, true);
+                buffer = new PrintWriter(escritor);
+                buffer.print(this.data()+"\r\n");
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(escritor!=null)
+                    escritor.close();
+            }
+        }
+        catch(FileNotFoundException p){
+            System.out.println("Se ha producido una FileNotFoundException"+p.getMessage());
+        }
+        catch(IOException p){
+            System.out.println("Se ha producido una IOException"+p.getMessage());
+        }
+        catch(Exception p){
+            System.out.println("Se ha producido una Exception"+p.getMessage());
+        }
+    }
+
+    public void writeModificacionToBinaryFile (String path) {
+        try{
+            FileOutputStream fichero = new FileOutputStream(path, true);
+            ObjectOutputStream escritor = new ObjectOutputStream(fichero);
+            escritor.writeObject(this);
+            escritor.flush();
+            escritor.close();
+        }       
+        catch(FileNotFoundException p){
+            System.out.println("Se ha producido una FileNotFoundException"+p.getMessage());
+        }
+        catch(IOException p){
+            System.out.println("Se ha producido una IOException"+p.getMessage());
+        }
+        catch(Exception p){
+            System.out.println("Se ha producido una Exception"+p.getMessage());
+        }
+    }
+    
     //Constructor por defecto
     public Pago() {
     }
@@ -112,14 +250,15 @@ public class Pago {
 
     }
 
-    public Pago(long id, Date fechadePago, double importe, String metododePago, Paciente paciente, long idPaciente, long idCobro) {
+    public Pago(long id, long idPaciente, long idCobro ,Date fechadePago, double importe, String metododePago) {
         this.id = id;
+        this.idPaciente = idPaciente;
+        this.idCobro = idCobro;
         this.fechadePago = fechadePago;
         this.importe = importe;
         this.metododePago = metododePago;
-        this.paciente = paciente;
-        this.idPaciente = idPaciente;
-        this.idCobro = idCobro;
+
+
     }
 
 
@@ -139,7 +278,7 @@ public class Pago {
     }
 
     public String data() {
-        return "" + getID() + "|" + getFechaDePago() + "|" + getImporte() + "|" + getMetodoDePago()+"|"+getPaciente().getId()+"|"+getIdCobro();
+        return "" + getID()+"|"+getPaciente().getId()+"|"+getIdCobro() + "|" + getFechaDePago() + "|" + getImporte() + "|" + getMetodoDePago();
     }
 
     public ArrayList<Pago> getAllPago() {
