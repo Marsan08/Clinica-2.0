@@ -4,6 +4,17 @@
  * and open the template in the editor.
  */
 package clinica;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.ArrayList;
@@ -181,4 +192,136 @@ public class Intervencion extends Cita{
         
      return i;   
     }    
+    
+    
+            
+        public static ArrayList<Intervencion> fromTextFile (String path) {
+        ArrayList<Intervencion> inte = new ArrayList<>();
+        File fichero = new File(path);
+        FileReader interve = null;
+        BufferedReader buffer = null ;
+        try {
+            try {
+                interve = new FileReader(fichero);
+                buffer = new BufferedReader(interve);
+                String linea;
+                while((linea=buffer.readLine())!=null){
+                    String[] campos = linea.split("\\|");
+                    long id = Long.parseLong(campos[0]);
+                    String duracion = campos[10];
+                    Intervencion i = new Intervencion();
+                    inte.add(i);                   
+                }
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(interve!=null)
+                    interve.close();
+            }
+        }
+        catch(FileNotFoundException i){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException i){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception i){
+            System.out.println("Se ha producido una Exception");
+        }
+        return inte;
+    }
+        
+        
+        public static ArrayList<Intervencion> fromBinaryFile (String path) {
+        ArrayList<Intervencion> inte = new ArrayList<>();
+        FileInputStream interven = null;
+        ObjectInputStream inObjeto = null;
+        try{
+            try{
+                interven = new FileInputStream(path);
+                inObjeto = new ObjectInputStream(interven);
+                Intervencion i;
+                while((i = (Intervencion)inObjeto.readObject())!=null)
+                    inte.add(i);
+            }finally{
+                if(interven!=null)
+                    interven.close();
+                if(inObjeto!=null)
+                    inObjeto.close();
+            }
+        }
+        catch(FileNotFoundException i){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException i){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(ClassNotFoundException i){
+            System.out.println("Se ha producido una ClassNotFoundException");
+        }
+        catch(Exception i){
+            System.out.println("Se ha producido una Exception");
+        }
+        return inte;
+    }
+    
+    public void toTextFile (String path){
+        File inter = new File(path);
+        FileWriter interv = null;
+        PrintWriter buffer = null ;
+        try {
+            try {
+                interv = new FileWriter(inter);
+                buffer = new PrintWriter(interv);
+                buffer.println(this.Data());
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(interv!=null)
+                    interv.close();
+            }
+        }
+        catch(FileNotFoundException i){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException i){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception i){
+            System.out.println("Se ha producido una Exception");
+        }
+    }
+
+   
+    public void toBinaryFile (String path) {
+        FileOutputStream inter = null;
+        ObjectOutputStream inObjeto = null;
+        try{
+            try{
+                inter = new FileOutputStream(path);
+                inObjeto = new ObjectOutputStream(inter);
+                inObjeto.writeObject(this);
+            }finally{
+                if(inter!=null)
+                    inter.close();
+                if(inObjeto!=null)
+                    inObjeto.close();
+            }
+        }
+        catch(FileNotFoundException i){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException i){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception i){
+            System.out.println("Se ha producido una Exception");
+        }
+    }
+  
+        
+        
+    
+    
+    
 }
