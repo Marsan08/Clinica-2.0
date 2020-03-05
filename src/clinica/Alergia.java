@@ -55,7 +55,7 @@ public class Alergia {
     /**
      * 
      * @param path es el parametro de un fichero de texto.
-     * @return devuelve lo que contenia el archivo de texto del que se leen los datos.
+     * @return devuelve lo que contenia el archivo de texto del que se leen los datos de la Alergia.
      * @exception  FileNotFoundException si no se encuentra el fichero
      * @exception  IOException  excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
      * @exception  Exception es aquella general.
@@ -99,7 +99,7 @@ public class Alergia {
     /**
      * 
      * @param path es el parametro de un fichero binario
-     * @return devuelve lo que contenia el archivo binario del que se leen los datos.
+     * @return devuelve lo que contenia el archivo binario del que se leen los datos de Alergia.
      * @exception  FileNotFoundException si no se encuentra el fichero
      * @exception  IOException  excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
      * @exception  Exception es aquella general.
@@ -206,8 +206,8 @@ public class Alergia {
     }
     /**
      * 
-     * @param ID es el parametro del id
-     * @param nombreAlergía es el parametro del nombre de  alergia.
+     * @param ID es el parametro del id <code>long</code> 
+     * @param nombreAlergía es el parametro del nombre de  alergia <code>String</code> .
      * 
      */
     //Constructor con argumentos

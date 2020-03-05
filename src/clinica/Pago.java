@@ -98,6 +98,14 @@ public class Pago {
     }
     
     //4 metodos nuevos
+    /**
+     * 
+     * @param path es el parametro de un fichero de texto.
+     * @exception  FileNotFoundException si no se encuentra el fichero
+     * @exception  IOException  excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+     * @exception  Exception es aquella excepcion general.
+     * @return  devuelve lo que contenia el archivo de texto del que se leen los datos del Pago.
+     */
      public static ArrayList<Pago> FromTextFile (String path) {
         ArrayList<Pago> ret = new ArrayList<>();
         File fichero = new File(path);
@@ -138,7 +146,16 @@ public class Pago {
         }
         return ret;
     }
-
+    /**
+     * 
+     * @param path
+     * @exception  FileNotFoundException si no se encuentra el fichero
+     * @exception  IOException  excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+     * @exception  Exception es aquella general.
+     * @exception EOFException es la excepcion que indica que se ha alcanzado el final del fichero o del stream.
+     * @exception ClassNotFoundException es la que indica que no se ha encontrado la clase.
+     * @return devuelve lo que contenia el archivo binario del que se leen los datos del Pago.
+     */
     public static ArrayList<Pago> readModificacionFromBinaryFile (String path) {
         ArrayList<Pago> ret = new ArrayList<>();
         FileInputStream lector = null;
@@ -162,7 +179,7 @@ public class Pago {
             System.out.println("Se ha producido una FileNotFoundException"+p.getMessage());
         }
         catch(EOFException p){
-            System.out.println("Final de fichero");
+            System.out.println("Final de fichero"+p.getMessage());
         }
         catch(IOException p){
             System.out.println("Se ha producido una IOException: "+p.getMessage());
@@ -175,7 +192,13 @@ public class Pago {
         }
         return ret;
     }
-
+    /**
+     * 
+     * @param path es el parametro del archivo de texto que se ira ha escribir.
+     * @exception FileNotFoundException si no se encuentra el fichero
+     * @exception IOException excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+     * @exception Exception es aquella general.
+     */
     public void writeModificacionToTextFile (String path){
         File fichero = new File(path);
         FileWriter escritor = null;
