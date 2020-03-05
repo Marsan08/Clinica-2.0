@@ -31,26 +31,49 @@ public class Cobro {
     private double importeTotalEuros;
     private Date fechaFinalizacion;
     private ArrayList <Pago> pagos; 
-
+    
+    //Constructor por defecto
+    
     public Cobro() {
     }
-
+    
+    /**Constructor por parametros
+     * 
+     * @param idCobro identificador de cobro
+     * @param importeTotalEuros importe total en euros en relacion al pago
+     * @param fechaFinalizacion fecha final para realizar el cobro
+     * @throws excepciones.PagoExcepcion 
+     */
+    
     public Cobro(int idCobro, double importeTotalEuros, Date fechaFinalizacion) throws excepciones.PagoExcepcion {
         this.id = idCobro;
         this.importeTotalEuros = importeTotalEuros;
         this.fechaFinalizacion = fechaFinalizacion;
     }
     
+    /**Constructor de copia
+     * 
+     * @param c 
+     */
+    
     public Cobro(Cobro c) {
         this.id=c.id;
         this.importeTotalEuros=c.getImporteTotalEuros();
         this.fechaFinalizacion=c.getFechaFinalizacion();
     }
-
+    
+    /**Otro constructor
+     * 
+     * @param id
+     * @param importeTotalEuros
+     * @param fechaFinalizacion 
+     */
+    
     private Cobro(long id, double importeTotalEuros, Date fechaFinalizacion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    //Getters y Setters
+    
     public long getIdCobro() {
         return id;
     }
@@ -83,23 +106,53 @@ public class Cobro {
         this.pagos = pagos;
     }
    
+    //Final Getters y Setters
 
+    /**Metodo toString 
+     * Primero atributos de la propia clase, despues atributos de las relaciones
+     * @return una sobrescritura de los atributos de la clase
+     */
+    
     @Override
     public String toString() {
         return "Cobro{" + "idCobro=" + id + ", importeTotalEuros=" + importeTotalEuros + ", fechaFinalizacion=" + fechaFinalizacion + '}';
     }
-        
+    
+    /**Metodo Data
+     * 
+     * @return String de los datos propios de la clase
+     */
+    
     public String data() {
         return getIdCobro() + " | " + getImporteTotalEuros()+ " | " + getFechaFinalizacion() ;
     }
+    
+    /**Metodo getAllCobro
+     * 
+     * @return ArrayList de cobro
+     */
+    
     public ArrayList<Cobro> getAllCobro (){
     ArrayList <Cobro> cobros = new ArrayList <Cobro>();
     return cobros;
     }
+    
+    /**Metodo getCobroById
+     * 
+     * @param id
+     * @return el identificador
+     */
+    
     public Cobro getCobroById (long id){
         Cobro c = new Cobro();
         return c;
     }
+    
+    /**Metodo nuevoCobro
+     * 
+     * @return un nuevo cobro
+     * @throws ParseException 
+     */
     
    public static Cobro nuevoCobro () throws ParseException, PagoExcepcion{
        
@@ -143,6 +196,12 @@ public class Cobro {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
        
+    /**Metodo fromTextFile
+     * 
+     * @param path
+     * @return ArrayList de cobro desde un fichero de texto
+     */
+    
     public static ArrayList<Cobro> fromTextFile (String path) {
         ArrayList<Cobro> ret = new ArrayList<>();
         File fichero = new File(path);
@@ -181,6 +240,12 @@ public class Cobro {
         return ret;
     }
     
+    /**Metodo fromBinaryFile
+     * 
+     * @param path
+     * @return ArrayList de cobro desde un fichero binario
+     */
+    
     public static ArrayList<Cobro> fromBinaryFile (String path) {
         ArrayList<Cobro> ret = new ArrayList<>();
         FileInputStream lector = null;
@@ -214,6 +279,11 @@ public class Cobro {
         return ret;
     }
     
+    /**Metodo toTextFile
+     * 
+     * @param path 
+     */
+    
     public void toTextFile (String path){
         File archivo = new File(path);
         FileWriter writer = null;
@@ -240,6 +310,11 @@ public class Cobro {
             System.out.println("Se ha producido una Exception");
         }
     }
+    
+    /**Metodo toBinaryFile
+     * 
+     * @param path 
+     */
     
     public void toBinaryFile (String path) {
         FileOutputStream writer = null;

@@ -21,6 +21,7 @@ import java.util.Scanner;
 /**
  * @version 2.0
  * @author DAW106
+ * @see Empleado
  */
 public class Cirujano extends Empleado{
    
@@ -29,17 +30,26 @@ public class Cirujano extends Empleado{
     public Cirujano() {
         super();
     }
-
+    
+    //Constructor por defecto
+    
     public Cirujano(String nombre, String apellido, String telefono, String nif, String direccion) {
         super (nombre, apellido, telefono, nif, direccion);
         this.especialidades = especialidades;
     }
     
+    /**
+     * 
+     * @param c 
+     */
+    
     public Cirujano(Cirujano c) {
         super (c);
      
         this.especialidades=c.getEspecialidades();
-       
+    
+    //Constructor    
+        
     }
     public Cirujano(Empleado e, ArrayList especialidades) {
         super(e);
