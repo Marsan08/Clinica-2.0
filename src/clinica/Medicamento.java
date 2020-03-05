@@ -38,9 +38,23 @@ public class Medicamento {
     private int dosisMaxDiaria;
     // Dosis máxima diaria en mg puesto, por tanto tiene que ser un int porque debe ser un numero entero, NO PUEDE SER VALOR 0
 
+    
+    
+    /** 
+     * Constructor por defecto
+     */
     public Medicamento() {
     }
 
+    /**
+     * Contructor por parametos
+     * @param idMedicamento indica el id del medicamento
+     * @param nombre indica el nombre de medicamento
+     * @param principioActivo indica el principio activo del medicamento
+     * @param dosisMaxDiaria indica la dosis maxima diaria que se puede ingerir del medicamento
+     * @throws MedicacionException 
+     */
+    
     public Medicamento(long idMedicamento, String nombre, String principioActivo, int dosisMaxDiaria) throws MedicacionException {
         this.id = idMedicamento;
         if (MedicacionException.validarNombre(nombre)) {
@@ -60,6 +74,12 @@ public class Medicamento {
         }
         
     }
+    
+    /**
+     * Constructor de copia
+     * @param m
+     * @throws MedicacionException 
+     */
 
     public Medicamento(Medicamento m) throws MedicacionException {
         this.id = m.getId();
@@ -69,6 +89,8 @@ public class Medicamento {
         this.dosisMaxDiaria = (int) m.getDosisMaxDiaria();
     }
 
+    // Getter y Setter
+    
     public long getId() {
         return id;
     }
@@ -108,26 +130,55 @@ public class Medicamento {
     public void setAlergia(Alergia alergia) {
         this.alergia = alergia;
     }
+    
+    //Finalización de getter y setter
+    
+    /**
+     * Metodo to String
+     * @return sobreescritura de String que devuelve los datos de la clase
+     */
 
     @Override
     public String toString() {
         return "Medicamento{" + "idMedicamento=" + id + ", nombre=" + nombre + ", principioActivo=" + principioActivo + ", dosisMaxDiaria=" + dosisMaxDiaria + '}';
     }
+    
+    /**
+     * Metodo Data
+     * @return String de los datos propios de la clase
+     */
 
     public String Data() {
         return this.getId() + " | " + this.getNombre() + " | " + this.getPrincipioActivo() + " | " + this.getDosisMaxDiaria();
     }
 
+    /**
+     * Metodo getAllMedicamento
+     * @return ArrayList de medicamentos
+     */
+    
     public ArrayList<Medicamento> getAllMedicamento() {
         ArrayList<Medicamento> medicamentos = new ArrayList<Medicamento>();
         return medicamentos;
     }
 
+    
+    /**
+     * Metodo getMedicamentoById
+     * @param id
+     * @return delvuelve el id del medicamento
+     */
     public Medicamento getMedicamentoById(long id) {
         Medicamento m = new Medicamento();
         return m;
     }
 
+    /**
+     * Metodo nuevo Medicamento
+     * @return un nuevo medicamento
+     * @throws MedicacionException 
+     */
+    
     public static Medicamento nuevoMedicamento() throws MedicacionException {
 
         Medicamento m = new Medicamento();
@@ -181,7 +232,7 @@ public class Medicamento {
         return m;
     }
 
-
+    // Un setter 
     private void setCita(ArrayList<Cita> citas) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -189,7 +240,11 @@ public class Medicamento {
     
     //Metodos de entrada y salida
     
-            
+        /**
+         * Metodo fromTextFile
+         * @param path
+         * @return ArrayList de medicamento a traves de un fichero de texto
+         */
         public static ArrayList<Medicamento> fromTextFile (String path) {
         ArrayList<Medicamento> med = new ArrayList<>();
         File fichero = new File(path);
@@ -229,6 +284,12 @@ public class Medicamento {
     }
         
         
+        /**
+         * Metodo fromBinaryFile
+         * @param path
+         * @return ArrayList medicamento a traves de un fichero binario
+         */
+        
         public static ArrayList<Medicamento> fromBinaryFile (String path) {
         ArrayList<Medicamento> med = new ArrayList<>();
         FileInputStream medica = null;
@@ -262,6 +323,12 @@ public class Medicamento {
         return med;
     }
     
+        
+       /**
+        * Metodo toTextFile crea un fichero de texto
+        * @param path 
+        */ 
+        
     public void toTextFile (String path){
         File medica = new File(path);
         FileWriter medicacion = null;
@@ -290,6 +357,11 @@ public class Medicamento {
     }
 
    
+    /**
+     * Metodo toBinaryFile crea un fichero binario
+     * @param path 
+     */
+    
     public void toBinaryFile (String path) {
         FileOutputStream medica = null;
         ObjectOutputStream medObjeto = null;

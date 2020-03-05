@@ -34,15 +34,32 @@ public class Tratamiento {
     // Consentimiento del paciente al ser solo acepto o no se pone un boolean, OLO SE ACEPTAN VALORES DE VERDADERO (ACEPTA Y FALSO (NO ACEPTA)
     private ArrayList <Cita> citas;
     
+    /**
+     * Contructor por defecto
+     */
+    
     public Tratamiento() {
     }
 
+    /**
+     * Contructor por parametros
+     * @param id devuelve el id del tratamiento
+     * @param nombre devuelve el nombre del tratamiento
+     * @param fechaInicio devuelve la fecha inicio del tratamiento
+     * @param consentimiento devuelve el consentimiento
+     */
+    
     public Tratamiento(long id, String nombre, String fechaInicio, boolean consentimiento) {
         this.id = id;
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
         this.consentimiento = consentimiento;
     }
+    
+    /**
+     * Contructor de copia
+     * @param t 
+     */
     
     public Tratamiento (Tratamiento t) {
         this.id = t.getId ();
@@ -69,15 +86,11 @@ public class Tratamiento {
         this.citas = citas;
     }
  
-    
+    // Getter y setter
     public long getId() {
         return id;
     }
 
-    /**
-     *
-     * @param id
-     */
     public void setId(long id) {
         this.id = id;
     }
@@ -163,29 +176,61 @@ public class Tratamiento {
         this.citas = citas;
     }
 
+    //Finalización de getter y setter
     
     
     
+    /**
+     * Metodo toString
+     * @return Sobreescritura que devuelve los atributos de la clase
+     */
     
     @Override
     public String toString() {
         return "Tratamiento{" + "idTratamiento=" + id + ", nombre=" + nombre + ", fechaInicio=" + fechaInicio + ", consentimiento=" + consentimiento + '}';
     }
      
+    
+    /**
+     * Metodo Data
+     * @return indica los datos de la propia clase
+     */
+    
     public String Data (){
      return getIdInforme() + " | " + getIdCobro() + " | " + getIdPaciente()+ " | " + this.getId() + " | " + this.getIdCobro() + " | " + this.getIdPaciente() + " | " + this.getIdInforme() + " | " + this.getNombre() + " | " + this.getFechaInicio() + " | " + this.isConsentimiento ();
     }
+    
+    /**
+     * Metodo GetAllTratamiento
+     * @return ArrayList de tratamiento.
+     */
     
     public ArrayList<Tratamiento> getAllTratamiento (){
     ArrayList <Tratamiento> tratamientos = new ArrayList <Tratamiento>();
     return tratamientos ;
     }
     
+    
+    /**
+     * Metodo getTratamientoById
+     * @param id
+     * @return devuelve el id de tratamiento
+     */
+    
     public Tratamiento getTratamientoById (long id){
         Tratamiento t = new Tratamiento();
          return t;
     }
  
+    
+    /**
+     * Crea un tratamiento añadiendo los argumentos por teclado. 
+     * 
+     * @return un objeto de tipo Tratamiento
+     * @throws ParseException cuando el formato de fecha no es valido
+     * @throws PagoExcepcion cuando el formato de alguno de los campos de <code>Pago</code> no es correcto.
+     */
+    
     public static Tratamiento nuevoTratamiento() throws ParseException, PagoExcepcion{
             Tratamiento t = new Tratamiento();
             Scanner in = new Scanner(System.in);
