@@ -99,6 +99,7 @@ public class Paciente  implements Serializable {
         this.direccion = direccion;
     }
     //Los 4 métodos de lectura y escritura.
+    
     public static ArrayList<Paciente> readPacientefromTextFile (String path) {
         ArrayList<Paciente> ret = new ArrayList<>();
         File fichero = new File(path);

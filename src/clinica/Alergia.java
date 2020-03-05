@@ -52,6 +52,14 @@ public class Alergia {
     public void setNombreAlergía(String nombreAlergía) {
         this.nombreAlergia = nombreAlergía;
     }
+    /**
+     * 
+     * @param path es el parametro de un fichero de texto.
+     * @return devuelve lo que contenia el archivo de texto del que se leen los datos.
+     * @exception  FileNotFoundException si no se encuentra el fichero
+     * @exception  IOException  excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+     * @exception  Exception es aquella general.
+     */
      public static ArrayList<Alergia> FromTextFile (String path) {
         ArrayList<Alergia> ret = new ArrayList<>();
         File fichero = new File(path);
@@ -88,7 +96,16 @@ public class Alergia {
         }
         return ret;
     }
-
+    /**
+     * 
+     * @param path es el parametro de un fichero binario
+     * @return devuelve lo que contenia el archivo binario del que se leen los datos.
+     * @exception  FileNotFoundException si no se encuentra el fichero
+     * @exception  IOException  excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+     * @exception  Exception es aquella general.
+     * @exception EOFException es la excepcion que indica que se ha alcanzado el final del fichero o del stream.
+     * @exception ClassNotFoundException es la que indica que no se ha encontrado la clase.
+     */
     public static ArrayList<Alergia> FromBinaryFile (String path) {
         ArrayList<Alergia> ret = new ArrayList<>();
         FileInputStream lector = null;
@@ -112,7 +129,7 @@ public class Alergia {
             System.out.println("Se ha producido una FileNotFoundException"+p.getMessage());
         }
         catch(EOFException p){
-            System.out.println("Final de fichero");
+            System.out.println("Final de fichero"+p.getMessage());
         }
         catch(IOException p){
             System.out.println("Se ha producido una IOException: "+p.getMessage());
@@ -125,7 +142,14 @@ public class Alergia {
         }
         return ret;
     }
-
+    
+    /**
+     * 
+     * @param path es el parametro del archivo de texto que se ira ha escribir.
+     * @exception FileNotFoundException si no se encuentra el fichero
+     * @exception IOException excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+     * @exception Exception es aquella general.
+     */
     public void writeToTextFile (String path){
         File fichero = new File(path);
         FileWriter escritor = null;
@@ -152,7 +176,13 @@ public class Alergia {
             System.out.println("Se ha producido una Exception"+p.getMessage());
         }
     }
-
+    /**
+     * 
+     * @param path es el parametro del archivo binario que se ira ha escribir.
+     * @exception FileNotFoundException si no se encuentra el fichero.
+     * @exception IOException excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+     * @exception Exception es aquella general.
+     */
     public void writeToBinaryFile (String path) {
         try{
             FileOutputStream fichero = new FileOutputStream(path, true);
@@ -174,31 +204,57 @@ public class Alergia {
     //Constructor por defecto
     public Alergia() {
     }
+    /**
+     * 
+     * @param ID es el parametro del id
+     * @param nombreAlergía es el parametro del nombre de  alergia.
+     * 
+     */
     //Constructor con argumentos
     public Alergia(long ID, String nombreAlergía) {
         this.id = ID;
         this.nombreAlergia = nombreAlergía;
     }
+    /**
+     * 
+     * @param p es el parametro de alergia que nos vale para hacer el constructor de copia.
+     */
     //Constructor de copia
     public Alergia (Alergia p) {
         this.nombreAlergia = p.getNombreAlergia();
         this.id = p.getID();
     }
     //Otros métodos sobreescritos
+    /**
+     * 
+     * @return devuelve un String de Id y nombreAlergia 
+     */
     @Override
     public String toString() {
         return "Alerg\u00eda{" + "ID=" + id + ", nombreAlerg\u00eda=" + nombreAlergia + '}';
     }
+    /**
+     * 
+     * @return devuelve los datos de Alergia en orden.
+     */
     public String data() {
         return ""+getID()+"|"+getNombreAlergia()+"|"+getHistoriales();
     }
+    /**
+     * 
+     * @return devuelve todas las alergias que existen en el sistema.
+     */
     public ArrayList<Alergia> getAllAlergia (){
         
     ArrayList <Alergia> alergias = new ArrayList <Alergia>();
     
     return alergias;
     }
-    
+    /**
+     * 
+     * @param id es el identificador de la clase alergia .Cada alergia tiene su propio identificador.
+     * @return  devuelve la alergia en la que coincida el id .
+     */
     public Alergia getAlergiaById (long id){
         Alergia a = new Alergia();
         /*Este método sirve para que posteriormente se busque el id dado
@@ -207,6 +263,10 @@ public class Alergia {
         */ 
         return a;
     }
+    /**
+     * 
+     * @return devuelve una Alergia nueva.
+     */
         public static Alergia nuevaAlergia () {
   
         Alergia a = new Alergia();
