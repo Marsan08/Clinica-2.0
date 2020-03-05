@@ -19,31 +19,49 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
- * version 2
+ * @version 2
  * @author DAW109
- */
+ * @see Empleado */
+
 public class Enfermeria extends Empleado{
-    
+   
     private char categoria;
-    //Dado que la categoría tiene que estar solo representado por una letra es un char PUEDE TENER LOS VALORES QUE SE QUIERAN PUESTO QUE PUEDEN PONER LAS CATEGORÍAS COMO CATEGORÍA A,0, 1... SOLO PUEDE SER UN CARACTER.
+    /**Dado que la categoría tiene que estar solo representado por una letra es un char
+     * PUEDE TENER LOS VALORES QUE SE QUIERAN 
+     * PUESTO QUE PUEDEN PONER LAS CATEGORÍAS COMO CATEGORÍA A,0, 1... SOLO PUEDE SER UN CARACTER.*/
     private ArrayList <Intervencion> intervenciones;
+    
+    
+    
     //Constructor por defecto
     public Enfermeria() {
         super();
     }
-    //Constructor con parámetros
+    
+    /** Contructor por parametros
+     * @param nombre indica el nombre del enfermero
+     * @param apellido indica el apellido del enfermero   
+     * @param telefono indica el telefeno del enfermero
+     * @param nif indica el nif del enfermero
+     * @param direccion indica la dirección del enfermero
+     */
 
     public Enfermeria(String nombre, String apellido, String telefono, String nif, String direccion) {
         super (nombre, apellido, telefono, nif, direccion);
         this.categoria = categoria;
     }
-    //Constructor de copia
+    /**Constructor de copia
+     * 
+     * @param e 
+     */
     
     public Enfermeria (Enfermeria e){
         super (e);
         this.categoria=e.getCategoria();
     
     }
+    
+    //Getter y Setters
     
     public Enfermeria (Empleado e, char categoria) {
         super (e);
@@ -66,12 +84,20 @@ public class Enfermeria extends Empleado{
         this.intervenciones = intervenciones;
     }
   
-
+    //FINALIZACIÓN DE LOS GETTER Y SETTER
+    
+    
+    /**
+     * Metodo Data
+     * @return 
+     */
+ 
     public String Data () {
         
         return super.data()+ getCategoria();
     }
 
+    
     @Override
     public String toString() {
         return super.toString()+  "Enfermeria{" + "categoria=" + categoria + '}';
@@ -89,6 +115,8 @@ public class Enfermeria extends Empleado{
       return enfermerias;
               
   }
+  
+  
   
   public static Enfermeria nuevoEnfermeria() throws ParseException{
        Enfermeria e = new Enfermeria();
