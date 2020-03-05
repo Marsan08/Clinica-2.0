@@ -22,6 +22,7 @@ import java.util.Scanner;
 /**
  * version 2
  * @author DAW109
+ * @see Cita
  */
 public class Intervencion extends Cita{
     
@@ -33,9 +34,22 @@ public class Intervencion extends Cita{
     
     private long idCirujano;
     
+    /**
+     * Contructor por defecto
+     */
+    
     public Intervencion() {
     super();
     }
+    
+    /**Contructor por parametros
+     * @see Cita
+     * @param fecha indica la fecha de la intervención
+     * @param rangoHorario indica el rango horario de la intervención
+     * @param hora indica la hora de la intervencion
+     * @param estado indica el estado de la intervención
+     * @param duracion indica la duración de la intervención
+     */
     
     public Intervencion(Date fecha, char rangoHorario,String hora,boolean estado,String duracion){
         super(fecha,rangoHorario,hora,estado);
@@ -45,6 +59,10 @@ public class Intervencion extends Cita{
        this.idCirujano = idCirujano;
     }
     
+    /** Contructor de copia
+     * 
+     * @param i 
+     */
     public Intervencion (Intervencion i) {
         super(i);
         this.duracion = i.getDuracion();
@@ -53,6 +71,11 @@ public class Intervencion extends Cita{
         this.idCirujano = i.getIdCirujano();
     }
     
+    /** Otros constructores
+     * 
+     * @param c
+     * @param duracion 
+     */
     public Intervencion(Cita c, String duracion){
        super(c);
        this.duracion = duracion;
@@ -78,7 +101,7 @@ public class Intervencion extends Cita{
        
    }
       
-      
+      //GETTER Y SETTERS
    
     public String getDuracion() {
         return duracion;
@@ -112,11 +135,23 @@ public class Intervencion extends Cita{
         this.idCirujano = idCirujano;
     }
    
+    //FINALIZACIÓN GETTER Y SETTER
+    
+    
+    /**
+     * Metodo toString
+     * @return sobreescritura de los atributos de la clase
+     */
 
     @Override
     public String toString() {
         return super.toString()+ "Intervencion{" + "duracion=" + duracion + '}';
     }
+    
+    /**
+     * Metodo Data
+     * @return indica los datos de la propia clase
+     */
     
     public String Data () {
         
@@ -124,10 +159,21 @@ public class Intervencion extends Cita{
         
     }
     
+    /** 
+     * Metodo getAllIntervención
+     * @return ArrayList de Intervención
+     */
+    
     public ArrayList<Intervencion> getAllIntervencion (){
     ArrayList <Intervencion> intervenciones = new ArrayList <Intervencion>();
     return intervenciones ;
     }
+    
+    /**
+     * Metoddo getIntervencionById
+     * @param id
+     * @return el identificador de intervención
+     */
     
     public Intervencion getIntervencionById (long id){
         Intervencion i = new Intervencion();
@@ -137,6 +183,12 @@ public class Intervencion extends Cita{
     */    
         return i;
     }
+    
+    /**
+     * Metodo nuevaIntervención
+     * @return  una nueva Intervención
+     * @throws ParseException 
+     */
     
     public static Intervencion nuevaIntervencion () throws ParseException{
   
@@ -194,8 +246,12 @@ public class Intervencion extends Cita{
     }    
     
     
-            
-        public static ArrayList<Intervencion> readIntervencionfromTextFile (String path) {
+            /** 
+             * Metodo readIntervenciónfromTextFile
+             * @param path
+             * @return ArrayList de intervenciones a traves de un fichero de texto
+             */
+        public static ArrayList<Intervencion> readIntervencionFromTextFile (String path) {
         ArrayList<Intervencion> inte = new ArrayList<>();
         File fichero = new File(path);
         FileReader interve = null;
@@ -231,6 +287,11 @@ public class Intervencion extends Cita{
         return inte;
     }
         
+        /**
+         * Metodo readIntervenciónFromBinaryFile
+         * @param path
+         * @return ArrayList de intervención a traves de un fichero binario
+         */
         
         public static ArrayList<Intervencion> readIntervencionfromBinaryFile (String path) {
         ArrayList<Intervencion> inte = new ArrayList<>();
@@ -265,6 +326,11 @@ public class Intervencion extends Cita{
         return inte;
     }
     
+        /**
+         * Metodo toTextFile crea un fichero de texto
+         * @param path 
+         */
+        
     public void toTextFile (String path){
         File inter = new File(path);
         FileWriter interv = null;
@@ -292,7 +358,10 @@ public class Intervencion extends Cita{
         }
     }
 
-   
+   /**
+    * Metodo toBinary crea un fichero binario
+    * @param path 
+    */
     public void toBinaryFile (String path) {
         FileOutputStream inter = null;
         ObjectOutputStream inObjeto = null;

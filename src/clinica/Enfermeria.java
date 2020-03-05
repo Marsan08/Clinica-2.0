@@ -89,25 +89,37 @@ public class Enfermeria extends Empleado{
     
     /**
      * Metodo Data
-     * @return 
+     * @return Muestra los datos propios de la clase
      */
  
     public String Data () {
         
-        return super.data()+ getCategoria();
+        return super.data() + this.getCategoria();
     }
 
-    
+    /**
+     * Metodo String
+     * @return una sobreescritura de los datos de la clase.
+     */
     @Override
     public String toString() {
         return super.toString()+  "Enfermeria{" + "categoria=" + categoria + '}';
     }
     
+    /**
+     * Metodo getEnfermeriaById
+     * @param id
+     * @return el id
+     */
     public Enfermeria getEnfermeriaById (long id){
         Enfermeria e = new Enfermeria ();
          return e;
     }
  
+    /**
+     * Metodo getAllEnfermeria
+     * @return ArrayList de enfermeros
+     */
   public ArrayList<Enfermeria> getAllEnfermeria (){
       
       ArrayList<Enfermeria> enfermerias = new ArrayList <Enfermeria>();
@@ -117,7 +129,11 @@ public class Enfermeria extends Empleado{
   }
   
   
-  
+  /**
+   * Metodo nuevoEnfermeria
+   * @return un nuevo enfermero
+   * @throws ParseException 
+   */
   public static Enfermeria nuevoEnfermeria() throws ParseException{
        Enfermeria e = new Enfermeria();
        Scanner in = new Scanner (System.in);
@@ -162,8 +178,12 @@ public class Enfermeria extends Empleado{
   
   
   //Metodos de entrada y salida 
-  
-  public static ArrayList<Enfermeria> readEnfermeeriafromTextFile (String path) {
+  /**
+   * Metodo readEnfermeriafromTextFile
+   * @param path
+   * @return ArrayList de ficheros de Enfermeria
+   */
+  public static ArrayList<Enfermeria> readEnfermeriaFromTextFile (String path) {
         ArrayList<Enfermeria> enf = new ArrayList<>();
         File fichero = new File(path);
         FileReader enfermero = null;
@@ -199,7 +219,12 @@ public class Enfermeria extends Empleado{
         return enf;
     }
   
-          public static ArrayList<Enfermeria> readEnfermeriafromBinaryFile (String path) {
+  /**
+   * Metodo readEnfermeriaFromBinaryFile
+   * @param path
+   * @return Arraylist de enfermeros a traves de un fichero en binario
+   */
+          public static ArrayList<Enfermeria> readEnfermeriaFromBinaryFile (String path) {
         ArrayList<Enfermeria> enf = new ArrayList<>();
         FileInputStream enfermero = null;
         ObjectInputStream enfObjeto = null;
@@ -232,6 +257,12 @@ public class Enfermeria extends Empleado{
         return enf;
     }
     
+          
+    /**
+     * Metodo toTextFile crea un fichero de texto
+     * @param path 
+     * 
+     */
     public void toTextFile (String path){
         File enfermero = new File(path);
         FileWriter enfermeria = null;
@@ -259,7 +290,10 @@ public class Enfermeria extends Empleado{
         }
     }
 
-   
+   /**
+    * Metodo toBinaryFile crea un fichero en binario
+    * @param path 
+    */
     public void toBinaryFile (String path) {
         FileOutputStream enfermeria = null;
         ObjectOutputStream enfObjeto = null;

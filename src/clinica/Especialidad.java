@@ -29,15 +29,28 @@ public class Especialidad {
     private String nombre;
     //Nombre de la especialidad ej; endodoncista, esta relacionada con cirujía ES OBLIGATORIO TENER UNA CADENA DE CARACTERES
 
-
+/**
+ * Constructor por defecto
+ */
     public Especialidad() {
     }
 
+    /**
+     * Constructor por parametros
+     * @param nombre indica el nombre de la especialidad
+     * @param idEspecialidad indica el id de la especialidad
+     */
+    
     public Especialidad(String nombre, long idEspecialidad) {
         this.nombre = nombre;
         this.id = idEspecialidad;
     }
     
+    
+    /**
+     * Contructor de copia
+     * @param e 
+     */
   public Especialidad (Especialidad e){
       
       this.nombre = e.getNombre();
@@ -45,9 +58,20 @@ public class Especialidad {
       
   }
 
+  /**
+   * Otro constructor
+   * @param id
+   * @param nombre 
+   */
     private Especialidad(long id, String nombre) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
+    /**
+     * Getter y settets
+     * @return get y set
+     */
 
     public String getNombre() {
         return nombre;
@@ -61,25 +85,37 @@ public class Especialidad {
         return id;
     }
 
-    /**
-     *
-     * @param id
-     */
+   
     public void setId(long id) {
         this.id = id;
     }
 
+    //FINALIZACION GETTER Y SETTER
+    
+    /**
+     * Metodo ToString
+     * @return sobrescritura de los datos de la clase
+     */
+    
     @Override
     public String toString() {
         return "Especialidad{" + "nombre=" + nombre + ", idEspecialidad=" + id + '}';
     }
+    
+    /**
+     * Metodo Data
+     * @return String de los datos propios de la clase
+     */
     
     public String Data(){
         
         return this.getId() + " | " + this.getNombre();
     }
 
-    
+    /**
+     * Metodo getAllEspecialidad
+     * @return ArrayList de Especilidad
+     */
     public ArrayList<Especialidad> getAllEspecialidad(){
         
         ArrayList <Especialidad> especilidades = new ArrayList <Especialidad>();
@@ -89,14 +125,21 @@ public class Especialidad {
     }
     
 
-    
+    /**
+     * Metodo getEspecialidadById
+     * @param id
+     * @return el identificador
+     */
     public Especialidad getEspecilidadById (long id){
         Especialidad e =new Especialidad();
         
         return e;
     }
     
-        
+        /**
+         * Metodo neuvaEspecialidad
+         * @return una nueva Especilialidad
+         */
         
         public static Especialidad nuevaEspecialidad(){
         
@@ -122,7 +165,11 @@ public class Especialidad {
         
         //Metodos de entrada y salida
         
-        
+        /**
+         * Metodo fromTextFile
+         * @param path
+         * @return ArrayList de Especialidad desde un fichero de texto
+         */
         public static ArrayList<Especialidad> fromTextFile (String path) {
         ArrayList<Especialidad> esp = new ArrayList<>();
         File fichero = new File(path);
@@ -159,7 +206,11 @@ public class Especialidad {
         return esp;
     }
         
-        
+        /**
+         * Metodo fromBinaryFile
+         * @param path
+         * @return ArrayList de Especialidad desde un fichero binario
+         */
         public static ArrayList<Especialidad> fromBinaryFile (String path) {
         ArrayList<Especialidad> ret = new ArrayList<>();
         FileInputStream especial = null;
@@ -193,6 +244,11 @@ public class Especialidad {
         return ret;
     }
     
+        /**
+         * Metodo toTextFile crea un fichero de texto
+         * @param path 
+         */
+        
     public void toTextFile (String path){
         File especialidad = new File(path);
         FileWriter especializado = null;
@@ -220,7 +276,10 @@ public class Especialidad {
         }
     }
 
-   
+   /**
+    * Metodo toBinaryFile crea un fichero binario
+    * @param path 
+    */
     public void toBinaryFile (String path) {
         FileOutputStream especializado = null;
         ObjectOutputStream espObjeto = null;
