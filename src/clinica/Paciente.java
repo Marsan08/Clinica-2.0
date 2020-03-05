@@ -98,6 +98,7 @@ public class Paciente  implements Serializable {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+    
     //Los 4 métodos de lectura y escritura.
     
     public static ArrayList<Paciente> readPacientefromTextFile (String path) {
@@ -230,6 +231,7 @@ public class Paciente  implements Serializable {
     }
    
     //Constructor por defecto
+    
     public Paciente() {
     }
     //Constructor con argumentos
@@ -380,6 +382,12 @@ public class Paciente  implements Serializable {
     
     //Caso de uso REALIZAR PAGO hecho por Mar Santin.
     
+    /**
+     * Metodo para realizar un pago de un tratamiento
+     * @param t Se le pasa un Tratamiento al metodo.
+     * @return Devuelve un boolean de si se ha finalizado el pago o no.
+     */
+    
     public boolean realizarPago (Tratamiento t){
         
         Scanner in = new Scanner (System.in);
@@ -409,7 +417,7 @@ public class Paciente  implements Serializable {
         return true;
     }
     
-    
+    //FINAL DEL METODO REALIZARPAGO
     
     
     
