@@ -163,7 +163,7 @@ public class Enfermeria extends Empleado{
   
   //Metodos de entrada y salida 
   
-  public static ArrayList<Enfermeria> fromTextFile (String path) {
+  public static ArrayList<Enfermeria> readEnfermeeriafromTextFile (String path) {
         ArrayList<Enfermeria> enf = new ArrayList<>();
         File fichero = new File(path);
         FileReader enfermero = null;
@@ -199,7 +199,7 @@ public class Enfermeria extends Empleado{
         return enf;
     }
   
-          public static ArrayList<Enfermeria> fromBinaryFile (String path) {
+          public static ArrayList<Enfermeria> readEnfermeriafromBinaryFile (String path) {
         ArrayList<Enfermeria> enf = new ArrayList<>();
         FileInputStream enfermero = null;
         ObjectInputStream enfObjeto = null;

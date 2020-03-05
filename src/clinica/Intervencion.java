@@ -195,7 +195,7 @@ public class Intervencion extends Cita{
     
     
             
-        public static ArrayList<Intervencion> fromTextFile (String path) {
+        public static ArrayList<Intervencion> readIntervencionfromTextFile (String path) {
         ArrayList<Intervencion> inte = new ArrayList<>();
         File fichero = new File(path);
         FileReader interve = null;
@@ -232,7 +232,7 @@ public class Intervencion extends Cita{
     }
         
         
-        public static ArrayList<Intervencion> fromBinaryFile (String path) {
+        public static ArrayList<Intervencion> readIntervencionfromBinaryFile (String path) {
         ArrayList<Intervencion> inte = new ArrayList<>();
         FileInputStream interven = null;
         ObjectInputStream inObjeto = null;

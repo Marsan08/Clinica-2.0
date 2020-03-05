@@ -5,7 +5,19 @@
  */
 package clinica;
 import excepciones.PagoExcepcion;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -33,6 +45,10 @@ public class Cobro {
         this.id=c.id;
         this.importeTotalEuros=c.getImporteTotalEuros();
         this.fechaFinalizacion=c.getFechaFinalizacion();
+    }
+
+    private Cobro(long id, double importeTotalEuros, Date fechaFinalizacion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public long getIdCobro() {
@@ -127,7 +143,129 @@ public class Cobro {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
        
-       
+    public static ArrayList<Cobro> fromTextFile (String path) {
+        ArrayList<Cobro> ret = new ArrayList<>();
+        File fichero = new File(path);
+        FileReader lector = null;
+        BufferedReader buffer = null ;
+        try {
+            try {
+                lector = new FileReader(fichero);
+                buffer = new BufferedReader(lector);
+                String linea;
+                while((linea=buffer.readLine())!=null){
+                    String[] campos = linea.split("\\|");
+                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                    long id = Long.parseLong(campos[10]);
+                    double importeTotalEuros = Double.parseDouble(campos[1]);
+                    Date fechaFinalizacion = df.parse(campos[4]);
+                    Cobro z = new Cobro(id, importeTotalEuros, fechaFinalizacion);
+                    ret.add(z);                   
+                }
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(lector!=null)
+                    lector.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
+        return ret;
+    }
+    
+    public static ArrayList<Cobro> fromBinaryFile (String path) {
+        ArrayList<Cobro> ret = new ArrayList<>();
+        FileInputStream lector = null;
+        ObjectInputStream lectorObjeto = null;
+        try{
+            try{
+                lector = new FileInputStream(path);
+                lectorObjeto = new ObjectInputStream(lector);
+                Cobro c;
+                while((c = (Cobro)lectorObjeto.readObject())!=null)
+                    ret.add(c);
+            }finally{
+                if(lector!=null)
+                    lector.close();
+                if(lectorObjeto!=null)
+                    lectorObjeto.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(ClassNotFoundException e){
+            System.out.println("Se ha producido una ClassNotFoundException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
+        return ret;
+    }
+    
+    public void toTextFile (String path){
+        File archivo = new File(path);
+        FileWriter writer = null;
+        PrintWriter buffer = null ;
+        try {
+            try {
+                writer = new FileWriter(archivo);
+                buffer = new PrintWriter(writer);
+                buffer.println(this.data());
+            }finally{
+                if(buffer!=null)
+                    buffer.close();
+                if(writer!=null)
+                    writer.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
+    }
+    
+    public void toBinaryFile (String path) {
+        FileOutputStream writer = null;
+        ObjectOutputStream writerObjeto = null;
+        try{
+            try{
+                writer = new FileOutputStream(path);
+                writerObjeto = new ObjectOutputStream(writer);
+                writerObjeto.writeObject(this);
+            }finally{
+                if(writer!=null)
+                    writer.close();
+                if(writerObjeto!=null)
+                    writerObjeto.close();
+            }
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Se ha producido una FileNotFoundException");
+        }
+        catch(IOException e){
+            System.out.println("Se ha producido una IOException");
+        }
+        catch(Exception e){
+            System.out.println("Se ha producido una Exception");
+        }
+    }   
        
    }
    
