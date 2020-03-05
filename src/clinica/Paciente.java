@@ -100,7 +100,15 @@ public class Paciente  implements Serializable {
     }
     
     //Los 4 métodos de lectura y escritura.
-    
+    /**
+     * 
+     * @param path es el parametro de un fichero de texto.
+     * @exception  FileNotFoundException si no se encuentra el fichero
+     * @exception  IOException  excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+     * @exception  PacienteException es aquella excepcion que esta regulada en PacienteException.
+     * @see Clinica.PacienteException
+     * @return  devuelve lo que contenia el archivo de texto del que se leen los datos del Paciente.
+     */
     public static ArrayList<Paciente> readPacientefromTextFile (String path) {
         ArrayList<Paciente> ret = new ArrayList<>();
         File fichero = new File(path);
@@ -142,6 +150,16 @@ public class Paciente  implements Serializable {
 
         return ret;
     }
+    /**
+     * 
+     * @param path es el parametro de un fichero binario
+     * @exception  FileNotFoundException si no se encuentra el fichero
+     * @exception  IOException  excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+     * @exception  Exception es aquella general.
+     * @exception EOFException es la excepcion que indica que se ha alcanzado el final del fichero o del stream.
+     * @exception ClassNotFoundException es la que indica que no se ha encontrado la clase.
+     * @return devuelve lo que contenia el archivo binario del que se leen los datos de Paciente.
+     */
      public static ArrayList<Paciente> readClientefromBinaryFile  (String path) {
         ArrayList<Paciente> ret = new ArrayList<>();
         FileInputStream lector = null;
@@ -182,7 +200,13 @@ public class Paciente  implements Serializable {
         return ret;
     }
     
-    
+  /**
+   * 
+   * @param path es el parametro del archivo de texto que se ira ha escribir.
+   * @exception FileNotFoundException si no se encuentra el fichero
+   * @exception IOException excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+   * @exception Exception es aquella general.
+   */  
  public void toTextFile (String path){
         File fichero = new File(path);
         FileWriter escritor = null;
@@ -209,7 +233,15 @@ public class Paciente  implements Serializable {
             System.out.println("Se ha producido una Exception"+p.getMessage());
         }
     }
-
+    /**
+     * 
+     * @param path es el parametro del archivo binario que se ira ha escribir.
+     * @throws FileNotFoundException Salta la excepcion.
+     * @throws IOException  Salta la excepcion.
+     * @exception FileNotFoundException si no se encuentra el fichero.
+     * @exception IOException excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+     * @exception Exception es aquella general.
+     */
     public void writeClienteToBinaryFile (String path) throws FileNotFoundException, IOException {
         try{
             FileOutputStream fichero = new FileOutputStream(path, true);
@@ -235,6 +267,16 @@ public class Paciente  implements Serializable {
     public Paciente() {
     }
     //Constructor con argumentos
+    /**
+     * 
+     * @param idPaciente Es el identificador del Paciente <code>long</code> .
+     * @param nombre Es el nombre del Paciente <code>String</code> .
+     * @param apellidos Es el apellido del Paciente <code>String</code> .
+     * @param NIF Es el NIF del Paciente <code>String</code>.
+     * @param telefono Es el telefono del Paciente <code>String</code>.
+     * @param direccion Es la direccion del Paciente <code>String</code>.
+     * @throws PacienteException salta la excepcion si no se respetan las restricciones.
+     */
 
     public Paciente(long idPaciente, String nombre, String apellidos, String NIF, String telefono, String direccion) throws PacienteException {
         this.id = idPaciente;
@@ -268,7 +310,18 @@ public class Paciente  implements Serializable {
         }
         this.direccion = direccion;
     }
-
+    
+    /**
+     * 
+     * @param historial es un objeto historial
+     * @param idHistorial es el id externo <code>long</code>.
+     * @param id es el identificador del paciente <code>long</code>.
+     * @param nombre es el nombre del Paciente <code>String</code>.
+     * @param apellidos es el apellido del Paciente <code>String</code>.
+     * @param NIF es el NIF del Paciente <code>String</code>.
+     * @param telefono es el telefono del Paciente <code>String</code>.
+     * @param direccion es la direccion del Paciente <code>String</code>.
+     */
     public Paciente(Historial historial, long idHistorial, long id, String nombre, String apellidos, String NIF, String telefono, String direccion) {
         this.historial = historial;
         this.idHistorial = idHistorial;
@@ -282,7 +335,10 @@ public class Paciente  implements Serializable {
     }
 
 
-   
+   /**
+    * 
+    * @param p es el parametro de Paciente que nos vale para hacer el constructor de copia.
+    */
     //Constructor de copia
    public Paciente (Paciente p) {
         this.id = p.getId();
@@ -295,23 +351,37 @@ public class Paciente  implements Serializable {
         
         }
     //Otros métodos sobreescritos
-    
+    /**
+     * 
+     * @return devuelve un String de Id , nombre ,apellidos,NIF,telefono y direccion.
+     */
     @Override
     public String toString() {
         return id + "Paciente{" + "ID" + ", nombre=" + nombre + ", apellidos=" + apellidos + ", NIF=" + NIF + ", telefono=" + telefono + ", direccion=" + direccion + '}';
     }
     
+    /**
+     * 
+     * @return devuelve los datos de Paciente en orden más el id de Historial que es <code>long</code>.
+     */
     public String data() {
         return ""+getId()+"|"+getNombre()+"|"+getApellidos()+"|"+getNIF()+"|"+getTelefono()+"|"+getDireccion()+"|"+getIdHistorial();
     }
 
     
-
+    /**
+     * 
+     * @return  devuelve todos los pacientes  que existen en el sistema.
+     */
     public ArrayList<Paciente> getAllPaciente (){
     ArrayList <Paciente> pacientes = new ArrayList <Paciente>();
     return pacientes;
     }
-    
+    /**
+     * 
+     * @param id es el identificador de la clase Paciente.Cada Paciente tiene su propio identificador.
+     * @return devuelve el paciente en la que coincida el id .
+     */
     public Paciente getPacienteById (long id){
         Paciente p = new Paciente();
         /*Este método sirve para que posteriormente se busque el id dado
@@ -320,8 +390,10 @@ public class Paciente  implements Serializable {
         */ 
         return p;
     }
-    
-    
+    /**
+     * 
+     * @return devuelve un Paciente nuevo.
+     */
     public static Paciente nuevoPaciente (){
         Paciente p = new Paciente();
         Scanner in= new Scanner(System.in);
