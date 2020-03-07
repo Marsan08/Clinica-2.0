@@ -56,6 +56,14 @@ public class Secretariado extends Empleado {
     public void setAñosExperiencia(int añosExperiencia) {
         this.añosExperiencia = añosExperiencia;
     }
+    /**
+     * 
+     * @param pathes el parametro de un fichero de texto.
+     * @exception  FileNotFoundException si no se encuentra el fichero
+     * @exception  IOException  excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+     * @exception  Exception es aquella excepcion general.
+     * @return  devuelve lo que contenia el archivo de texto del que se leen los datos de Secretariado.
+     */
      public static ArrayList<Secretariado> FromTextFile (String path) {
         ArrayList<Secretariado> ret = new ArrayList<>();
         File fichero = new File(path);
@@ -93,7 +101,16 @@ public class Secretariado extends Empleado {
         }
         return ret;
     }
-
+/**
+ * 
+ * @param pathes el parametro de un fichero binario.
+ * @exception  FileNotFoundException si no se encuentra el fichero
+ * @exception  IOException  excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+ * @exception  Exception es aquella general.
+ * @exception EOFException es la excepcion que indica que se ha alcanzado el final del fichero o del stream.
+ * @exception ClassNotFoundException es la que indica que no se ha encontrado la clase.
+ * @return devuelve lo que contenia el archivo binario del que se leen los datos de Secretariado.
+ */
     public static ArrayList<Secretariado> FromBinaryFile (String path) {
         ArrayList<Secretariado> ret = new ArrayList<>();
         FileInputStream lector = null;
@@ -130,7 +147,13 @@ public class Secretariado extends Empleado {
         }
         return ret;
     }
-
+/**
+ * 
+ * @param path es el parametro del archivo de texto que se ira ha escribir.
+ * @exception FileNotFoundException si no se encuentra el fichero .
+ * @exception IOException excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+ * @exception Exception es aquella general.
+ */
     public void writeToTextFile (String path){
         File fichero = new File(path);
         FileWriter escritor = null;
@@ -157,7 +180,13 @@ public class Secretariado extends Empleado {
             System.out.println("Se ha producido una Exception"+p.getMessage());
         }
     }
-
+/**
+ * 
+ * @param path es el parametro del archivo binario que se ira ha escribir.
+ * @exception FileNotFoundException si no se encuentra el fichero.
+ * @exception IOException excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+ * @exception Exception es aquella general.
+ */
     public void writeToBinaryFile (String path) {
         try{
             FileOutputStream fichero = new FileOutputStream(path, true);
@@ -177,11 +206,24 @@ public class Secretariado extends Empleado {
         }
     }
     //Constructor por defecto
+    /**
+     * Constructor por defecto que incluye al padre Empleado.
+     */
     public Secretariado() {
         super();
     }
 
     //Constructor con argumentos
+    /**
+     * 
+     * @param nombre es el nombre del secretario que hereda de empleado <code>String</code> .
+     * @param apellido es el apellido del secretario que hereda de empleado <code>String</code> .
+     * @param telefono es el telefono del secretario que hereda de empleado <code>String</code> .
+     * @param nif es el NIF del secretario que hereda de empleado <code>String</code> .
+     * @param direccion es la direccion del secretario que hereda de empleado <code>String</code> .
+     * @param añosExperiencia son los años de experiencia que tiene el secretario y es propio de la clase. <code>int</code> .
+     * @param idCita es el id de la Cita que la efectua <code>long</code> .
+     */
     public Secretariado(String nombre, String apellido, String telefono, String nif, String direccion,int añosExperiencia,long idCita) {
         super(nombre, apellido, telefono, nif, direccion);
         this.añosExperiencia = añosExperiencia;
@@ -189,34 +231,58 @@ public class Secretariado extends Empleado {
     }
 
     //Constructor de copia
+    /**
+     * 
+     * @param p es el parametro de Secretariado que nos vale para hacer el constructor de copia.
+     */
     public Secretariado(Secretariado p) {
         super(p);
         this.añosExperiencia = p.getAñosExperiencia();
         this.idCita= p.getIdCita();
 
     }
-
+/**
+ * 
+ * @param e es el parametro de Empleado que es la superclase de la que Secretariado hereda.
+ * @param añosExperiencia es un atributo que contiene los años de experiencia del Secretariado <code>int</code>
+ */
     public Secretariado(Empleado e, int añosExperiencia) {
         super(e);
         this.añosExperiencia = añosExperiencia;
     }
-
+/**
+ * 
+ * @param e es el parametro de Empleado que es la superclase de la que Secretariado hereda.
+ * @param añosExperiencia es un atributo que contiene los años de experiencia del Secretariado <code>int</code>
+ * @param informes es la lista de informes que realiza un Secretariado.
+ */
     public Secretariado(Empleado e, int añosExperiencia, ArrayList<Informe> informes) {
         super(e);
         this.añosExperiencia = añosExperiencia;
     }
 
     //Otros métodos sobreescritos
+/**
+ * 
+ * @return devuelve un String de todo lo que tiene Empleado que es el padre   y las años de experiencia .
+ */
     @Override
     public String toString() {
         return super.toString() + "Secretariado{" + "a\u00f1osExperiencia=" + añosExperiencia + '}';
     }
-
+/**
+ * 
+ * @return  devuelve los datos de Empleado y los años de experiencia en orden.
+ */
     @Override
     public String data() {
         return super.data() + "|" + getAñosExperiencia();
     }
-
+/**
+ * 
+ * @param id es el identificador de la clase Empleado pero  el Secretariado la hereda.Cada Empleado/Secretariado tiene su propio identificador.
+ * @return 
+ */
     public Secretariado getSecretariadoById(long id) {
         Secretariado s = new Secretariado();
         /*Este método sirve para que posteriormente se busque el id dado
@@ -225,14 +291,21 @@ public class Secretariado extends Empleado {
          */
         return s;
     }
-
+/**
+ * 
+ * @return devuelve todos los secretariados que existen en el sistema.
+ */
     public ArrayList<Secretariado> getAllSecretariado() {
 
         ArrayList<Secretariado> secretariados = new ArrayList<Secretariado>();
 
         return secretariados;
     }
-
+/**
+ * 
+ * @return devuelve un nuevo Secretariado.
+ * @throws ParseException es una excepcion del Parseo.
+ */
     public static Secretariado nuevoSecretariado() throws ParseException {
 
         Secretariado s;

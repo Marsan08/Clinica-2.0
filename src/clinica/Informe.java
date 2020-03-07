@@ -53,6 +53,14 @@ public class Informe {
         this.descripcionTratamiento = descripciónTratamiento;
     }
     //4 metodos E-S
+    /**
+     * 
+     * @param path es el parametro de un fichero de texto.
+     * @exception  FileNotFoundException si no se encuentra el fichero
+     * @exception  IOException  excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+     * @exception  Exception es aquella excepcion general.
+     * @return  devuelve lo que contenia el archivo de texto del que se leen los datos del Informe.
+     */
      public static ArrayList<Informe> FromTextFile (String path) {
         ArrayList<Informe> ret = new ArrayList<>();
         File fichero = new File(path);
@@ -89,7 +97,16 @@ public class Informe {
         }
         return ret;
     }
-
+/**
+ * 
+ * @param pathes el parametro de un fichero binario.
+ * @exception  FileNotFoundException si no se encuentra el fichero
+ * @exception  IOException  excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+ * @exception  Exception es aquella general.
+ * @exception EOFException es la excepcion que indica que se ha alcanzado el final del fichero o del stream.
+ * @exception ClassNotFoundException es la que indica que no se ha encontrado la clase.
+ * @return devuelve lo que contenia el archivo binario del que se leen los datos del Informe.
+ */
     public static ArrayList<Informe> FromBinaryFile (String path) {
         ArrayList<Informe> ret = new ArrayList<>();
         FileInputStream lector = null;
@@ -126,7 +143,13 @@ public class Informe {
         }
         return ret;
     }
-
+/**
+ * 
+ * @param path es el parametro del archivo de texto que se ira ha escribir.
+ * @exception FileNotFoundException si no se encuentra el fichero
+ * @exception IOException excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+ * @exception Exception es aquella general.
+ */
     public void writeToTextFile (String path){
         File fichero = new File(path);
         FileWriter escritor = null;
@@ -153,7 +176,13 @@ public class Informe {
             System.out.println("Se ha producido una Exception"+p.getMessage());
         }
     }
-
+/**
+ * 
+ * @param path es el parametro del archivo binario que se ira ha escribir.
+ * @exception FileNotFoundException si no se encuentra el fichero.
+ * @exception IOException excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+ * @exception Exception es aquella general.
+ */
     public void writeToBinaryFile (String path) {
         try{
             FileOutputStream fichero = new FileOutputStream(path, true);
@@ -176,28 +205,53 @@ public class Informe {
     public Informe() {
     }
     //Constructor con argumentos
+    /**
+     * 
+     * @param ID es el id del informe <code>long</code> .
+     * @param descripciónTratamiento es la descripción del tratamiento <code>String</code> .
+     */
     public Informe(long ID, String descripciónTratamiento) {
         this.id = ID;
         this.descripcionTratamiento = descripciónTratamiento;
     }
     //Constructor de copia
+    /**
+     * 
+     * @param p es el parametro de Informe que nos vale para hacer el constructor de copia.
+     */
     public Informe (Informe p) {
         this.descripcionTratamiento = p.getDescripciónTratamiento();
         this.id = p.getID();
     }
     //Otros métodos sobreescritos
+    /**
+     * 
+     * @return devuelve un String de Id y descripcion del tratamiento .
+     */
     @Override
     public String toString() {
         return "Informe{" + "ID=" + id + ", descripci\u00f3nTratamiento=" + descripcionTratamiento + '}';
     }
-    
+    /**
+     * 
+     * @return devuelve los datos del Informe Id <code>long</code> y descripcion <code>String</code> 
+     */
     public String data() {
         return ""+getID()+"|"+getDescripciónTratamiento();
     }
+    /**
+     * 
+     * @return devuelve todos los informes  que existen en el sistema.
+     */
     public ArrayList<Informe> getAllInforme (){
     ArrayList <Informe> informes = new ArrayList <Informe>();
     return informes ;
     }
+    /**
+     * 
+     * @param id es el identificador de la clase Informe.Cada Informe tiene su propio identificador.
+     * @return devuelve el informe en la que coincida el id .
+     */
     public Informe getInformeById (long id){
         Informe i = new Informe();
         /*Este método sirve para que posteriormente se busque el id dado
@@ -206,6 +260,11 @@ public class Informe {
         */ 
         return i;
     }
+    /**
+     * 
+     * @return devuelve un nuevo informe
+     * @throws ParseException  es una excepcion del Parseo.
+     */
         public static Informe nuevoInforme () throws ParseException{
   
         Informe i = new Informe();

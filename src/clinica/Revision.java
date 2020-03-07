@@ -46,6 +46,14 @@ public class Revision extends Cita {
     public void setAnotaciones(String anotaciones) {
         this.anotaciones = anotaciones;
     }
+    /**
+     * 
+     * @param path es el parametro de un fichero de texto.
+     * @exception  FileNotFoundException si no se encuentra el fichero
+     * @exception  IOException  excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+     * @exception  Exception es aquella excepcion general.
+     * @return  devuelve lo que contenia el archivo de texto del que se leen los datos del Revision.
+     */
      public static ArrayList<Revision> FromTextFile (String path) {
         ArrayList<Revision> ret = new ArrayList<>();
         File fichero = new File(path);
@@ -83,7 +91,16 @@ public class Revision extends Cita {
         }
         return ret;
     }
-
+/**
+ * 
+ * @param path es el parametro de un fichero binario.
+ * @exception  FileNotFoundException si no se encuentra el fichero
+ * @exception  IOException  excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+ * @exception  Exception es aquella general.
+ * @exception EOFException es la excepcion que indica que se ha alcanzado el final del fichero o del stream.
+ * @exception ClassNotFoundException es la que indica que no se ha encontrado la clase.
+ * @return devuelve lo que contenia el archivo binario del que se leen los datos de la Revision.
+ */
     public static ArrayList<Revision> FromBinaryFile (String path) {
         ArrayList<Revision> ret = new ArrayList<>();
         FileInputStream lector = null;
@@ -120,7 +137,13 @@ public class Revision extends Cita {
         }
         return ret;
     }
-
+/**
+ * 
+ * @param path es el parametro del archivo de texto que se ira ha escribir.
+ * @exception FileNotFoundException si no se encuentra el fichero .
+ * @exception IOException excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+ * @exception Exception es aquella general.
+ */
     public void writeToTextFile (String path){
         File fichero = new File(path);
         FileWriter escritor = null;
@@ -147,7 +170,13 @@ public class Revision extends Cita {
             System.out.println("Se ha producido una Exception"+p.getMessage());
         }
     }
-
+/**
+ * 
+ * @param path es el parametro del archivo binario que se ira ha escribir.
+ * @exception FileNotFoundException si no se encuentra el fichero.
+ * @exception IOException excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+ * @exception Exception es aquella general.
+ */
     public void writeToBinaryFile (String path) {
         try{
             FileOutputStream fichero = new FileOutputStream(path, true);
@@ -167,44 +196,79 @@ public class Revision extends Cita {
         }
     }
     //Constructor por defecto
+    /**
+     * Constructor por defecto que incluye al padre Cita.
+     */
     public Revision() {
     super();
     }
+    /**
+     * 
+     * @param fecha es la fecha en la que se efectua la revision <code>Date</code> .
+     * @param rangoHorario es el  rango horario en el que se efectua la revision (M o T)<code>char</code> .
+     * @param hora es la hora de la revision  <code>String</code> .
+     * @param estado es el estado de la cita <code>boolean</code> .
+     * @param anotaciones son las anotaciones que se realizan en la revision <code>String</code> .
+     * @param idCirujano es el id del cirujano que la efectua <code>long</code> .
+     */
     //Constructor con argumentos
     public Revision(Date fecha, char rangoHorario,String hora,boolean estado,String anotaciones,long idCirujano) {
         super(fecha,rangoHorario,hora,estado);
         this.anotaciones = anotaciones;
         this.idCirujano = idCirujano;
     }
+    /**
+     * 
+     * @param p es el parametro de Revision que nos vale para hacer el constructor de copia.
+     */
     //Constructor de copia
     public Revision (Revision p) {
         super(p);
         this.anotaciones = p.getAnotaciones();
         this.idCirujano = p.idCirujano;
     }
+    /**
+     * 
+     * @param c es el parametro de Cita que es la superclase de la que revision hereda.
+     * @param anotaciones es un atributo que contiene las anotaciones que el cirujano  hace en una Revision <code>String</code>
+     */
     public Revision(Cita c, String anotaciones){
        super(c);
        this.anotaciones = anotaciones;
     } 
     //Otros métodos sobreescritos
+    /**
+     *
+     * @return  devuelve un String de todo lo que tiene Cita que es el padre   y las anotaciones .
+     */
     @Override
     public String toString() {
         return super.toString()+"Revisi\u00f3n{" + "anotaciones=" + anotaciones + '}';
     }
-    
+    /**
+     * 
+     * @return  devuelve los datos de Cita ,las anotaciones y el id del Cirujano que es <code>long</code> en orden.
+     */
     @Override
     public String data() {
         
         return super.data()+ "|"+getAnotaciones()+"|"+getIdCirujano();
     }
    
-    
+    /**
+     * 
+     * @return  devuelve todos las revisiones  que existen en el sistema.
+     */
     public ArrayList<Revision> getAllRevision (){
     ArrayList <Revision> revisiones = new ArrayList <Revision>();
     return revisiones ;
     }
     
-    
+    /**
+     * 
+     * @param id es el identificador de la clase Cita pero  la Revision la hereda.Cada Cita/Revision tiene su propio identificador.
+     * @return devuelve la revision con la que coincide el id.
+     */
     public Revision getRevisionById (long id){
         Revision r = new Revision();
     /*Este método sirve para que posteriormente se busque el id dado
@@ -213,6 +277,11 @@ public class Revision extends Cita {
     */    
         return r;
     }
+    /**
+     * 
+     * @return devuelve una nueva Revision.
+     * @throws ParseException es una excepcion del Parseo.
+     */
     public static Revision nuevaRevision () throws ParseException{
   
         Revision r;
