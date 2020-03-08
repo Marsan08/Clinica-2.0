@@ -266,7 +266,7 @@ public class Alergia {
     /**
      * 
      * @return devuelve una Alergia nueva.
-     * @see 
+     * @see  package.Historial#member label
      */
         public static Alergia nuevaAlergia () {
   
