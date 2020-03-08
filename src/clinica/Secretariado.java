@@ -281,7 +281,7 @@ public class Secretariado extends Empleado {
 /**
  * 
  * @param id es el identificador de la clase Empleado pero  el Secretariado la hereda.Cada Empleado/Secretariado tiene su propio identificador.
- * @return 
+ * @return devuelve un empleado que coincida el id .
  */
     public Secretariado getSecretariadoById(long id) {
         Secretariado s = new Secretariado();
@@ -343,7 +343,11 @@ public class Secretariado extends Empleado {
     }
 
     
-    
+/**
+ * 
+ * @param t es el tratamiento que se le pasa al secretariado para que este realize un informe.
+ * @return devuelve un informe hecho
+ */    
     public boolean realizarInforme(Tratamiento t) {
         boolean ret = false;
         Scanner in = new Scanner(System.in);
