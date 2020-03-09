@@ -217,7 +217,7 @@ public class Alergia {
     }
     /**
      * 
-     * @param p es el parametro de alergia que nos vale para hacer el constructor de copia.
+     * @param p  alergia que nos vale para hacer el constructor de copia.
      */
     //Constructor de copia
     public Alergia (Alergia p) {
@@ -266,6 +266,7 @@ public class Alergia {
     /**
      * 
      * @return devuelve una Alergia nueva.
+     * @see  package.Historial#member label
      */
         public static Alergia nuevaAlergia () {
   

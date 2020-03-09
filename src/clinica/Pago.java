@@ -148,7 +148,7 @@ public class Pago {
     }
     /**
      * 
-     * @param path
+     * @param path es el parametro de un fichero binario.
      * @exception  FileNotFoundException si no se encuentra el fichero
      * @exception  IOException  excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
      * @exception  Exception es aquella general.
@@ -225,7 +225,13 @@ public class Pago {
             System.out.println("Se ha producido una Exception"+p.getMessage());
         }
     }
-
+     /**
+     * 
+     * @param path es el parametro del archivo binario que se ira ha escribir.
+     * @exception FileNotFoundException si no se encuentra el fichero.
+     * @exception IOException excepciones que se producen mientras se tiene acceso a la información mediante secuencias, archivos y directorios.
+     * @exception Exception es aquella general.
+     */
     public void writeModificacionToBinaryFile (String path) {
         try{
             FileOutputStream fichero = new FileOutputStream(path, true);
@@ -248,7 +254,15 @@ public class Pago {
     //Constructor por defecto
     public Pago() {
     }
-
+       /**
+     * 
+     * @param id es el id del pago <code>long</code> .
+     * @param idPaciente es el id del Paciente que realiza el pago<code>long</code> .
+     * @param idCobro es el id del Cobro al que pertenece el pago<code>long</code> .
+     * @param fechadePago es la fecha del pago <code>Date</code> .
+     * @param importe Es el importe del pago <code>double</code> .
+     * @param metododePago Es el metodo de pago <code>char</code> .
+     */
     //Constructor con argumentos
     public Pago(long ID, Date FechaDePago, double importe, String MetodoDePago) throws PagoExcepcion {
         this.id = ID;
@@ -272,7 +286,15 @@ public class Pago {
         }
 
     }
-
+    /**
+     * 
+     * @param id es el id del pago <code>long</code> .
+     * @param idPaciente es el id del Paciente que realiza el pago<code>long</code> .
+     * @param idCobro es el id del Cobro al que pertenece el pago<code>long</code> .
+     * @param fechadePago es la fecha del pago <code>Date</code> .
+     * @param importe Es el importe del pago <code>double</code> .
+     * @param metododePago Es el metodo de pago <code>char</code> .
+     */
     public Pago(long id, long idPaciente, long idCobro ,Date fechadePago, double importe, String metododePago) {
         this.id = id;
         this.idPaciente = idPaciente;
@@ -284,7 +306,10 @@ public class Pago {
 
     }
 
-
+    /**
+     * 
+     * @param p es el parametro de Pago que nos vale para hacer el constructor de copia.
+     */
     //Constructor de copia
     public Pago(Pago p) {
         this.id = p.getID();
@@ -294,21 +319,34 @@ public class Pago {
         this.idPaciente = p.getIdPaciente();
         this.idPaciente = p.getIdCobro();
     }
-
+    /**
+     * 
+     * @return devuelve un String de Id fechadePago , importe y metodo de pago .
+     */
     @Override
     public String toString() {
         return "Pago{" + "ID=" + id + ", fechaDePago=" + fechadePago + ", importe=" + importe + ", m\u00e9todoDePago=" + metododePago + '}';
     }
-
+    /**
+     * 
+     * @return  devuelve los datos de Pago en orden más el id de Paciente y Cobro que son <code>long</code>.
+     */
     public String data() {
         return "" + getID()+"|"+getPaciente().getId()+"|"+getIdCobro() + "|" + getFechaDePago() + "|" + getImporte() + "|" + getMetodoDePago();
     }
-
+    /**
+     * 
+     * @return devuelve todos los pagos  que existen en el sistema.
+     */
     public ArrayList<Pago> getAllPago() {
         ArrayList<Pago> pagos = new ArrayList<Pago>();
         return pagos;
     }
-
+    /**
+     * 
+     * @param id es el identificador de la clase Pago.Cada Pago tiene su propio identificador.
+     * @return devuelve el pago en la que coincida el id .
+     */
     public Pago getPagoById(long id) {
         Pago p = new Pago();
         /*Este método sirve para que posteriormente se busque el id dado
@@ -317,7 +355,10 @@ public class Pago {
          */
         return p;
     }
-
+    /**
+     * 
+     * @return devuelve un pago nuevo
+     */
     public static Pago nuevoPago() {
         Pago p = new Pago();
         Scanner in = new Scanner(System.in);

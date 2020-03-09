@@ -28,7 +28,7 @@ import java.util.Scanner;
  */
 public class Cita {
 
-    protected long id;
+    protected long id; 
     private Date fecha;
     private char rangoHorario;
     private String hora;
@@ -36,9 +36,19 @@ public class Cita {
     
     private long idTratamiento;
     
+    //Constructor por defecto
+       
     public Cita() {
     }
 
+    /**Constructor por parametros
+     * 
+     * @param fecha fecha de la cita
+     * @param rangoHorario rango horario en el cual se llevara a cabo la cita
+     * @param hora hora en la cual se llevara a cabo la cita
+     * @param estado urgente o no urgente
+     */
+    
     public Cita(Date fecha, char rangoHorario, String hora, boolean estado) {
 
         this.fecha = fecha;
@@ -47,21 +57,43 @@ public class Cita {
         this.estado = estado;
     }
 
+    /**Constructor de copia
+     * 
+     * @param c 
+     */
+    
     public Cita(Cita c) {
         this.id = c.getId();
         this.fecha = c.getFecha();
         this.rangoHorario = c.getRangoHorario();
         this.hora = c.getHora();
     }
-
-    private Cita(long id, Date fecha, char rangoHorario, String hora, boolean estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    /**Otro constructor
+     * 
+     * @param id 
+     * @param fecha
+     * @param rangoHorario
+     * @param hora
+     * @param estado 
+     */
+    
+    public Cita(long id, Date fecha, char rangoHorario, String hora, boolean estado) {
     }
-
-    private Cita(long id, Date fecha, String hora, boolean estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    /**Otro constructor
+     * 
+     * @param id
+     * @param fecha
+     * @param hora
+     * @param estado 
+     */
+    
+    public Cita(long id, Date fecha, String hora, boolean estado) {
     }
-
+    
+    //Getters y Setters
+    
     public long getId() {
         return id;
     }
@@ -101,7 +133,11 @@ public class Cita {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-
+    
+    public String getEstado() {
+        return hora;
+    }
+    
     public long getIdTratamiento() {
         return idTratamiento;
     }
@@ -110,29 +146,55 @@ public class Cita {
         this.idTratamiento = idTratamiento;
     }
 
+    //Final de Getters y Setters
     
+    /**Metodo toString 
+     * Primero atributos de la propia clase, despues atributos de las relaciones
+     * @return una sobrescritura de los atributos de la clase
+     */
     
     @Override
     public String toString() {
         return "Cita{" + "idCita=" + id + ", fecha=" + fecha + ", rangoHorario=" + rangoHorario + ", hora=" + hora + '}';
     }
-    //primero atributos cita, despues atributos de las relaciones
+    
+    /**Metodo Data
+     * 
+     * @return String de los datos propios de la clase
+     */
     
     public String data() {
         return getId() + " | " + getFecha() + " | " + getRangoHorario() + " | " + getHora() + " | " + getIdTratamiento();
 
     }
-
+    
+    /**Metodo getAllCita
+     * 
+     * @return ArrayList de cita
+     */
+    
     public ArrayList<Cita> getAllCita() {
         ArrayList<Cita> citas = new ArrayList<Cita>();
         return citas;
     }
-
+    
+    /**Metodo getCitaById
+     * 
+     * @param id
+     * @return el identificador
+     */
+    
     public Cita getCitaById(long id) {
         Cita c = new Cita();
         return c;
     }
-
+    
+    /**Metodo nuevoCita
+     * 
+     * @return una nueva cita
+     * @throws ParseException 
+     */
+    
     public static Cita nuevoCita() throws ParseException {
         Cita c = new Cita();
         boolean correcto;
@@ -169,7 +231,13 @@ public class Cita {
 
         return c;
     }
-
+    
+    /**Metodo fromTextFile
+     * 
+     * @param path
+     * @return ArrayList de cita desde un fichero de texto
+     */
+    
     public static ArrayList<Cita> fromTextFile (String path) {
         ArrayList<Cita> ret = new ArrayList<>();
         File fichero = new File(path);
@@ -212,6 +280,12 @@ public class Cita {
         return ret;
     }
     
+    /**Metodo fromBinaryFile
+     * 
+     * @param path
+     * @return ArrayList de cita desde un fichero binario
+     */
+    
     public static ArrayList<Cita> fromBinaryFile (String path) {
         ArrayList<Cita> ret = new ArrayList<>();
         FileInputStream lector = null;
@@ -245,6 +319,11 @@ public class Cita {
         return ret;
     }
     
+    /**Metodo toTextFile
+     * 
+     * @param path 
+     */
+    
     public void toTextFile (String path){
         File archivo = new File(path);
         FileWriter writer = null;
@@ -271,6 +350,11 @@ public class Cita {
             System.out.println("Se ha producido una Exception");
         }
     }
+    
+    /**Metodo toBinaryFile
+     * 
+     * @param path 
+     */
     
     public void toBinaryFile (String path) {
         FileOutputStream writer = null;

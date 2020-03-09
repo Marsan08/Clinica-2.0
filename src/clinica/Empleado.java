@@ -18,7 +18,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
- * @version 1.0
+ * @version 2.0
  * @author DAW106
  */
 public class Empleado{
@@ -30,10 +30,21 @@ public class Empleado{
     private String telefono; 
     private String nif;
     private String direccion; //Direccion del empleado
-
+    
+    //Constructor por defecto
+    
     public Empleado() {
     }
-
+    
+    /**Constructor por parametros
+     * 
+     * @param nombre nombre del empleado
+     * @param apellido apellido del empleado
+     * @param telefono telefono del empleado
+     * @param nif nif del empleado
+     * @param direccion direccion del empleado
+     */
+    
     public Empleado( String nombre, String apellido, String telefono, String nif, String direccion) {
     
         this.nombre = nombre;
@@ -42,6 +53,11 @@ public class Empleado{
         this.nif = nif;
         this.direccion= direccion;
     }
+    
+    /**Constructor de copia
+     * 
+     * @param e 
+     */
     
     public Empleado(Empleado e) {
 
@@ -55,11 +71,21 @@ public class Empleado{
         
     }
 
+    /**Otro constructor
+     * 
+     * @param id
+     * @param nombre
+     * @param apellido
+     * @param telefono
+     * @param nif
+     * @param direccion 
+     */
+    
     private Empleado(long id, String nombre, String apellido, String telefono, String nif, String direccion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
+    //Getters y Setters
+    
     public long getId() {
 
         return id;
@@ -111,29 +137,55 @@ public class Empleado{
         this.direccion = direccion;
     }
 
+    //Final Getters Setters
+    
+    /**Metodo toString 
+     * Primero atributos de la propia clase, despues atributos de las relaciones
+     * @return una sobrescritura de los atributos de la clase
+     */
+    
     @Override
     public String toString() {
         return "Empleado{" + "idEmpleado=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", nif=" + nif + ", direccion=" + direccion + '}';
     }
+    
+    /**Metodo Data
+     * 
+     * @return String de los datos propios de la clase
+     */
     
     public String data() {
       
         return this.getId() + " | " + this.getNombre() + " | " + this.getApellido() + " | " + this.getTelefono() + " | " + this.getNif() + " | " + this.getDireccion();
     }
     
-    
+    /**Metodo getAllEmpleado
+     * 
+     * @return ArrayList de empleado
+     */
     
     public ArrayList<Empleado> getAllCita (){
     ArrayList <Empleado> empleados = new ArrayList <Empleado>();
     return empleados ;
     }
     
-    
+    /**Metodo getEmpleadoById
+     * 
+     * @param id
+     * @return el identificador
+     */
     
     public Empleado getEmpleadoById (long id){
         Empleado e = new Empleado();
          return e;
     }
+    
+    /**Metodo nuevoEmpleado
+     * 
+     * @return un nuevo Empleado
+     * @throws ParseException 
+     */
+    
             public static Empleado nuevoEmpleado(){
      
         Empleado em = new Empleado();
@@ -175,6 +227,12 @@ public class Empleado{
 
      }
             
+    /**Metodo fromTextFile
+     * 
+     * @param path
+     * @return ArrayList de empleado desde un fichero de texto
+     */        
+            
         public static ArrayList<Empleado> fromTextFile (String path) {
         ArrayList<Empleado> ret = new ArrayList<>();
         File fichero = new File(path);
@@ -215,6 +273,12 @@ public class Empleado{
         return ret;
     }
     
+    /**Metodo fromBinaryFile
+     * 
+     * @param path
+     * @return ArrayList de empleado desde un fichero binario
+     */   
+        
     public static ArrayList<Empleado> fromBinaryFile (String path) {
         ArrayList<Empleado> ret = new ArrayList<>();
         FileInputStream lector = null;
@@ -248,6 +312,11 @@ public class Empleado{
         return ret;
     }
     
+    /**Metodo toTextFile
+     * 
+     * @param path 
+     */
+    
     public void toTextFile (String path){
         File archivo = new File(path);
         FileWriter writer = null;
@@ -274,6 +343,11 @@ public class Empleado{
             System.out.println("Se ha producido una Exception");
         }
     }
+    
+    /**Metodo toBinaryFile
+     * 
+     * @param path 
+     */
     
     public void toBinaryFile (String path) {
         FileOutputStream writer = null;

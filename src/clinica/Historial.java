@@ -31,23 +31,45 @@ public class Historial {
     private ArrayList<Alergia> alergias;
   //private List<Alergia>alergias=new ArrayList<Alergia>();
     private long idPaciente;
+    
+    //Constructor por defecto
+    
     public Historial() {
     }
-
+    
+    /**Constructor por parametros
+     * 
+     * @param idHistoria identificador del historial
+     * @param descripcion descripcion del historial
+     */
+    
     public Historial(int idHistoria, String descripcion) {
         this.id = idHistoria;
         this.descripcion = descripcion;
     }
     
+    /**Constructor de copia
+     * 
+     * @param h 
+     */
+    
     public Historial(Historial h){
         this.descripcion=h.getDescripcion();
         this.id=h.getId();
     }
-
-    private Historial(long id, String descripcion, long idPaciente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    /**Otro constructor
+     * 
+     * @param id
+     * @param descripcion
+     * @param idPaciente 
+     */
+    
+    public Historial(long id, String descripcion, long idPaciente) {
     }
-
+    
+    //Getters y Setters
+    
     public ArrayList<Alergia> getAlergias() {
         return alergias;
     }
@@ -79,24 +101,55 @@ public class Historial {
     public void setIdPaciente(long idPaciente) {
         this.idPaciente = idPaciente;
     }
-
+    
+    //Final Getters y Setters
+    
+    /**Metodo toString 
+     * Primero atributos de la propia clase, despues atributos de las relaciones
+     * @return una sobrescritura de los atributos de la clase
+     */
+    
     @Override
     public String toString() {
         return "Historial{" + "idHistoria=" + id + ", descripcion=" + descripcion + '}';
     }
     
+    /**Metodo Data
+     * 
+     * @return String de los datos propios de la clase
+     */
+    
     public String data() {
         return getId() + " | " + getDescripcion() + " | " + getIdPaciente() ;
     }
+    
+    /**Metodo getAllHistorial
+     * 
+     * @return ArrayList de historial
+     */
     
     public ArrayList<Historial> getAllHistorial (){
     ArrayList <Historial> historiales = new ArrayList <Historial>();
     return historiales ;
     }
+    
+    /**Metodo getHisotrialById
+     * 
+     * @param id
+     * @return el identificador
+     */
+    
     public Historial getHistorialById (long id){
         Historial h = new Historial();
          return h;
     }
+    
+    /**Metodo nuevoHistorial
+     * 
+     * @return una nueva historial
+     * @throws ParseException 
+     */
+    
           public static Historial nuevoHistorial()
      {
         Historial h = new Historial();
@@ -137,6 +190,12 @@ public class Historial {
 
      }
     
+    /**Metodo fromTextFile
+     * 
+     * @param path
+     * @return ArrayList de historial desde un fichero de texto
+     */   
+          
        public static ArrayList<Historial> fromTextFile (String path) {
         ArrayList<Historial> ret = new ArrayList<>();
         File fichero = new File(path);
@@ -174,6 +233,12 @@ public class Historial {
         return ret;
     }
     
+    /**Metodo fromBinaryFile
+     * 
+     * @param path
+     * @return ArrayList de historial desde un fichero binario
+     */
+       
     public static ArrayList<Historial> fromBinaryFile (String path) {
         ArrayList<Historial> ret = new ArrayList<>();
         FileInputStream lector = null;
@@ -207,6 +272,11 @@ public class Historial {
         return ret;
     }
     
+    /**Metodo toTextFile
+     * 
+     * @param path 
+     */
+    
     public void toTextFile (String path){
         File archivo = new File(path);
         FileWriter writer = null;
@@ -233,6 +303,11 @@ public class Historial {
             System.out.println("Se ha producido una Exception");
         }
     }
+    
+    /**Metodo toBinaryFile
+     * 
+     * @param path 
+     */
     
     public void toBinaryFile (String path) {
         FileOutputStream writer = null;
