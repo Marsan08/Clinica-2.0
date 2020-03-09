@@ -32,12 +32,12 @@ public class Historial {
   //private List<Alergia>alergias=new ArrayList<Alergia>();
     private long idPaciente;
     
-    //Constructor por defecto
+    //Constructor por defecto. Crea un Empleado con los atributos por defecto
     
     public Historial() {
     }
     
-    /**Constructor por parametros
+    /**Constructor por parametros. 
      * 
      * @param idHistoria identificador del historial
      * @param descripcion descripcion del historial
@@ -48,7 +48,7 @@ public class Historial {
         this.descripcion = descripcion;
     }
     
-    /**Constructor de copia
+    /**Constructor de copia. Crea un Empleado cogiendo los atributos de otro
      * 
      * @param h 
      */
@@ -104,28 +104,30 @@ public class Historial {
     
     //Final Getters y Setters
     
-    /**Metodo toString 
-     * Primero atributos de la propia clase, despues atributos de las relaciones
-     * @return una sobrescritura de los atributos de la clase
-     */
+    /**
+    Método toString de la clase Historial
+    Devuelve un <code>String</code>
+    @return un <code>String</code>
+    */
     
     @Override
     public String toString() {
         return "Historial{" + "idHistoria=" + id + ", descripcion=" + descripcion + '}';
     }
     
-    /**Metodo Data
-     * 
-     * @return String de los datos propios de la clase
-     */
+    /** Metodo Data
+    Metodo que devuelve los atributos de la clase separados por '|'
+    Devuelve un <code>String</code>
+    @return un <code>String</code>
+    */
     
     public String data() {
         return getId() + " | " + getDescripcion() + " | " + getIdPaciente() ;
     }
     
     /**Metodo getAllHistorial
-     * 
-     * @return ArrayList de historial
+     * Metodo que devuelve todos los historiales
+     * @return un <code>ArrayList</code>
      */
     
     public ArrayList<Historial> getAllHistorial (){
@@ -133,10 +135,10 @@ public class Historial {
     return historiales ;
     }
     
-    /**Metodo getHisotrialById
-     * 
-     * @param id
-     * @return el identificador
+    /**Metodo ById
+     * Recorre el <code>ArrayList</code> de Historial
+     * @param id id del Historial
+     * @return un <code>Historial</code>
      */
     
     public Historial getHistorialById (long id){
@@ -144,9 +146,9 @@ public class Historial {
          return h;
     }
     
-    /**Metodo nuevoHistorial
-     * 
-     * @return una nueva historial
+    /**
+     * Metodo nuevoHistorial
+     * @return un <code>Historial</code> con los datos puestos por el usuario
      * @throws ParseException 
      */
     
@@ -190,13 +192,16 @@ public class Historial {
 
      }
     
-    /**Metodo fromTextFile
-     * 
-     * @param path
-     * @return ArrayList de historial desde un fichero de texto
-     */   
+    /**
+     * Metodo readHistorialfromTextFile
+     * @param path ruta del fichero
+     * @exception  FileNotFoundException
+     * @exception  IOException
+     * @exception  Exception
+     * @return un <code>ArrayList</code>
+     */ 
           
-       public static ArrayList<Historial> fromTextFile (String path) {
+       public static ArrayList<Historial> readHistorialfromTextFile (String path) {
         ArrayList<Historial> ret = new ArrayList<>();
         File fichero = new File(path);
         FileReader lector = null;
@@ -233,10 +238,14 @@ public class Historial {
         return ret;
     }
     
-    /**Metodo fromBinaryFile
-     * 
-     * @param path
-     * @return ArrayList de historial desde un fichero binario
+    /**
+     * Metodo readEmpleadofromBinaryFile
+     * @param path ruta del fichero
+     * @exception  FileNotFoundException
+     * @exception  IOException  
+     * @exception  Exception
+     * @exception ClassNotFoundException
+     * @return un <code>ArrayList</code>
      */
        
     public static ArrayList<Historial> fromBinaryFile (String path) {
@@ -272,9 +281,12 @@ public class Historial {
         return ret;
     }
     
-    /**Metodo toTextFile
-     * 
-     * @param path 
+    /**
+     * Metodo toTextFile
+     * @param path ruta del fichero
+     * @exception FileNotFoundException
+     * @exception IOException
+     * @exception Exception
      */
     
     public void toTextFile (String path){
@@ -304,9 +316,12 @@ public class Historial {
         }
     }
     
-    /**Metodo toBinaryFile
-     * 
-     * @param path 
+    /**
+     * Metodo toBinaryFile
+     * @param path ruta del fichero
+     * @exception FileNotFoundException
+     * @exception IOException 
+     * @exception Exception
      */
     
     public void toBinaryFile (String path) {

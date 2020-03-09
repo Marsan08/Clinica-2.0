@@ -32,7 +32,7 @@ public class Cobro {
     private Date fechaFinalizacion;
     private ArrayList <Pago> pagos; 
     
-    //Constructor por defecto
+    //Constructor por defecto. Crea un cobro con los atributos por defecto
     
     public Cobro() {
     }
@@ -51,9 +51,9 @@ public class Cobro {
         this.fechaFinalizacion = fechaFinalizacion;
     }
     
-    /**Constructor de copia
+    /**Constructor de copia. Crea un cobro cogiendo los atributos de otro
      * 
-     * @param c 
+     * @param c Cobro a crear
      */
     
     public Cobro(Cobro c) {
@@ -108,28 +108,30 @@ public class Cobro {
    
     //Final Getters y Setters
 
-    /**Metodo toString 
-     * Primero atributos de la propia clase, despues atributos de las relaciones
-     * @return una sobrescritura de los atributos de la clase
-     */
+    /**
+    Método toString de la clase Cobro
+    Devuelve un <code>String</code>
+    @return un <code>String</code>
+    */
     
     @Override
     public String toString() {
         return "Cobro{" + "idCobro=" + id + ", importeTotalEuros=" + importeTotalEuros + ", fechaFinalizacion=" + fechaFinalizacion + '}';
     }
     
-    /**Metodo Data
-     * 
-     * @return String de los datos propios de la clase
-     */
+    /** Metodo Data
+    Metodo que devuelve los atributos de la clase separados por '|'
+    Devuelve un <code>String</code>
+    @return un <code>String</code>
+    */
     
     public String data() {
         return getIdCobro() + " | " + getImporteTotalEuros()+ " | " + getFechaFinalizacion() ;
     }
     
     /**Metodo getAllCobro
-     * 
-     * @return ArrayList de cobro
+     * Metodo que devuelve todos los cobros
+     * @return un <code>ArrayList</code>
      */
     
     public ArrayList<Cobro> getAllCobro (){
@@ -137,10 +139,10 @@ public class Cobro {
     return cobros;
     }
     
-    /**Metodo getCobroById
-     * 
-     * @param id
-     * @return el identificador
+    /**Metodo ById
+     * Recorre el <code>ArrayList</code> de Cobro
+     * @param id id del cobro
+     * @return un <code>Cobro</code>
      */
     
     public Cobro getCobroById (long id){
@@ -148,9 +150,9 @@ public class Cobro {
         return c;
     }
     
-    /**Metodo nuevoCobro
-     * 
-     * @return un nuevo cobro
+    /**
+     * Metodo nuevoCobro
+     * @return un <code>Cobro</code> con los datos puestos por el usuario
      * @throws ParseException 
      */
     
@@ -196,10 +198,13 @@ public class Cobro {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
        
-    /**Metodo fromTextFile
-     * 
-     * @param path
-     * @return ArrayList de cobro desde un fichero de texto
+    /**
+     * Metodo readCobrofromTextFile
+     * @param path ruta del fichero
+     * @exception  FileNotFoundException
+     * @exception  IOException
+     * @exception  Exception    
+     * @return un <code>ArrayList</code>
      */
     
     public static ArrayList<Cobro> fromTextFile (String path) {
@@ -240,10 +245,14 @@ public class Cobro {
         return ret;
     }
     
-    /**Metodo fromBinaryFile
-     * 
-     * @param path
-     * @return ArrayList de cobro desde un fichero binario
+    /**
+     * Metodo readCobrofromBinaryFile
+     * @param path ruta del fichero
+     * @exception  FileNotFoundException
+     * @exception  IOException  
+     * @exception  Exception
+     * @exception ClassNotFoundException
+     * @return un <code>ArrayList</code>
      */
     
     public static ArrayList<Cobro> fromBinaryFile (String path) {
@@ -279,9 +288,12 @@ public class Cobro {
         return ret;
     }
     
-    /**Metodo toTextFile
-     * 
-     * @param path 
+    /**
+     * Metodo toTextFile
+     * @param path ruta del fichero
+     * @exception FileNotFoundException
+     * @exception IOException
+     * @exception Exception
      */
     
     public void toTextFile (String path){
@@ -311,9 +323,12 @@ public class Cobro {
         }
     }
     
-    /**Metodo toBinaryFile
-     * 
-     * @param path 
+    /**
+     * Metodo toBinaryFile
+     * @param path ruta del fichero
+     * @exception FileNotFoundException
+     * @exception IOException 
+     * @exception Exception
      */
     
     public void toBinaryFile (String path) {

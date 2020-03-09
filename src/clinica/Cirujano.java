@@ -26,21 +26,21 @@ import java.util.Scanner;
 public class Cirujano extends Empleado{
    
     private ArrayList <Especialidad> especialidades;//Esto deberia implementarse en un lista de Especialidad. 
-    private ArrayList<Revision> revisiones;
+    private ArrayList<Revision> revisiones;//Esto deberia implementarse en un lista de Revision. 
     public Cirujano() {
         super();
     }
     
-    //Constructor por defecto
+    //Constructor por defecto. Crea un cirujano con los atributos por defecto
     
     public Cirujano(String nombre, String apellido, String telefono, String nif, String direccion) {
         super (nombre, apellido, telefono, nif, direccion);
         this.especialidades = especialidades;
     }
     
-    /**
+    /** Constructor de copia. Crea un cirujano cogiendo los atributos de otro
      * 
-     * @param c 
+     * @param c Cirujano a crear
      */
     
     public Cirujano(Cirujano c) {
@@ -48,7 +48,7 @@ public class Cirujano extends Empleado{
      
         this.especialidades=c.getEspecialidades();
     
-    //Constructor    
+    //Constructor por parametros
         
     }
     public Cirujano(Empleado e, ArrayList especialidades) {
@@ -57,6 +57,8 @@ public class Cirujano extends Empleado{
              
     }
 
+    //Getters y Setters
+    
     public ArrayList<Revision> getRevisiones() {
         return revisiones;
     }
@@ -77,8 +79,10 @@ public class Cirujano extends Empleado{
     public void setEspecialidades(ArrayList especialidades) {
         this.especialidades = especialidades;
     }
-    /*
+    /**
     Método toString de la clase Cirujano
+    Devuelve un <code>String</code>
+    @return un <code>String</code>
     */
 
     @Override
@@ -86,21 +90,43 @@ public class Cirujano extends Empleado{
         return super.toString()+ "Cirujano{" + "especialidades=" + especialidades + '}';
     }
     
-    /*
-    Método que devuelve los atributos de la clase separados por '|'
+    /** Metodo Data
+    Metodo que devuelve los atributos de la clase separados por '|'
+    Devuelve un <code>String</code>
+    @return un <code>String</code>
     */
     @Override
     public String data() {
         return super.data()+getEspecialidades();
     }
+    
+    /**Metodo getAllCirujano
+     * Metodo que devuelve todos los cirujanos
+     * @return un <code>ArrayList</code>
+     */
+    
     public ArrayList<Cirujano> getAllCirujano (){
     ArrayList <Cirujano> cirujanos = new ArrayList <Cirujano>();
     return cirujanos ;
     }
+    
+    /**Metodo ById
+     * Recorre el <code>ArrayList</code> de Cirujano
+     * @param id id del cirujano
+     * @return un <code>Cirujano</code>
+     */
+    
     public Cirujano getCirujanoById (long id){
         Cirujano c = new Cirujano();
          return c;
     }
+    
+    /**
+     * Metodo nuevoCirujanos
+     * @return un <code>Cirujano</code> con los datos puestos por el usuario
+     * @throws ParseException 
+     */
+    
     public static Cirujano nuevoCirujanos() throws ParseException{
     Cirujano c = new Cirujano();
     Scanner in = new Scanner(System.in);  
@@ -155,6 +181,15 @@ public class Cirujano extends Empleado{
        
     }
     
+    /**
+     * Metodo readCirujanofromTextFile
+     * @param path ruta del fichero
+     * @exception  FileNotFoundException
+     * @exception  IOException
+     * @exception  Exception
+     * @return un <code>ArrayList</code>
+     */
+    
     public static ArrayList<Cirujano> readCirujanofromTextFile (String path) {
         ArrayList<Cirujano> ret = new ArrayList<>();
         File fichero = new File(path);
@@ -190,6 +225,16 @@ public class Cirujano extends Empleado{
         return ret;
     }
     
+    /**
+     * Metodo readCirujanofromBinaryFile
+     * @param path ruta del fichero
+     * @exception  FileNotFoundException
+     * @exception  IOException  
+     * @exception  Exception
+     * @exception ClassNotFoundException
+     * @return un <code>ArrayList</code>
+     */
+    
     public static ArrayList<Cirujano> readCirujanofromBinaryFile (String path) {
         ArrayList<Cirujano> ret = new ArrayList<>();
         FileInputStream lector = null;
@@ -223,6 +268,14 @@ public class Cirujano extends Empleado{
         return ret;
     }
     
+    /**
+     * Metodo toTextFile
+     * @param path ruta del fichero
+     * @exception FileNotFoundException
+     * @exception IOException
+     * @exception Exception
+     */
+    
     public void toTextFile (String path){
         File archivo = new File(path);
         FileWriter writer = null;
@@ -249,6 +302,14 @@ public class Cirujano extends Empleado{
             System.out.println("Se ha producido una Exception");
         }
     }
+    
+    /**
+     * Metodo toBinaryFile
+     * @param path ruta del fichero
+     * @exception FileNotFoundException
+     * @exception IOException 
+     * @exception Exception
+     */
     
     public void toBinaryFile (String path) {
         FileOutputStream writer = null;

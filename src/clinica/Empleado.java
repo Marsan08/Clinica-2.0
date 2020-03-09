@@ -24,14 +24,14 @@ import java.util.Scanner;
 public class Empleado{
 
     
-    protected long id;
-    private String nombre;
-    private String apellido;
-    private String telefono; 
-    private String nif;
+    protected long id; //id del empleado
+    private String nombre; //nombre del empleado
+    private String apellido; //apellido del empleado
+    private String telefono; //telefono del empleado
+    private String nif; //nif del empleado
     private String direccion; //Direccion del empleado
     
-    //Constructor por defecto
+    //Constructor por defecto. Crea un Empleado con los atributos por defecto
     
     public Empleado() {
     }
@@ -54,9 +54,9 @@ public class Empleado{
         this.direccion= direccion;
     }
     
-    /**Constructor de copia
+    /**Constructor de copia. Crea un Empleado cogiendo los atributos de otro
      * 
-     * @param e 
+     * @param e Empleado a crear
      */
     
     public Empleado(Empleado e) {
@@ -139,20 +139,22 @@ public class Empleado{
 
     //Final Getters Setters
     
-    /**Metodo toString 
-     * Primero atributos de la propia clase, despues atributos de las relaciones
-     * @return una sobrescritura de los atributos de la clase
-     */
+    /**
+    Método toString de la clase Empleado
+    Devuelve un <code>String</code>
+    @return un <code>String</code>
+    */
     
     @Override
     public String toString() {
         return "Empleado{" + "idEmpleado=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", nif=" + nif + ", direccion=" + direccion + '}';
     }
     
-    /**Metodo Data
-     * 
-     * @return String de los datos propios de la clase
-     */
+    /** Metodo Data
+    Metodo que devuelve los atributos de la clase separados por '|'
+    Devuelve un <code>String</code>
+    @return un <code>String</code>
+    */
     
     public String data() {
       
@@ -160,8 +162,8 @@ public class Empleado{
     }
     
     /**Metodo getAllEmpleado
-     * 
-     * @return ArrayList de empleado
+     * Metodo que devuelve todos los empleados
+     * @return un <code>ArrayList</code>
      */
     
     public ArrayList<Empleado> getAllCita (){
@@ -169,10 +171,10 @@ public class Empleado{
     return empleados ;
     }
     
-    /**Metodo getEmpleadoById
-     * 
-     * @param id
-     * @return el identificador
+    /**Metodo ById
+     * Recorre el <code>ArrayList</code> de Empleado
+     * @param id id del Empleado
+     * @return un <code>Cita</code>
      */
     
     public Empleado getEmpleadoById (long id){
@@ -180,9 +182,9 @@ public class Empleado{
          return e;
     }
     
-    /**Metodo nuevoEmpleado
-     * 
-     * @return un nuevo Empleado
+    /**
+     * Metodo nuevoEmpleado
+     * @return un <code>Empleado</code> con los datos puestos por el usuario
      * @throws ParseException 
      */
     
@@ -227,11 +229,14 @@ public class Empleado{
 
      }
             
-    /**Metodo fromTextFile
-     * 
-     * @param path
-     * @return ArrayList de empleado desde un fichero de texto
-     */        
+    /**
+     * Metodo readEmpleadofromTextFile
+     * @param path ruta del fichero
+     * @exception  FileNotFoundException
+     * @exception  IOException
+     * @exception  Exception
+     * @return un <code>ArrayList</code>
+     */       
             
         public static ArrayList<Empleado> fromTextFile (String path) {
         ArrayList<Empleado> ret = new ArrayList<>();
@@ -273,11 +278,15 @@ public class Empleado{
         return ret;
     }
     
-    /**Metodo fromBinaryFile
-     * 
-     * @param path
-     * @return ArrayList de empleado desde un fichero binario
-     */   
+    /**
+     * Metodo readEmpleadofromBinaryFile
+     * @param path ruta del fichero
+     * @exception  FileNotFoundException
+     * @exception  IOException  
+     * @exception  Exception
+     * @exception ClassNotFoundException
+     * @return un <code>ArrayList</code>
+     */
         
     public static ArrayList<Empleado> fromBinaryFile (String path) {
         ArrayList<Empleado> ret = new ArrayList<>();
@@ -312,9 +321,12 @@ public class Empleado{
         return ret;
     }
     
-    /**Metodo toTextFile
-     * 
-     * @param path 
+    /**
+     * Metodo toTextFile
+     * @param path ruta del fichero
+     * @exception FileNotFoundException
+     * @exception IOException
+     * @exception Exception
      */
     
     public void toTextFile (String path){
@@ -344,9 +356,12 @@ public class Empleado{
         }
     }
     
-    /**Metodo toBinaryFile
-     * 
-     * @param path 
+    /**
+     * Metodo toBinaryFile
+     * @param path ruta del fichero
+     * @exception FileNotFoundException
+     * @exception IOException 
+     * @exception Exception
      */
     
     public void toBinaryFile (String path) {

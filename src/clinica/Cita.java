@@ -36,7 +36,7 @@ public class Cita {
     
     private long idTratamiento;
     
-    //Constructor por defecto
+    //Constructor por defecto. Crea una cita con los atributos por defecto
        
     public Cita() {
     }
@@ -57,9 +57,9 @@ public class Cita {
         this.estado = estado;
     }
 
-    /**Constructor de copia
+    /**Constructor de copia. Crea un cobro cogiendo los atributos de otro
      * 
-     * @param c 
+     * @param c Cita a crear
      */
     
     public Cita(Cita c) {
@@ -148,20 +148,22 @@ public class Cita {
 
     //Final de Getters y Setters
     
-    /**Metodo toString 
-     * Primero atributos de la propia clase, despues atributos de las relaciones
-     * @return una sobrescritura de los atributos de la clase
-     */
+    /**
+    Método toString de la clase Cita
+    Devuelve un <code>String</code>
+    @return un <code>String</code>
+    */
     
     @Override
     public String toString() {
         return "Cita{" + "idCita=" + id + ", fecha=" + fecha + ", rangoHorario=" + rangoHorario + ", hora=" + hora + '}';
     }
     
-    /**Metodo Data
-     * 
-     * @return String de los datos propios de la clase
-     */
+    /** Metodo Data
+    Metodo que devuelve los atributos de la clase separados por '|'
+    Devuelve un <code>String</code>
+    @return un <code>String</code>
+    */
     
     public String data() {
         return getId() + " | " + getFecha() + " | " + getRangoHorario() + " | " + getHora() + " | " + getIdTratamiento();
@@ -169,8 +171,8 @@ public class Cita {
     }
     
     /**Metodo getAllCita
-     * 
-     * @return ArrayList de cita
+     * Metodo que devuelve todas las citas
+     * @return un <code>ArrayList</code>
      */
     
     public ArrayList<Cita> getAllCita() {
@@ -178,10 +180,10 @@ public class Cita {
         return citas;
     }
     
-    /**Metodo getCitaById
-     * 
-     * @param id
-     * @return el identificador
+    /**Metodo ById
+     * Recorre el <code>ArrayList</code> de Cita
+     * @param id id de la cita
+     * @return un <code>Cita</code>
      */
     
     public Cita getCitaById(long id) {
@@ -189,9 +191,9 @@ public class Cita {
         return c;
     }
     
-    /**Metodo nuevoCita
-     * 
-     * @return una nueva cita
+    /**
+     * Metodo nuevoCita
+     * @return un <code>Cita</code> con los datos puestos por el usuario
      * @throws ParseException 
      */
     
@@ -232,10 +234,13 @@ public class Cita {
         return c;
     }
     
-    /**Metodo fromTextFile
-     * 
-     * @param path
-     * @return ArrayList de cita desde un fichero de texto
+    /**
+     * Metodo readCitafromTextFile
+     * @param path ruta del fichero
+     * @exception  FileNotFoundException
+     * @exception  IOException
+     * @exception  Exception
+     * @return un <code>ArrayList</code>
      */
     
     public static ArrayList<Cita> fromTextFile (String path) {
@@ -280,10 +285,14 @@ public class Cita {
         return ret;
     }
     
-    /**Metodo fromBinaryFile
-     * 
-     * @param path
-     * @return ArrayList de cita desde un fichero binario
+    /**
+     * Metodo readCitafromBinaryFile
+     * @param path ruta del fichero
+     * @exception  FileNotFoundException
+     * @exception  IOException  
+     * @exception  Exception
+     * @exception ClassNotFoundException
+     * @return un <code>ArrayList</code>
      */
     
     public static ArrayList<Cita> fromBinaryFile (String path) {
@@ -319,9 +328,12 @@ public class Cita {
         return ret;
     }
     
-    /**Metodo toTextFile
-     * 
-     * @param path 
+    /**
+     * Metodo toTextFile
+     * @param path ruta del fichero
+     * @exception FileNotFoundException
+     * @exception IOException
+     * @exception Exception
      */
     
     public void toTextFile (String path){
@@ -351,9 +363,12 @@ public class Cita {
         }
     }
     
-    /**Metodo toBinaryFile
-     * 
-     * @param path 
+    /**
+     * Metodo toBinaryFile
+     * @param path ruta del fichero
+     * @exception FileNotFoundException
+     * @exception IOException 
+     * @exception Exception
      */
     
     public void toBinaryFile (String path) {
