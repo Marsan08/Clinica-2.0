@@ -150,12 +150,12 @@ public class Intervencion extends Cita{
     
     /**
      * Metodo Data
-     * @return indica los datos de la propia clase
+     * @return indica los datos de la propia clase mas el id de cita <code> long <code>
      */
     
     public String Data () {
         
-        return super.data()+ " | " + getIdCirujano() + "|" + getDuracion();
+        return super.data()+ " | " + getIdCirujano() + "|" + getDuracion() + "|" + id;
         
     }
     

@@ -89,17 +89,17 @@ public class Enfermeria extends Empleado{
     
     /**
      * Metodo Data
-     * @return Muestra los datos propios de la clase
+     * @return Muestra los datos propios de la clase mas el id de Empleado <code> long <code>
      */
  
     public String Data () {
         
-        return super.data() + this.getCategoria();
+        return super.data() + this.getCategoria() + id;
     }
 
     /**
      * Metodo String
-     * @return una sobreescritura de los datos de la clase.
+     * @return una sobreescritura del metodo To String muestra los datos de la clase.
      */
     @Override
     public String toString() {
@@ -132,7 +132,7 @@ public class Enfermeria extends Empleado{
   /**
    * Metodo nuevoEnfermeria
    * @return un nuevo enfermero
-   * @throws ParseException 
+   * @throws ParseException si hay un fallo en la fecha
    */
   public static Enfermeria nuevoEnfermeria() throws ParseException{
        Enfermeria e = new Enfermeria();
