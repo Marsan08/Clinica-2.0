@@ -94,7 +94,7 @@ public class Especialidad {
     
     /**
      * Metodo ToString
-     * @return sobrescritura de los datos de la clase
+     * @return sobrescritura del metodo To String muestra los datos de la clase
      */
     
     @Override
